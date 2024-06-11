@@ -11,10 +11,10 @@ class ServiceController extends Controller
     {
         return view('admin.service');
     }
-    public function edit()
-    {
-        return view('admin.edit-service');
-    }
+    // public function edit()
+    // {
+    //     return view('admin.edit-service');
+    // }
     // public function store()
     // {
     //     return view('admin.service.store');

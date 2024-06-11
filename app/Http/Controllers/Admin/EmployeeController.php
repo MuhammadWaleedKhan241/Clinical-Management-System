@@ -13,15 +13,15 @@ class EmployeeController extends Controller
     {
         return view('admin.employee.show');
     }
-    public function edit()
-    {
-        return view('admin.employee.edit');
-    }
-    public function store()
-    {
-        return view('admin.employee.store');
-    }
-    public function delete(){
-        return view('admin.employee.delete');
-    }
+    // public function edit()
+    // {
+    //     return view('admin.employee.edit');
+    // }
+    // public function store()
+    // {
+    //     return view('admin.employee.store');
+    // }
+    // public function delete(){
+    //     return view('admin.employee.delete');
+    // }
 }

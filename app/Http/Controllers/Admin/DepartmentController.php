@@ -32,14 +32,13 @@ class DepartmentController extends Controller
     //     return redirect()->route('admin.managesession')->with('success', 'Session Addeed Successfully!');
     // }
     // public function edit()
-
     // {
-    //     return view('admin.departments.edit');
+    //     return view('admin.departments');
     // }
-    public function store()
-    {
-        return view('admin.departments.store');
-    }
+    // public function store()
+    // {
+    //     return view('admin.departments.store');
+    // }
 
     // public function delete()
     // {

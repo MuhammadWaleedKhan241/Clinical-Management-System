@@ -11,16 +11,16 @@ class DoctorOPDController extends Controller
     {
         return view('admin.doctor-OPD.show');
     }
-    public function edit()
-    {
-        return view('admin.doctor-OPD.edit');
-    }
-    public function store()
-    {
-        return view('admin.doctor-OPD.store');
-    }
-    public function delete()
-    {
-        return view('admin.doctor-OPD.delete');
-    }
+    // public function edit()
+    // {
+    //     return view('admin.doctor-OPD.edit');
+    // }
+    // public function store()
+    // {
+    //     return view('admin.doctor-OPD.store');
+    // }
+    // public function delete()
+    // {
+    //     return view('admin.doctor-OPD.delete');
+    // }
 }

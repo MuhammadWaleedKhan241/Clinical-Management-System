@@ -11,16 +11,16 @@ class PackageController extends Controller
     {
         return view('admin.package.show');
     }
-    public function edit()
-    {
-        return view('admin.package.edit');
-    }
-    public function store()
-    {
-        return view('admin.package.store');
-    }
-    public function delete()
-    {
-        return view('admin.package.delete');
-    }
+    // public function edit()
+    // {
+    //     return view('admin.package.edit');
+    // }
+    // public function store()
+    // {
+    //     return view('admin.package.store');
+    // }
+    // public function delete()
+    // {
+    //     return view('admin.package.delete');
+    // }
 }

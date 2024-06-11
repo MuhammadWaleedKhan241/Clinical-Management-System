@@ -57,7 +57,7 @@
                                     m-t-30
                                     table-hover
                                     contact-list
-                                  " data-paging="true" data-paging-size="7">
+                                    " data-paging="true" data-paging-size="7">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -70,12 +70,12 @@
                                 <td>1</td>
                                 <td>Hematology</td>
                                 <td>
-                                    <a class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="{{route('department.edit')}}" class="btn btn-sm btn-primary">Edit</a>
                                     <a class="btn btn-sm btn-danger">Delete</a>
                                     <!-- <button class="btn btn-sm btn-info">Details</button> -->
                                 </td>
                             </tr>
-                   
+
                         </tbody>
                     </table>
                 </div>
