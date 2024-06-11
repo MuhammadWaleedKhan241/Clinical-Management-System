@@ -9,7 +9,7 @@ class DoctorOPDController extends Controller
 {
     public function show()
     {
-        return view('admin.doctor-OPD.show');
+        return view('admin.doctor-OPD');
     }
     // public function edit()
     // {

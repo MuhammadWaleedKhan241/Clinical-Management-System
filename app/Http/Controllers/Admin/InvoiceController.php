@@ -9,7 +9,7 @@ class InvoiceController extends Controller
 {
     public function show()
     {
-        return view('admin.invoice');
+        return view('admin.invoice-report');
     }
     // public function edit()
     // {

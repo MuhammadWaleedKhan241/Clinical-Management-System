@@ -349,7 +349,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-item"> 
+                <li class="sidebar-item">
                     <a class="sidebar-link has-arrow" aria-expanded="false">
                         <span>
                             <i class="ti ti-message-dots"></i>
@@ -358,7 +358,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level visible">
                         <li class="sidebar-item">
-                            <a href="{{route('admin.patient')}}" class="sidebar-link">
+                            <a href="{{route('admin.patient.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -366,7 +366,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="appointment.html" class="sidebar-link">
+                            <a href="{{route('admin.appointment.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>

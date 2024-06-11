@@ -9,7 +9,7 @@ class PackageController extends Controller
 {
     public function show()
     {
-        return view('admin.package.show');
+        return view('admin.packages');
     }
     // public function edit()
     // {

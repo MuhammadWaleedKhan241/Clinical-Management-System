@@ -70,7 +70,7 @@
                                 <td>1</td>
                                 <td>Hematology</td>
                                 <td>
-                                    <a href="{{route('department.edit')}}" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="" class="btn btn-sm btn-primary">Edit</a>
                                     <a class="btn btn-sm btn-danger">Delete</a>
                                     <!-- <button class="btn btn-sm btn-info">Details</button> -->
                                 </td>

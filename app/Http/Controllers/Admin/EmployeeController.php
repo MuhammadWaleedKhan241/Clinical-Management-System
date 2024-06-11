@@ -11,7 +11,7 @@ class EmployeeController extends Controller
 {
     public function show()
     {
-        return view('admin.employee.show');
+        return view('admin.employee');
     }
     // public function edit()
     // {
