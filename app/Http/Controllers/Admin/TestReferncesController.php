@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class OPD-BillController extends Controller
+class TestReferencesController extends Controller
 {
     //
 }
