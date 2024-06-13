@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -10,38 +11,43 @@ class DepartmentController extends Controller
 
     public function show()
     {
+        $department = Department::all();
+        return view('admin.departments', compact('department'));
+    }
+
+    public function create()
+    {
         return view('admin.departments');
     }
-    // function store(Request $request)
-    // {
 
-    //     $request->validate([
+    public function store(Request $request)
+    {
+        $request->validate([
+            'department_name' => 'required|string|max:255',
+        ]);
 
-    //         'attribute1' => 'nullable',
+        Department::create(['department_name' => $request->department_name]);
+        return redirect()->route('admin.department')->with('success', 'Department added successfully.');
+    }
 
-    //     ]);
+    public function edit(Department $department)
+    {
+        return view('admin.edit_department', compact('department'));
+    }
 
+    public function update(Request $request, Department $department)
+    {
+        $request->validate([
+            'department_name' => 'required|string|max:255',
+        ]);
 
-    //     $data = new AddSession();
+        $department->update(['department_name' => $request->department_name]);
+        return redirect()->route('admin.department.show')->with('success', 'Department updated successfully.');
+    }
 
-    //     // $data->year = $request->input('year');
-
-    //     $data->attribute1 = $request->input('attribute1');
-
-    //     $data->save();
-    //     return redirect()->route('admin.managesession')->with('success', 'Session Addeed Successfully!');
-    // }
-    // public function edit()
-    // {
-    //     return view('admin.departments');
-    // }
-    // public function store()
-    // {
-    //     return view('admin.departments.store');
-    // }
-
-    // public function delete()
-    // {
-    //     return view('admin.departments.delete');
-    // }
+    public function destroy(Department $department)
+    {
+        $department->delete();
+        return redirect()->route('admin.department.show')->with('success', 'Department deleted successfully.');
+    }
 }

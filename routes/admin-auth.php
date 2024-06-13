@@ -41,68 +41,123 @@ Route::middleware('guest:admin')->prefix('admin')->name('admin.')->group(functio
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 });
 
+// Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
+
+//     Route::get('/dashboard', function () {
+//         return view('admin.dashboard');
+//     })->middleware(['verified'])->name('dashboard');
+
+
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+//     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+//         ->name('logout');
+
+//     Route::get('/department', [DepartmentController::class, 'show'])->name('department.show');
+//     Route::get('/department', [DepartmentController::class, 'edit'])->name('department.edit');
+//     Route::post('/department', [DepartmentController::class, 'store'])->name('department.store');
+//      Route::delete('/department', [DepartmentController::class, 'delete'])->name('department.delete');
+
+//     Route::get('/service', [ServiceController::class, 'show'])->name('service.show');
+
+//     Route::get('/service', [ServiceController::class, 'show'])->name('service.show');
+//     Route::get('/service', [ServiceController::class, 'edit'])->name('service.edit');
+//     Route::post('/service', [ServiceController::class, 'store'])->name('service.store');
+//     Route::delete('/service', [ServiceController::class, 'delete'])->name('service.delete');
+
+//     Route::get('/package', [PackageController::class, 'show'])->name('package.show');
+//     Route::get('/package', [PackageController::class, 'edit'])->name('package.edit');
+//     Route::post('/package', [PackageController::class, 'store'])->name('package.store');
+//     Route::delete('/package', [PackageController::class, 'delete'])->name('package.delete');
+
+//     Route::get('/employee', [EmployeeController::class, 'show'])->name('employee.show');
+//     Route::get('/employee', [EmployeeController::class, 'edit'])->name('employee.edit');
+//     Route::post('/employee', [EmployeeController::class, 'store'])->name('employee.store');
+//     Route::delete('/employee', [EmployeeController::class, 'delete'])->name('employee.delete');
+
+//     Route::get('/doctoropd', [DoctorOPDController::class, 'show'])->name('doctoropd.show');
+//     Route::get('/doctoropd', [DoctorOPDController::class, 'edit'])->name('doctoropd.edit');
+//     Route::get('/doctoropd', [DoctorOPDController::class, 'store'])->name('doctoropd.store');
+//     Route::get('doctoropd', [DoctorOPDController::class, 'delete'])->name('doctoropd.delete');
+
+//     Route::get('/invoice', [InvoiceController::class, 'show'])->name('invoice.show');
+//     Route::get('invoice', [InvoiceController::class, 'edit'])->name('invoice.edit');
+//     Route::get('invoice', [InvoiceController::class, 'store'])->name('invoice.store');
+//     Route::get('invoice', [InvoiceController::class, 'delete'])->name('invoice.delete');
+
+//     Route::get('/patient', [patientController::class, 'show'])->name('patient.show');
+//     Route::get('invoice', [patientController::class, 'edit'])->name('patient.edit');
+//     Route::get('invoice', [patientController::class, 'store'])->name('patient.store');
+//     Route::get('invoice', [patientController::class, 'delete'])->name('patient.delete');
+
+
+
+//     Route::get('/appointment', [AppointmentController::class, 'show'])->name('appointment.show');
+//     Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+//     Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.create');
+
+
+
+
+//     Route::get('/service-bill', [ServiceBillController::class, 'show'])->name('servicebill.show');
+
+//     Route::get('/OPD-bill', [OPD_BillController::class, 'show'])->name('OPDbill.show');
+//     Route::get('/package-bill', [PackageBillController::class, 'show'])->name('packagebill.show');
+//     Route::get('/service-sale-report', [ServiceSaleReportController::class, 'show'])->name('servicesalereport.show');
+//     Route::get('/OPD-sale-report', [OPDSaleReportController::class, 'show'])->name('OPDsalereport.show');
+//     Route::get('/package-sale-report', [PackageSaleReportController::class, 'show'])->name('packagesalereport.show');
+//     Route::get('/manage-test', [ManageTestController::class, 'show'])->name('managaetest.show');
+//     Route::get('/test-reference', [TestReferencesController::class, 'show'])->name('testreference.show');
+//     Route::get('/examination-report', [ExaminationReportController::class, 'show'])->name('examinationreport.show');
+//     Route::get('/stain-report', [StainReportController::class, 'show'])->name('stainreport.show');
+//     Route::get('/report', [ReportController::class, 'show'])->name('report.show');
+//     Route::get('/user', [UserController::class, 'show'])->name('user.show');
+// });
+
+
+
+
+
+
+
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
-
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->middleware(['verified'])->name('dashboard');
-
+    Route::get('/dashboard', [DashboardController::class, 'show'])->middleware(['verified'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->name('logout');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
 
     Route::get('/department', [DepartmentController::class, 'show'])->name('department.show');
-    //Route::get('/department', [DepartmentController::class, 'edit'])->name('department.edit');
-    // Route::post('/department', [DepartmentController::class, 'store'])->name('department.store');
-    //  Route::delete('/department', [DepartmentController::class, 'delete'])->name('department.delete');
+    Route::post('/departments', [DepartmentController::class, 'store'])->name('department.store');
+    Route::get('/departments', [DepartmentController::class, 'create'])->name('department.create');
+    Route::get('/departments/{department}/edit', [DepartmentController::class, 'edit'])->name('department.edit');
+    Route::patch('/departments/{department}', [DepartmentController::class, 'update'])->name('department.update');
+    Route::delete('/departments/{department}', [DepartmentController::class, 'destroy'])->name('department.destroy');
 
     Route::get('/service', [ServiceController::class, 'show'])->name('service.show');
-
-    //Route::get('/service', [ServiceController::class, 'show'])->name('service.show');
-    // Route::get('/service', [ServiceController::class, 'edit'])->name('service.edit');
-    // Route::post('/service', [ServiceController::class, 'store'])->name('service.store');
-    // Route::delete('/service', [ServiceController::class, 'delete'])->name('service.delete');
-
     Route::get('/package', [PackageController::class, 'show'])->name('package.show');
-    // Route::get('/package', [PackageController::class, 'edit'])->name('package.edit');
-    // Route::post('/package', [PackageController::class, 'store'])->name('package.store');
-    // Route::delete('/package', [PackageController::class, 'delete'])->name('package.delete');
-
     Route::get('/employee', [EmployeeController::class, 'show'])->name('employee.show');
-    // Route::get('/employee', [EmployeeController::class, 'edit'])->name('employee.edit');
-    // Route::post('/employee', [EmployeeController::class, 'store'])->name('employee.store');
-    // Route::delete('/employee', [EmployeeController::class, 'delete'])->name('employee.delete');
-
     Route::get('/doctoropd', [DoctorOPDController::class, 'show'])->name('doctoropd.show');
-    // Route::get('/doctoropd', [DoctorOPDController::class, 'edit'])->name('doctoropd.edit');
-    // Route::get('/doctoropd', [DoctorOPDController::class, 'store'])->name('doctoropd.store');
-    // Route::get('doctoropd', [DoctorOPDController::class, 'delete'])->name('doctoropd.delete');
-
     Route::get('/invoice', [InvoiceController::class, 'show'])->name('invoice.show');
-    // Route::get('invoice', [InvoiceController::class, 'edit'])->name('invoice.edit');
-    // Route::get('invoice', [InvoiceController::class, 'store'])->name('invoice.store');
-    // Route::get('invoice', [InvoiceController::class, 'delete'])->name('invoice.delete');
-
-    Route::get('/patient', [patientController::class, 'show'])->name('patient.show');
-    // Route::get('invoice', [patientController::class, 'edit'])->name('patient.edit');
-    // Route::get('invoice', [patientController::class, 'store'])->name('patient.store');
-    // Route::get('invoice', [patientController::class, 'delete'])->name('patient.delete');
+    Route::get('/patient', [PatientController::class, 'show'])->name('patient.show');
 
 
-
+    //APPOINTMENT
     Route::get('/appointment', [AppointmentController::class, 'show'])->name('appointment.show');
     Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
-    Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.create');
-
-
+    Route::get('/appointments', [AppointmentController::class, 'create'])->name('appointment.create');
+    Route::get('/appointments/{appointment}/edit', [AppointmentController::class, 'edit'])->name('appointment.edit');
+    Route::patch('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointment.update');
+    Route::delete('/appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointment.destroy');
 
 
     Route::get('/service-bill', [ServiceBillController::class, 'show'])->name('servicebill.show');
-
     Route::get('/OPD-bill', [OPD_BillController::class, 'show'])->name('OPDbill.show');
     Route::get('/package-bill', [PackageBillController::class, 'show'])->name('packagebill.show');
     Route::get('/service-sale-report', [ServiceSaleReportController::class, 'show'])->name('servicesalereport.show');

@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('patient_name');
             $table->string('doctor');
-            $table->timestamp('available_time');
-            $table->date('appointment_date');
-            $table->string('name');
             $table->string('description');
+            $table->date('appointment_date');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -1,143 +1,9 @@
 @extends('admin.admin.master')
 @section('content')
-{{-- <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex align-items-center gap-4 mb-4">
-
-                <div>
-                    <a class="fw-semibold fs-5 text-dark">Admin Dashboard</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="container-fluid">
-            <!-- Card Row -->
-            <div class="flex flex-wrap gap-4">
-                <div class="card border-0 zoom-in bg-light-primary shadow-none ">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <a class="fw-semibold fs-3 text-primary mb-1">Pending Appointments</a>
-                            <h5 class="fw-semibold text-primary mb-0">120</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="card border-0 zoom-in bg-light-warning shadow-none ">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <a class="fw-semibold fs-3 text-primary mb-1">Total Patients</a>
-                            <h5 class="fw-semibold text-primary mb-0">120</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="card border-0 zoom-in bg-light-primary shadow-none ">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <a class="fw-semibold fs-3 text-primary mb-1">Total Departments</a>
-                            <h5 class="fw-semibold text-primary mb-0">120</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="card border-0 zoom-in bg-light-warning shadow-none ">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <a class="fw-semibold fs-3 text-primary mb-1">Total Test</a>
-                            <h5 class="fw-semibold text-primary mb-0">120</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div>
-            <h3 class="fw-semibold fs-4 text-dark">Appointments</h3>
-            <br>
-            <input type="text" id="search" class=" form-control w-25 mb-4" placeholder="Search by name">
-            <!-- User Table -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name </th>
-                        <th scope="col">Patient</th>
-                        <th scope="col">Doctor</th>
-                        <th scope="col">Descripton</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody id="userTableBody">
-                    <!-- Dynamic rows will be inserted here -->
-                </tbody>
-            </table>
-
-            <!-- Pagination -->
-            <div class="pagination" id="pagination">
-                <!-- Dynamic pagination links will be inserted here -->
-            </div>
-        </div>
-
-        <div>
-            <h3 class="fw-semibold fs-4 text-dark">Collections</h3>
-            <br>
-            <input type="text" id="search" class=" form-control w-25 mb-4" placeholder="Search by name">
-
-            <!-- User Table -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Invoice No </th>
-                        <th scope="col">Payment</th>
-                        <th scope="col">SubTotal</th>
-                        <th scope="col">Discount</th>
-                        <th scope="col">Tax</th>
-                        <th scope="col">Total Amount</th>
-                    </tr>
-                </thead>
-                <tbody id="userTableBody">
-                    <!-- Dynamic rows will be inserted here -->
-                </tbody>
-            </table>
-
-            <!-- Pagination -->
-            <div class="pagination" id="pagination">
-                <!-- Dynamic pagination links will be inserted here -->
-            </div>
-        </div>
-
-        <div>
-            <h3 class="fw-semibold fs-4 text-dark">OPD</h3>
-            <br>
-            <input type="text" id="search" class=" form-control w-25 mb-4" placeholder="Search by name">
-
-            <!-- User Table -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Patient</th>
-                        <th scope="col">Doctor</th>
-                        <th scope="col">Registerd At</th>
-                        <th scope="col">Staus</th>
-                    </tr>
-                </thead>
-                <tbody id="userTableBody">
-                    <!-- Dynamic rows will be inserted here -->
-                </tbody>
-            </table>
-
-            <!-- Pagination -->
-            <div class="pagination" id="pagination">
-                <!-- Dynamic pagination links will be inserted here -->
-            </div>
-        </div>
-    </div>
-</div> --}}
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="d-flex align-items-center gap-4 mb-4">
-
                 <div>
                     <a class="fw-semibold fs-5 text-dark">Admin Dashboard</a>
                 </div>
@@ -180,44 +46,42 @@
                 </div>
             </div>
         </div>
+
         <div>
             <h3 class="fw-semibold fs-4 text-dark">Appointments</h3>
             <br>
             <input type="text" id="search" class=" form-control w-25 mb-4" placeholder="Search by name">
-            <!-- User Table -->
             <div class="card-body">
-                <h4 class="fw-semibold fs-4 text-dark">Appointments</h4>
-                <div class="d-flex justify-content-end mb-3">
-                    <a href="{{ route('admin.appointments.create') }}" class="btn btn-info btn-rounded">
-                        Add New Appointment
-                    </a>
-                </div>
+                
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Notes</th>
+                                <th>Patient Name</th>
+                                <th>Doctor</th>
+                                <th>Description</th>
+                                <th>Appointment Date</th>
+                                <th>status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($appointments as $appointments)
+                            @foreach($appointments as $appointment)
                             <tr>
                                 <td>{{ $appointment->id }}</td>
-                                <td>{{ $appointment->name }}</td>
-                                <td>{{ $appointment->date }}</td>
-                                <td>{{ $appointment->time }}</td>
-                                <td>{{ $appointment->notes }}</td>
+                                <td>{{ $appointment->patient_name }}</td>
+                                <td>{{ $appointment->doctor }}</td>
+                                <td>{{ $appointment->description }}</td>
+                                <td>{{ $appointment->appointment_date }}</td>
+                                <td>
+                                    <!-- Add action buttons here if needed -->
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-
             <!-- Pagination -->
             <div class="pagination" id="pagination">
                 <!-- Dynamic pagination links will be inserted here -->
@@ -228,8 +92,6 @@
             <h3 class="fw-semibold fs-4 text-dark">Collections</h3>
             <br>
             <input type="text" id="search" class=" form-control w-25 mb-4" placeholder="Search by name">
-
-            <!-- User Table -->
             <table class="table">
                 <thead>
                     <tr>
@@ -246,8 +108,6 @@
                     <!-- Dynamic rows will be inserted here -->
                 </tbody>
             </table>
-
-            <!-- Pagination -->
             <div class="pagination" id="pagination">
                 <!-- Dynamic pagination links will be inserted here -->
             </div>
@@ -257,8 +117,6 @@
             <h3 class="fw-semibold fs-4 text-dark">OPD</h3>
             <br>
             <input type="text" id="search" class=" form-control w-25 mb-4" placeholder="Search by name">
-
-            <!-- User Table -->
             <table class="table">
                 <thead>
                     <tr>
@@ -273,8 +131,6 @@
                     <!-- Dynamic rows will be inserted here -->
                 </tbody>
             </table>
-
-            <!-- Pagination -->
             <div class="pagination" id="pagination">
                 <!-- Dynamic pagination links will be inserted here -->
             </div>
@@ -282,6 +138,7 @@
     </div>
 </div>
 @endsection
+
 @push('page-level-script')
 <script>
     const users = [
