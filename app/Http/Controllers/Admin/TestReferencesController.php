@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class TestReferencesController extends Controller
 {
-    //
+    public function show()
+    {
+        return view('admin.test-reference');
+    }
 }

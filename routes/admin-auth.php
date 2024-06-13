@@ -92,18 +92,26 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     // Route::get('invoice', [patientController::class, 'store'])->name('patient.store');
     // Route::get('invoice', [patientController::class, 'delete'])->name('patient.delete');
 
-    Route::get('/service-bill', [ServiceBillController::class, 'show'])->name('servicebill.shw');
+
+
+    Route::get('/appointment', [AppointmentController::class, 'show'])->name('appointment.show');
+    Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+    Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.create');
+
+
+
+
+    Route::get('/service-bill', [ServiceBillController::class, 'show'])->name('servicebill.show');
+
     Route::get('/OPD-bill', [OPD_BillController::class, 'show'])->name('OPDbill.show');
     Route::get('/package-bill', [PackageBillController::class, 'show'])->name('packagebill.show');
     Route::get('/service-sale-report', [ServiceSaleReportController::class, 'show'])->name('servicesalereport.show');
     Route::get('/OPD-sale-report', [OPDSaleReportController::class, 'show'])->name('OPDsalereport.show');
     Route::get('/package-sale-report', [PackageSaleReportController::class, 'show'])->name('packagesalereport.show');
     Route::get('/manage-test', [ManageTestController::class, 'show'])->name('managaetest.show');
-    Route::get('/test-reference', [TestReferencesController::class, 'show'])->name('.show');
-    Route::get('/examination-report', [ExaminationReportController::class, 'show'])->name('appointment.show');
-    Route::get('/stain-report', [StainReportController::class, 'show'])->name('appointment.show');
-    Route::get('/report', [ReportController::class, 'show'])->name('appointment.show');
-    Route::get('/user', [UserController::class, 'show'])->name('appointment.show');
-
-     
+    Route::get('/test-reference', [TestReferencesController::class, 'show'])->name('testreference.show');
+    Route::get('/examination-report', [ExaminationReportController::class, 'show'])->name('examinationreport.show');
+    Route::get('/stain-report', [StainReportController::class, 'show'])->name('stainreport.show');
+    Route::get('/report', [ReportController::class, 'show'])->name('report.show');
+    Route::get('/user', [UserController::class, 'show'])->name('user.show');
 });

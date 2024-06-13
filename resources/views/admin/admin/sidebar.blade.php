@@ -384,7 +384,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level visible">
                         <li class="sidebar-item">
-                            <a href="service-bill.html" class="sidebar-link">
+                            <a href="{{route('admin.servicebill.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -392,7 +392,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="OPD-bill.html" class="sidebar-link">
+                            <a href="{{route('admin.OPDbill.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -400,7 +400,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="package-bill.html" class="sidebar-link">
+                            <a href="{{route('admin.packagebill.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -418,7 +418,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level visible">
                         <li class="sidebar-item">
-                            <a href="service-sales-report.html" class="sidebar-link">
+                            <a href="{{route('admin.servicesalereport.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -426,7 +426,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="OPD-sale-report.html" class="sidebar-link">
+                            <a href="{{route('admin.OPDsalereport.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -434,7 +434,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="package-sale-report.html" class="sidebar-link">
+                            <a href="{{route('admin.packagesalereport.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -452,7 +452,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level visible">
                         <li class="sidebar-item">
-                            <a href="manage-test.html" class="sidebar-link">
+                            <a href="{{route('admin.managaetest.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -460,7 +460,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="test-reference.html" class="sidebar-link">
+                            <a href="{{route('admin.testreference.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -468,7 +468,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="examination-report" class="sidebar-link">
+                            <a href="{{route('admin.examinationreport.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -476,7 +476,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="stain-report.html" class="sidebar-link">
+                            <a href="{{route('admin.stainreport.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -484,7 +484,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="report.html" class="sidebar-link">
+                            <a href="{{route('admin.report.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -502,7 +502,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level visible">
                         <li class="sidebar-item">
-                            <a href="user.html" class="sidebar-link">
+                            <a href="{{route('admin.user.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>

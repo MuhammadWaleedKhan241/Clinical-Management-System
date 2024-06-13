@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class ServiceSaleReportController extends Controller
 {
-    //
+    public function show(){
+        return view('admin.service-sales-report');
+    }
 }

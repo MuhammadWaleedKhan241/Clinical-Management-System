@@ -1,4 +1,4 @@
-<header class="app-header">
+{{-- <header class="app-header">
     <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav d-flex justify-content-between">
             <li class="nav-item">
@@ -8,8 +8,12 @@
             </li>
         </ul>
     </nav>
-</header>
-{{-- <header class="app-header bg-light">
+</header> --}}
+
+
+
+
+<header class="app-header bg-light">
     <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -18,7 +22,6 @@
                 </a>
             </li>
         </ul>
-
         <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="p-2">
@@ -37,21 +40,21 @@
                                 </div>
                             </div>
                         </a>
-                        <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up w-25"
+                        {{-- <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up w-25"
                             aria-labelledby="drop1">
                             <div class="profile-dropdown position-relative" data-simplebar>
                                 <div class="message-body">
                                     <!-- Link to the user's profile -->
-                                    {{-- <a href="{{ route('admin.profile.show') }}"
-                                        class="py-8 px-7 mt-8 d-flex align-items-center">My Profile</a> --}}
+                                    <a href="{{ route('profile.show') }}"
+                                        class="py-8 px-7 mt-8 d-flex align-items-center">My Profile</a>
 
                                     <!-- Link to change password page -->
-                                    {{-- <a href="{{ route('admin.password.change') }}"
+                                    <a href="{{ route('password.change') }}"
                                         class="py-8 px-7 d-flex align-items-center">Change
-                                        Password</a> 
+                                        Password</a>
 
                                     <!-- Logout form -->
-                                    <form action="{{ route('admin.logout') }}" method="POST">
+                                    <form action="{{ route('logout') }}" method="POST">
                                         @csrf
 
                                         <button type="submit" class="py-8 px-7 mt-8 d-flex align-items-center">Log
@@ -59,11 +62,10 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-</header> --}}
+</header>

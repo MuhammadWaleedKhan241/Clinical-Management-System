@@ -9,12 +9,12 @@
             <div class="card-body">
 
                 <div>
-                    <h4 class="fw-semibold fs-4 text-dark">Patient List</h4>
+                    <h4 class="fw-semibold fs-4 text-dark">Service Bill List</h4>
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
                         data-bs-target="#add-contact">
-                        Add New Patient
+                        Add New
                     </button>
                 </div>
                 <!-- Add Contact Popup Model -->

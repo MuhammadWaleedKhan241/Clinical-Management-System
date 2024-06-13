@@ -185,22 +185,38 @@
             <br>
             <input type="text" id="search" class=" form-control w-25 mb-4" placeholder="Search by name">
             <!-- User Table -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name </th>
-                        <th scope="col">Patient</th>
-                        <th scope="col">Doctor</th>
-                        <th scope="col">Descripton</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody id="userTableBody">
-                    <!-- Dynamic rows will be inserted here -->
-                </tbody>
-            </table>
+            <div class="card-body">
+                <h4 class="fw-semibold fs-4 text-dark">Appointments</h4>
+                <div class="d-flex justify-content-end mb-3">
+                    <a href="{{ route('admin.appointments.create') }}" class="btn btn-info btn-rounded">
+                        Add New Appointment
+                    </a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($appointments as $appointments)
+                            <tr>
+                                <td>{{ $appointment->id }}</td>
+                                <td>{{ $appointment->name }}</td>
+                                <td>{{ $appointment->date }}</td>
+                                <td>{{ $appointment->time }}</td>
+                                <td>{{ $appointment->notes }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
             <!-- Pagination -->
             <div class="pagination" id="pagination">
@@ -339,4 +355,3 @@
         });
 </script>
 @endpush
-

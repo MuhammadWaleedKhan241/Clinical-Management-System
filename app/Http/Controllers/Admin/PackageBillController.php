@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class PackageBillController extends Controller
 {
-    //
+    public function show()
+    {
+        return view('admin.package-bill');
+    }
 }
