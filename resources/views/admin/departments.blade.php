@@ -107,7 +107,7 @@
                     <h4 class="fw-semibold fs-4 text-dark">Department List</h4>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-warning btn-sm btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
                         data-bs-target="#add-contact">
                         Add New Department
                     </button>
@@ -159,26 +159,30 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($department as $department)
-                            <tr>
-                                <td>{{ $department->id }}</td>
-                                <td>{{ $department->department_name }}</td>
-                                <td>
-                                    <a href="{{ route('admin.department.edit', $department->id) }}"
-                                        class="btn btn-warning btn-sm">Edit</a>
-                                    <form action="{{ route('admin.department.destroy', $department->id) }}"
-                                        method="POST" style="display:inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
+                      
+                                <tbody>
+                                    @foreach($departments as $department)
+                                    <tr>
+                                        <td>{{ $department->id }}</td>
+                                        <td>{{ $department->department_name }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.department.edit', $department->id) }}"
+                                                class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('admin.department.destroy', $department->id) }}"
+                                                method="POST" style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </table>
                 </div>
+
             </div>
         </div>
     </div>

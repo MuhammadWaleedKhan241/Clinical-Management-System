@@ -11,8 +11,8 @@ class DepartmentController extends Controller
 
     public function show()
     {
-        $department = Department::all();
-        return view('admin.departments', compact('department'));
+        $departments = Department::all(); // Using plural for the variable name
+        return view('admin.departments', compact('departments')); // Passing the variable to the view
     }
 
     public function create()
@@ -27,7 +27,7 @@ class DepartmentController extends Controller
         ]);
 
         Department::create(['department_name' => $request->department_name]);
-        return redirect()->route('admin.department')->with('success', 'Department added successfully.');
+        return redirect()->route('admin.department.store')->with('success', 'Department added successfully.');
     }
 
     public function edit(Department $department)

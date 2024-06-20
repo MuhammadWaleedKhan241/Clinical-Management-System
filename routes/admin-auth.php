@@ -128,27 +128,57 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 
-
+    //Departments
     Route::get('/department', [DepartmentController::class, 'show'])->name('department.show');
-    Route::post('/departments', [DepartmentController::class, 'store'])->name('department.store');
     Route::get('/departments', [DepartmentController::class, 'create'])->name('department.create');
+    Route::post('/departments', [DepartmentController::class, 'store'])->name('department.store');
     Route::get('/departments/{department}/edit', [DepartmentController::class, 'edit'])->name('department.edit');
     Route::patch('/departments/{department}', [DepartmentController::class, 'update'])->name('department.update');
     Route::delete('/departments/{department}', [DepartmentController::class, 'destroy'])->name('department.destroy');
 
-    Route::get('/service', [ServiceController::class, 'show'])->name('service.show');
-    Route::get('/package', [PackageController::class, 'show'])->name('package.show');
+    //Services
+    Route::get('/services', [ServiceController::class, 'show'])->name('service.show');
+    Route::get('/services', [ServiceController::class, 'create'])->name('service.create');
+    Route::post('/services', [ServiceController::class, 'store'])->name('service.store');
+    Route::get('/services/{service}/edit', [ServiceController::class, 'edit'])->name('service.edit');
+    Route::patch('/services/{service}', [ServiceController::class, 'update'])->name('service.update');
+    Route::delete('/services/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
+
+    //Packages
+    Route::get('/package/show', [PackageController::class, 'show'])->name('package.show');
+    Route::get('/package/create', [PackageController::class, 'create'])->name('package.create');
+    Route::post('/package', [PackageController::class, 'store'])->name('package.store');
+    Route::get('/package/edit/{id}', [PackageController::class, 'edit'])->name('package.edit');
+    Route::patch('/package/{id}', [PackageController::class, 'update'])->name('package.update');
+    Route::delete('/package/{id}', [PackageController::class, 'destroy'])->name('package.destroy');
+
+
+    //Employee
     Route::get('/employee', [EmployeeController::class, 'show'])->name('employee.show');
+
+
+
+
+
+    //DoctorOPD
     Route::get('/doctoropd', [DoctorOPDController::class, 'show'])->name('doctoropd.show');
+
+
+
+
+    //Invoice
     Route::get('/invoice', [InvoiceController::class, 'show'])->name('invoice.show');
+
+
+
+    //Ptient
     Route::get('/patient', [PatientController::class, 'show'])->name('patient.show');
 
 
-    //APPOINTMENT
+    //Appointment
     Route::get('/appointment', [AppointmentController::class, 'show'])->name('appointment.show');
     Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
     Route::get('/appointments', [AppointmentController::class, 'create'])->name('appointment.create');
@@ -156,14 +186,37 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::patch('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointment.update');
     Route::delete('/appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointment.destroy');
 
-
+    //Service-Bill
     Route::get('/service-bill', [ServiceBillController::class, 'show'])->name('servicebill.show');
+
+
+
+
+    //OPD-Bill
     Route::get('/OPD-bill', [OPD_BillController::class, 'show'])->name('OPDbill.show');
+
+
+
+
+
+    //Package-Bill
     Route::get('/package-bill', [PackageBillController::class, 'show'])->name('packagebill.show');
+
+
+
+    //Service Sale-Report
     Route::get('/service-sale-report', [ServiceSaleReportController::class, 'show'])->name('servicesalereport.show');
+
+
+
+    //OPD Sale-Report
     Route::get('/OPD-sale-report', [OPDSaleReportController::class, 'show'])->name('OPDsalereport.show');
+
+
+    //Package Sale-report
     Route::get('/package-sale-report', [PackageSaleReportController::class, 'show'])->name('packagesalereport.show');
     Route::get('/manage-test', [ManageTestController::class, 'show'])->name('managaetest.show');
+
     Route::get('/test-reference', [TestReferencesController::class, 'show'])->name('testreference.show');
     Route::get('/examination-report', [ExaminationReportController::class, 'show'])->name('examinationreport.show');
     Route::get('/stain-report', [StainReportController::class, 'show'])->name('stainreport.show');
