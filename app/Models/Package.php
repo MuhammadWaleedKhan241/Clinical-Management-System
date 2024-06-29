@@ -11,7 +11,7 @@ class Package extends Model
 
     protected $fillable = [
         'package_name',
-        'select_test',
+        'description',
         'price',
     ];
 
@@ -19,4 +19,15 @@ class Package extends Model
     protected $casts = [
         'select_test' => 'array',
     ];
+
+    public function tests()
+    {
+        return $this->belongsToMany(Test::class);
+    }
+
+    // Test.php
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class);
+    }
 }

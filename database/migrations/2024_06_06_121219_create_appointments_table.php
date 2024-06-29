@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('doctor');
             $table->string('description');
             $table->date('appointment_date');
+            $table->time('appointment_time');
+            $table->string('status')->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });

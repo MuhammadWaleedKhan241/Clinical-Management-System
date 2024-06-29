@@ -22,14 +22,21 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'patient_name' => 'required|string|max:225',
-            'doctor' => 'required|string|max:225',
-            'description' => 'required|string|max:1000',
-            'appointment_date' => 'required|date'
+            'patient_name' => 'required|string|max:255',
+            'doctor' => 'required|string|max:255',
+            'description' => 'required|string',
+            'appointment_date' => 'required|date',
+            'appointment_time' => 'required|date_format:H:i', // Validate time format
         ]);
 
-        Appointments::create($request->all());
-        return redirect()->route('admin.dashboard')->with('success', 'Appointment added successfully.');
+        Appointments::create([
+            'patient_name' => $request->patient_name,
+            'doctor' => $request->doctor,
+            'description' => $request->description,
+            'appointment_date' => $request->appointment_date,
+            'appointment_time' => $request->appointment_time, // Include appointment_time
+        ]);
+        return redirect()->route('admin.appointment')->with('success', 'Appointment added successfully.');
     }
 
     public function edit(Appointments $appointment)

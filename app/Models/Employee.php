@@ -11,9 +11,10 @@ class Employee extends Model
 
     protected $fillable = [
         'full_name',
-        'phone_no',
-        'select_type',
-        'select_department',
+        'email',
+        'phone',
+        'type',
+        'department',
         'address',
         'education',
         'description',
@@ -21,6 +22,7 @@ class Employee extends Model
         'speciality',
         'working_days',
     ];
+
 
     protected $casts = [
         'select_type' => 'array',

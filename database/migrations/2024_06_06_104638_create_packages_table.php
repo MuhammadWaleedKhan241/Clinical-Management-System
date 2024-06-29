@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->string('oackage_name');
+            $table->string('package_name');
+            $table->text('description');
             $table->json('select_test');
             $table->decimal('price', 8, 2);
             $table->timestamps();

@@ -11,8 +11,8 @@ class DepartmentController extends Controller
 
     public function show()
     {
-        $departments = Department::all(); // Using plural for the variable name
-        return view('admin.departments', compact('departments')); // Passing the variable to the view
+        $departments = Department::all(); // Example: Fetch all departments
+        return view('admin.departments', compact('departments'));
     }
 
     public function create()

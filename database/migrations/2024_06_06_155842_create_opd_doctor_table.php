@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('opd_doctor', function (Blueprint $table) {
             $table->id();
             $table->string('full_name');
-            $table->string('phone_no'); // Changed from decimal to string
-            $table->json('select_department');
-            $table->text('opd_fee');
+            $table->string('phone');
+            $table->string('type');
+            $table->decimal('doctor_charges', 8, 2);
+            $table->decimal('opd_fee', 8, 2);
             $table->timestamps();
             $table->softDeletes();
         });

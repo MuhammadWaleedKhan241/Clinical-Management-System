@@ -7,13 +7,27 @@
                 <h4 class="card-title mb-0">Service List</h4>
             </div>
             <div class="card-body">
+                <!-- Alert Messages -->
+                @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+
+                @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
                         data-bs-target="#add-service">
                         Add New Service
                     </button>
                 </div>
-
                 <!-- Add Service Popup Modal -->
                 <div id="add-service" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
@@ -34,7 +48,7 @@
                                                 placeholder="Service Name" required />
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <input type="number" class="form-control" name="service_amount"
+                                            <input type="number" class="form-control" name="price"
                                                 placeholder="Service Amount" required />
                                         </div>
                                         <div class="col-md-12 mb-3">
@@ -75,12 +89,18 @@
                             <tr>
                                 <td>{{ $service->id }}</td>
                                 <td>{{ $service->service_name }}</td>
-                                <td>{{ $service->department->department_name }}</td>
+                                <td>
+                                    @if($service->department)
+                                    {{ $service->department->department_name }}
+                                    @else
+                                    <span class="text-danger">No Department</span>
+                                    @endif
+                                </td>
                                 <td>${{ $service->service_amount }}</td>
                                 <td>
-                                    <a href="{{ route('services.edit', $service->id) }}"
+                                    <a href="{{ route('admin.service.edit', $service->id) }}"
                                         class="btn btn-sm btn-primary">Edit</a>
-                                    <form action="{{ route('services.destroy', $service->id) }}" method="POST"
+                                    <form action="{{ route('admin.service.destroy', $service->id) }}" method="POST"
                                         style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')

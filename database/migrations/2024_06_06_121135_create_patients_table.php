@@ -13,23 +13,23 @@ return new class extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->string('email');
+            $table->string('name');
+            $table->string('email')->unique();
             $table->string('phone');
-            $table->enum('gender', ['Male', 'Female', 'Other'])->nullable();
-            $table->enum('martial_status', ['Single', 'Married'])->nullable();
-            $table->enum('blood_group', ['AB+', 'AB-', 'A+', 'A-', 'B+', 'B-'])->nullable();;
-            $table->dateTime('dob');
-            $table->string('age');
+            $table->enum('gender', ['male', 'female', 'other']);
+            $table->enum('marital_status', ['single', 'married', 'divorced', 'widowed']); // Ensure this line is present
+            $table->enum('blood_group', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']);
+            $table->date('dob');
+            $table->integer('age');
             $table->string('relative_name');
             $table->string('relative_phone');
+            $table->string('country');
             $table->string('state');
             $table->string('district');
             $table->string('location');
             $table->string('occupation');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

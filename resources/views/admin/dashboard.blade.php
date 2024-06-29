@@ -46,13 +46,11 @@
                 </div>
             </div>
         </div>
-
         <div>
             <h3 class="fw-semibold fs-4 text-dark">Appointments</h3>
             <br>
             <input type="text" id="search" class=" form-control w-25 mb-4" placeholder="Search by name">
             <div class="card-body">
-                
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
@@ -62,7 +60,9 @@
                                 <th>Doctor</th>
                                 <th>Description</th>
                                 <th>Appointment Date</th>
-                                <th>status</th>
+                                <th>Appointment Time</th>
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,8 +73,17 @@
                                 <td>{{ $appointment->doctor }}</td>
                                 <td>{{ $appointment->description }}</td>
                                 <td>{{ $appointment->appointment_date }}</td>
+                                <td>{{ $appointment->appointment_time }}</td>
+                                <td>{{ $appointment->status }}</td>
                                 <td>
-                                    <!-- Add action buttons here if needed -->
+                                    <a href="{{ route('admin.appointment.edit', $appointment->id) }}"
+                                        class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="{{ route('admin.appointment.destroy', $appointment->id) }}"
+                                        method="POST" style="display:inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

@@ -11,15 +11,21 @@
                 <div>
                     <h4 class="fw-semibold fs-4 text-dark">Appointment List</h4>
                 </div>
+                @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
-                        data-bs-target="#add-contact">
+                        data-bs-target="#add-appointment">
                         Add New Appointment
                     </button>
                 </div>
-                <!-- Add Contact Popup Model -->
-                <div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                    aria-hidden="true">
+                <!-- Add Appointment Popup Modal -->
+                <div id="add-appointment" class="modal fade in" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-lg">
                         <div class="modal-content">
                             <div class="modal-header d-flex align-items-center">
@@ -31,7 +37,7 @@
                             </div>
                             <div class="modal-body">
                                 <form class="form-horizontal form-material"
-                                    action="{{ route('admin.appointments.store') }}" method="POST">
+                                    action="{{ route('admin.appointment.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <div class="col-md-12 mb-3">
@@ -43,12 +49,16 @@
                                                 name="doctor" required />
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Description"
-                                                name="description" required />
+                                            <textarea class="form-control" placeholder="Description" name="description"
+                                                required></textarea>
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <input type="date" class="form-control" placeholder="Appointment Date"
                                                 name="appointment_date" required />
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <input type="time" class="form-control" placeholder="Appointment Time"
+                                                name="appointment_time" required />
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -77,6 +87,7 @@
                                 <th>Doctor</th>
                                 <th>Description</th>
                                 <th>Appointment Date</th>
+                                <th>Appointment Time</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -89,7 +100,8 @@
                                 <td>{{ $appointment->doctor }}</td>
                                 <td>{{ $appointment->description }}</td>
                                 <td>{{ $appointment->appointment_date }}</td>
-                                <td></td>
+                                <td>{{ $appointment->appointment_time }}</td>
+                                <td>{{ $appointment->status }}</td>
                                 <td>
                                     <a href="{{ route('admin.appointment.edit', $appointment->id) }}"
                                         class="btn btn-warning btn-sm">Edit</a>

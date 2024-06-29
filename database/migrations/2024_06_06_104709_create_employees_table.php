@@ -15,17 +15,16 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('full_name');
-            $table->string('phone_no');
-            $table->json('select_type');
-            // $table->json('select_department');
-            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
-            $table->text('address');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('type');
+            $table->string('department');
+            $table->string('address');
             $table->string('education');
-            $table->string('description');
-            $table->text('certificate');
+            $table->text('description');
+            $table->string('certificate');
             $table->string('speciality');
-            $table->json('working_days');
-            $table->softDeletes();
+            $table->string('working_days');
             $table->timestamps();
         });
     }

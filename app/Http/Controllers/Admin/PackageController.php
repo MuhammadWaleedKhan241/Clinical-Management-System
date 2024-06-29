@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Package;
+use App\Models\Test;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller
@@ -11,12 +12,14 @@ class PackageController extends Controller
     public function show()
     {
         $packages = Package::with('tests')->get();
-        return view('admin.packages', compact('packages'));
+        $tests = Test::all();
+        return view('admin.packages', compact('packages', 'tests'));
     }
 
     public function create()
     {
-        return view('admin.package-create'); // Changed view name for clarity
+        $tests = Test::all();
+        return view('admin.package.create', compact('tests'));
     }
 
     public function store(Request $request)
@@ -25,6 +28,7 @@ class PackageController extends Controller
             'package_name' => 'required|string|max:255',
             'description' => 'required|string',
             'tests' => 'required|array',
+            'tests.*' => 'exists:tests,id',
             'price' => 'required|numeric',
         ]);
 
@@ -36,25 +40,27 @@ class PackageController extends Controller
 
         $package->tests()->attach($request->tests);
 
-        return redirect()->route('package.show')->with('success', 'Package added successfully.');
+        return redirect()->route('packages.index')->with('success', 'Package added successfully.');
     }
+
 
     public function edit($id)
     {
         $package = Package::findOrFail($id);
-        return view('admin.package-edit', compact('package')); 
+        $tests = Test::all();
+        return view('admin.package.edit', compact('package', 'tests'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Package $package)
     {
         $request->validate([
             'package_name' => 'required|string|max:255',
             'description' => 'required|string',
             'tests' => 'required|array',
+            'tests.*' => 'exists:tests,id',
             'price' => 'required|numeric',
         ]);
 
-        $package = Package::findOrFail($id);
         $package->update([
             'package_name' => $request->package_name,
             'description' => $request->description,

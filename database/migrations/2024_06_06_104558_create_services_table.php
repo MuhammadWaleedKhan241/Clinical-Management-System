@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('service_name');
             $table->decimal('price', 8, 2);
+            // $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
             $table->timestamps();
-
-            $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
         });
     }
 
