@@ -73,7 +73,8 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table id="demo-foo-addrow" class="table table-bordered m-t-30 table-hover contact-list"
+                    <table id="demo-foo-addrow"
+                        class=" table table-striped table-hover table-bordered m-t-30 table-hover contact-list"
                         data-paging="true" data-paging-size="7">
                         <thead>
                             <tr>

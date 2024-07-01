@@ -45,7 +45,13 @@ class InvoiceController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            // Validation rules
+            'customer_name' => 'required|string|max:255',
+            'customer_email' => 'required|email|max:255',
+            'customer_phone' => 'required|string|max:255',
+            'amount' => 'required|numeric',
+            'invoice_date' => 'required|date',
+            'due_date' => 'required|date',
+            'status' => 'required|string|in:pending,paid,canceled',
         ]);
 
         $invoice = Invoice::findOrFail($id);
@@ -53,6 +59,7 @@ class InvoiceController extends Controller
 
         return redirect()->route('admin.invoice.show')->with('success', 'Invoice updated successfully.');
     }
+
 
     public function destroy($id)
     {

@@ -36,7 +36,7 @@ class AppointmentController extends Controller
             'appointment_date' => $request->appointment_date,
             'appointment_time' => $request->appointment_time, // Include appointment_time
         ]);
-        return redirect()->route('admin.appointment')->with('success', 'Appointment added successfully.');
+        return redirect()->route('admin.appointment.show')->with('success', 'Appointment added successfully.');
     }
 
     public function edit(Appointments $appointment)

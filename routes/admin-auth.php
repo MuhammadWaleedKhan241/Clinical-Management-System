@@ -102,7 +102,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy'])->name('invoice.destroy');
 
 
-
     //Appointment
     Route::get('/appointment/show', [AppointmentController::class, 'show'])->name('appointment.show');
     Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointment.store');
@@ -111,59 +110,69 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::patch('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointment.update');
     Route::delete('/appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointment.destroy');
 
-    //Ptient
 
-    // Route::get('/patient/show', [PatientController::class, 'show'])->name('patient.show');
+
+    //Ptient
     Route::get('/patient/show', [PatientController::class, 'show'])->name('patient.show');
     Route::get('/patients/create', [PatientController::class, 'create'])->name('patient.create');
     Route::post('/patients', [PatientController::class, 'store'])->name('patient.store');
     Route::get('/patients/{patient}', [PatientController::class, 'edit'])->name('patient.edit');
-    Route::put('patients/patients/{id}', [PatientController::class, 'update'])->name('admin.patient.update');
+    Route::put('patients/patients/{id}', [PatientController::class, 'update'])->name('patient.update');
     Route::delete('patients/{id}', [PatientController::class, 'destroy'])->name('patient.destroy');
 
 
     //Service-Bill
     Route::get('/service-bill', [ServiceBillController::class, 'show'])->name('servicebill.show');
-    Route::get('/service-bill', [ServiceBillController::class, 'create'])->name('servicebill.creat');
-    Route::get('/service-bill', [ServiceBillController::class, 'store'])->name('servicebill.store');
-    Route::get('/service-bill', [ServiceBillController::class, 'edit'])->name('servicebill.edit');
-    Route::get('/service-bill', [ServiceBillController::class, 'update'])->name('servicebill.update');
-    Route::get('/service-bill', [ServiceBillController::class, 'delete'])->name('servicebill.delete');
+    Route::get('/service-bill/create', [ServiceBillController::class, 'create'])->name('servicebill.create');
+    Route::post('/service-bill', [ServiceBillController::class, 'store'])->name('servicebill.store');
+    Route::get('/service-bill/{id}/edit', [ServiceBillController::class, 'edit'])->name('servicebill.edit');
+    Route::put('/service-bill/{id}', [ServiceBillController::class, 'update'])->name('servicebill.update');
+    Route::delete('/service-bill/{id}', [ServiceBillController::class, 'destroy'])->name('servicebill.destroy');
+
 
     //OPD-Bill
     Route::get('/OPD-bill', [OPD_BillController::class, 'show'])->name('OPDbill.show');
-    Route::get('/OPD-bill', [OPD_BillController::class, 'create'])->name('OPDbill.craete');
-    Route::get('/OPD-bill', [OPD_BillController::class, 'store'])->name('OPDbill.store');
-    Route::get('/OPD-bill', [OPD_BillController::class, 'edit'])->name('OPDbill.edit');
-    Route::get('/OPD-bill', [OPD_BillController::class, 'update'])->name('OPDbill.update');
-    Route::get('/OPD-bill', [OPD_BillController::class, 'delete'])->name('OPDbill.delete');
+    Route::get('/OPD-bill/create', [OPD_BillController::class, 'create'])->name('OPDbill.create');
+    Route::post('/OPD-bill', [OPD_BillController::class, 'store'])->name('OPDbill.store');
+    Route::get('/OPD-bill/{id}/edit', [OPD_BillController::class, 'edit'])->name('OPDbill.edit');
+    Route::put('/OPD-bill/{id}', [OPD_BillController::class, 'update'])->name('OPDbill.update');
+    Route::delete('/OPD-bill/{id}', [OPD_BillController::class, 'destroy'])->name('OPDbill.destroy');
+
 
     //Package-Bill
     Route::get('/package-bill', [PackageBillController::class, 'show'])->name('packagebill.show');
-    Route::get('/package-bill', [PackageBillController::class, 'create'])->name('packagebill.create');
-    Route::get('/package-bill', [PackageBillController::class, 'store'])->name('packagebill.store');
-    Route::get('/package-bill', [PackageBillController::class, 'edit'])->name('packagebill.edit');
-    Route::get('/package-bill', [PackageBillController::class, 'update'])->name('packagebill.update');
-    Route::get('/package-bill', [PackageBillController::class, 'delete'])->name('packagebill.delete');
+    Route::get('/package-bill/create', [PackageBillController::class, 'create'])->name('packagebill.create');
+    Route::post('/package-bill', [PackageBillController::class, 'store'])->name('packagebill.store');
+    Route::get('/package-bill/{id}/edit', [PackageBillController::class, 'edit'])->name('packagebill.edit');
+    Route::put('/package-bill/{id}', [PackageBillController::class, 'update'])->name('packagebill.update');
+    Route::delete('/package-bill/{id}', [PackageBillController::class, 'destroy'])->name('packagebill.destroy');
+
 
     //Service Sale-Report
     Route::get('/service-sale-report', [ServiceSaleReportController::class, 'show'])->name('servicesalereport.show');
-    Route::get('/service-sale-report', [ServiceSaleReportController::class, 'create'])->name('servicesalereport.create');
-    Route::get('/service-sale-report', [ServiceSaleReportController::class, 'store'])->name('servicesalereport.store');
-    Route::get('/service-sale-report', [ServiceSaleReportController::class, 'edit'])->name('servicesalereport.edit');
-    Route::get('/service-sale-report', [ServiceSaleReportController::class, 'update'])->name('servicesalereport.update');
-    Route::get('/service-sale-report', [ServiceSaleReportController::class, 'delete'])->name('servicesalereport.delete');
+    Route::get('/service-sale-report/create', [ServiceSaleReportController::class, 'create'])->name('servicesalereport.create');
+    Route::post('/service-sale-report', [ServiceSaleReportController::class, 'store'])->name('servicesalereport.store');
+    Route::get('/service-sale-report/{id}/edit', [ServiceSaleReportController::class, 'edit'])->name('servicesalereport.edit');
+    Route::put('/service-sale-report/{id}', [ServiceSaleReportController::class, 'update'])->name('servicesalereport.update');
+    Route::delete('/service-sale-report/{id}', [ServiceSaleReportController::class, 'destroy'])->name('servicesalereport.destroy');
+
 
     //OPD Sale-Report
     Route::get('/OPD-sale-report', [OPDSaleReportController::class, 'show'])->name('OPDsalereport.show');
-    Route::get('/OPD-sale-report', [OPDSaleReportController::class, 'show'])->name('OPDsalereport.show');
-    Route::get('/OPD-sale-report', [OPDSaleReportController::class, 'show'])->name('OPDsalereport.show');
-    Route::get('/OPD-sale-report', [OPDSaleReportController::class, 'show'])->name('OPDsalereport.show');
-    Route::get('/OPD-sale-report', [OPDSaleReportController::class, 'show'])->name('OPDsalereport.show');
-    Route::get('/OPD-sale-report', [OPDSaleReportController::class, 'show'])->name('OPDsalereport.show');
+    Route::get('/OPD-sale-report/create', [OPDSaleReportController::class, 'create'])->name('OPDsalereport.create');
+    Route::post('/OPD-sale-report', [OPDSaleReportController::class, 'store'])->name('OPDsalereport.store');
+    Route::get('/OPD-sale-report/{id}/edit', [OPDSaleReportController::class, 'edit'])->name('OPDsalereport.edit');
+    Route::put('/OPD-sale-report/{id}', [OPDSaleReportController::class, 'update'])->name('OPDsalereport.update');
+    Route::delete('/OPD-sale-report/{id}', [OPDSaleReportController::class, 'destroy'])->name('OPDsalereport.destroy');
 
     //Package Sale-report
     Route::get('/package-sale-report', [PackageSaleReportController::class, 'show'])->name('packagesalereport.show');
+    Route::get('/package-sale-report/create', [PackageSaleReportController::class, 'create'])->name('packagesalereport.create');
+    Route::post('/package-sale-report', [PackageSaleReportController::class, 'store'])->name('packagesalereport.store');
+    Route::get('/package-sale-report/{id}/edit', [PackageSaleReportController::class, 'edit'])->name('packagesalereport.edit');
+    Route::put('/package-sale-report/{id}', [PackageSaleReportController::class, 'update'])->name('packagesalereport.update');
+    Route::delete('/package-sale-report/{id}', [PackageSaleReportController::class, 'destroy'])->name('packagesalereport.destroy');
+
 
     //Manage Test
     Route::get('/manage-test', [ManageTestController::class, 'show'])->name('managaetest.show');

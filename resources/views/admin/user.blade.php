@@ -9,7 +9,7 @@
             <div class="card-body">
 
                 <div>
-                    <h4 class="fw-semibold fs-4 text-dark">Patient List</h4>
+                    <h4 class="fw-semibold fs-4 text-dark">User List</h4>
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
@@ -147,17 +147,7 @@
                                     <button class="btn btn-sm btn-primary">Details</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Saad</td>
-                                <td>Ali</td>
-                                <td>Dr.Akbar</td>
-                                <td>bfgbjfcj</td>
-                                <td>Friday</td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Details</button>
-                                </td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>

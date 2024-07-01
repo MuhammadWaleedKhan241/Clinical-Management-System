@@ -62,8 +62,8 @@
                                             <input type="text" name="opd_fee" class="form-control" placeholder="OPD Fee"
                                                 required />
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
+                                        </div>
+                                        <div class="modal-footer">
                                         <button type="submit" class="btn btn-info waves-effect">Save</button>
                                         <button type="button" class="btn btn-danger waves-effect"
                                             data-bs-dismiss="modal">Cancel</button>
@@ -74,7 +74,8 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table id="demo-foo-addrow" class="table table-bordered m-t-3 table-hover contact-list"
+                    <table id="demo-foo-addrow"
+                        class="table table-striped table-hover table-bordered m-t-3 table-hover contact-list"
                         data-paging="true" data-paging-size="7">
                         <thead>
                             <tr>

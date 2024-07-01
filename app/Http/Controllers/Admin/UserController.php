@@ -9,6 +9,6 @@ class UserController extends Controller
 {
     public function show()
     {
-        return view('admin.report');
+        return view('admin.user');
     }
 }
