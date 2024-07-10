@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('package_name');
             $table->text('description');
-            $table->json('select_test');
+            $table->string('select_test')->nullable()->change();
             $table->decimal('price', 8, 2);
             $table->timestamps();
             $table->softDeletes();

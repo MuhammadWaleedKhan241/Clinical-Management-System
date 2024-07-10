@@ -12,6 +12,7 @@ class Package extends Model
     protected $fillable = [
         'package_name',
         'description',
+        'select_test',
         'price',
     ];
 
@@ -22,7 +23,7 @@ class Package extends Model
 
     public function tests()
     {
-        return $this->belongsToMany(Test::class);
+        return $this->belongsToMany(Test::class, 'package_test');
     }
 
     // Test.php

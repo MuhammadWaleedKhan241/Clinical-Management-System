@@ -22,11 +22,16 @@
                 </div>
                 @endif
 
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-warning btn-sm btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
+                <div class="d-flex justify-content-between mb-3">
+                    <button type="button" class="btn btn-warning btn-rounded" data-bs-toggle="modal"
                         data-bs-target="#add-contact">
                         Add New Department
                     </button>
+                    <form action="{{ route('admin.department.show') }}" method="GET" class="d-flex">
+                        <input type="text" name="search" class="form-control" placeholder="Search by name"
+                            value="{{ request('search') }}">
+                        <button type="submit" class="btn btn-primary ms-2">Search</button>
+                    </form>
                 </div>
 
                 <!-- Add Department Popup Modal -->
@@ -50,8 +55,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-info waves-effect">Save</button>
-                                        <button type="button" class="btn btn-default waves-effect"
+                                        <button type="submit" class="btn btn-warning waves-effect">Save</button>
+                                        <button type="button" class="btn btn-danger waves-effect"
                                             data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
@@ -92,6 +97,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{ $departments->links() }}
                 </div>
             </div>
         </div>

@@ -8,15 +8,16 @@
                 <h4 class="card-title mb-0">Contact Patient List</h4>
             </div>
             <div class="card-body">
-                <div>
-                    <h4 class="fw-semibold fs-4 text-dark">Appointment List</h4>
-                </div>
                 @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @endif
+                <div>
+                    <h4 class="fw-semibold fs-4 text-dark">Appointment List</h4>
+                </div>
+                
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
                         data-bs-target="#add-appointment">

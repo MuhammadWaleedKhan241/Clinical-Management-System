@@ -13,22 +13,22 @@
 
 @section('content')
 <div class="container">
-<BR></BR>
+    <div class="border-bottom title-part-padding">
+        <h4 class="card-title mb-0">Doctor OPD List</h4>
+    </div>
     <br>
-    <br>
-    <br>
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
     <div class="d-flex justify-content-end ">
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createInvoiceModal">Add New
             Invoice</button>
     </div>
-
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div> 
-    @endif
     <div>
-        <h1>Invoice List</h1>
+        <h4 class="fw-semibold fs-5 text-dark">Invoice List</h4>
     </div>
     <table class="table table-striped table-hover table-bordered m-t-30 table-hover contact-list" data-paging="true"
         data-paging-size="7">
@@ -49,9 +49,9 @@
             @foreach($invoices as $invoice)
             <tr>
                 <td>{{ $invoice->id }}</td>
-                <td>{{ $invoice->customer_name }}</td>
-                <td>{{ $invoice->customer_email }}</td>
-                <td>{{ $invoice->customer_phone }}</td>
+                <td>{{ $invoice->patient_name }}</td>
+                <td>{{ $invoice->patient_email }}</td>
+                <td>{{ $invoice->patient_phone }}</td>
                 <td>{{ $invoice->amount }}</td>
                 <td>{{ $invoice->invoice_date }}</td>
                 <td>{{ $invoice->due_date }}</td>
@@ -83,19 +83,19 @@
                                 @csrf
                                 @method('PATCH')
                                 <div class="form-group mb-3">
-                                    <label for="customer_name">Customer Name</label>
-                                    <input type="text" name="customer_name" class="form-control"
-                                        value="{{ $invoice->customer_name }}" required>
+                                    <label for="patient_name">Patient Name</label>
+                                    <input type="text" name="patient_name" class="form-control"
+                                        value="{{ $invoice->patient_name }}" required>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="customer_email">Customer Email</label>
-                                    <input type="email" name="customer_email" class="form-control"
-                                        value="{{ $invoice->customer_email }}" required>
+                                    <label for="patient_email">Patient Email</label>
+                                    <input type="email" name="patient_email" class="form-control"
+                                        value="{{ $invoice->patient_email }}" required>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="customer_phone">Customer Phone</label>
-                                    <input type="text" name="customer_phone" class="form-control"
-                                        value="{{ $invoice->customer_phone }}" required>
+                                    <label for="patient_phone">Patient Phone</label>
+                                    <input type="text" name="patient_phone" class="form-control"
+                                        value="{{ $invoice->patient_phone }}" required>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="amount">Amount</label>
@@ -148,16 +148,16 @@
                 <form action="{{ route('admin.invoice.store') }}" method="POST">
                     @csrf
                     <div class="form-group mb-3">
-                        <label for="customer_name">Customer Name</label>
-                        <input type="text" name="customer_name" class="form-control" required>
+                        <label for="patient_name">Patient Name</label>
+                        <input type="text" name="patient_name" class="form-control" required>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="customer_email">Customer Email</label>
-                        <input type="email" name="customer_email" class="form-control" required>
+                        <label for="patient_email">Patient Email</label>
+                        <input type="email" name="patient_email" class="form-control" required>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="customer_phone">Customer Phone</label>
-                        <input type="text" name="customer_phone" class="form-control" required>
+                        <label for="patient_phone">Patient Phone</label>
+                        <input type="text" name="patient_phone" class="form-control" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="amount">Amount</label>

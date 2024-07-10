@@ -14,7 +14,8 @@
     <meta name="keywords" content="NettaAdSoka" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!--  Favicon -->
-    {{-- <link rel="shortcut icon" type="image/png" href="assets/images/logos/favicon.ico" /> --}}
+    {{--
+    <link rel="shortcut icon" type="image/png" href="assets/images/logos/favicon.ico" /> --}}
     <!-- Core Css -->
     <link id="themeColors" rel="stylesheet" href="{{asset('assets/css/style.min.css')}}" />
     <link href="{{asset('https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css')}}" rel="stylesheet">
@@ -26,7 +27,8 @@
 
     <link id=" themeColors rel="stylesheet" href="{{asset('assets/css/style.min.css')}}" />
     <link href="{{asset('https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css')}}" rel="stylesheet">
-    {{-- <link rel="shortcut icon" type="image/png" href="{{asset('assets/images/logos/favicon.ico')}}" /> --}}
+    {{--
+    <link rel="shortcut icon" type="image/png" href="{{asset('assets/images/logos/favicon.ico')}}" /> --}}
     <!-- Owl Carousel  -->
     <link rel="stylesheet" href="{{asset('assets/libs/owl.carousel/dist/assets/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css')}}">
@@ -89,7 +91,7 @@
     <script src="assets/libs/simplebar/dist/simplebar.min.js"></script>
     <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{asset('https://code.jquery.com/jquery-3.6.0.min.js')}}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- core files -->
     <script src="assets/js/app.min.js"></script>
@@ -102,7 +104,6 @@
     <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!--  core files -->
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script src="{{asset('assets/js/carosuals.js')}}"></script>

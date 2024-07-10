@@ -1,10 +1,11 @@
 @extends('admin.admin.master')
+
 @section('content')
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="border-bottom title-part-padding">
-                <h4 class="card-title mb-0">Contact Employee list</h4>
+                <h4 class="card-title mb-0">Contact Employee List</h4>
             </div>
             <div class="card-body">
 
@@ -17,7 +18,7 @@
                         Add New Employee
                     </button>
                 </div>
-                <!-- Add Contact Popup Model -->
+                <!-- Add Contact Popup Modal -->
                 <div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-lg">

@@ -27,28 +27,28 @@ class PackageController extends Controller
         $request->validate([
             'package_name' => 'required|string|max:255',
             'description' => 'required|string',
-            'tests' => 'required|array',
-            'tests.*' => 'exists:tests,id',
+            //'test_id' => 'required|array',
             'price' => 'required|numeric',
+            'select_test' => 'nullable|string', // Add validation rule if necessary
         ]);
 
         $package = Package::create([
             'package_name' => $request->package_name,
             'description' => $request->description,
             'price' => $request->price,
+            'select_test' => $request->select_test, // Ensure this field is included
         ]);
 
-        $package->tests()->attach($request->tests);
+        $package->tests()->attach($request->test_id);
 
-        return redirect()->route('packages.index')->with('success', 'Package added successfully.');
+        return redirect()->route('admin.package.show')->with('success', 'Package created successfully.');
     }
-
 
     public function edit($id)
     {
         $package = Package::findOrFail($id);
         $tests = Test::all();
-        return view('admin.package.edit', compact('package', 'tests'));
+        return view('admin.edit_package', compact('package', 'tests'));
     }
 
     public function update(Request $request, Package $package)
@@ -78,6 +78,6 @@ class PackageController extends Controller
         $package->tests()->detach();
         $package->delete();
 
-        return redirect()->route('package.show')->with('success', 'Package deleted successfully.');
+        return redirect()->route('admin.package.show')->with('success', 'Package deleted successfully.');
     }
 }

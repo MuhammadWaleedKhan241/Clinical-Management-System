@@ -1,4 +1,3 @@
-
 @extends('admin.admin.master')
 
 @section('content')
@@ -20,6 +19,17 @@
                 @if(session('error'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+
+                @if($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul class="mb-0">
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @endif
@@ -46,7 +56,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form class="form-horizontal form-material" action="{{ route('admin.package.store')}}"
+                                <form class="form-horizontal form-material" action="{{ route('admin.package.store') }}"
                                     method="POST">
                                     @csrf
                                     <div class="form-group">
@@ -59,12 +69,21 @@
                                                 required></textarea>
                                         </div>
                                         {{-- <div class="col-md-12 mb-3">
-                                            <select class="form-select" name="tests[]" multiple required>
+                                            <select class="form-select" name="test_id[]" multiple required>
                                                 @foreach($tests as $test)
                                                 <option value="{{ $test->id }}">{{ $test->test_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div> --}}
+                                        <div class="col-md-12 mb-3">
+                                            <select class="form-select" name="test_id" required>
+                                                <option value="">Select Test</option>
+                                                @foreach($tests as $test)
+                                                <option value="{{ $test->id }}">{{ $test->test_name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="col-md-12 mb-3">
                                             <input type="number" class="form-control" name="price" placeholder="Price"
                                                 required />
@@ -84,7 +103,7 @@
                 </div>
                 <div class="table-responsive">
                     <table id="demo-foo-addrow"
-                        class=" table table-striped table-hover table-bordered m-t-30 table-hover contact-list"
+                        class="table table-striped table-hover table-bordered m-t-30 table-hover contact-list"
                         data-paging="true" data-paging-size="7">
                         <thead>
                             <tr>

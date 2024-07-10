@@ -30,14 +30,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('guest:admin')->prefix('admin')->name('admin.')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
-
+    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
-
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
-
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 });
 
@@ -45,15 +40,15 @@ Route::middleware('guest:admin')->prefix('admin')->name('admin.')->group(functio
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'show'])->middleware(['verified'])->name('dashboard');
-
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     //Departments
-    Route::get('/department', [DepartmentController::class, 'show'])->name('department.show');
-    Route::get('/departments', [DepartmentController::class, 'create'])->name('department.create');
+    Route::get('/departments', [DepartmentController::class, 'show'])->name('department.show');
+    Route::get('/departments/create', [DepartmentController::class, 'create'])->name('department.create');
     Route::post('/departments', [DepartmentController::class, 'store'])->name('department.store');
     Route::get('/departments/{department}/edit', [DepartmentController::class, 'edit'])->name('department.edit');
     Route::patch('/departments/{department}', [DepartmentController::class, 'update'])->name('department.update');
@@ -83,7 +78,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::patch('/employee/{id}', [EmployeeController::class, 'update'])->name('employee.update');
     Route::delete('/employee/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
 
-
     //DoctorOPD
     Route::get('/doctoropd/show', [DoctorOPDController::class, 'show'])->name('doctoropd.show');
     Route::get('/doctoropd/create', [DoctorOPDController::class, 'create'])->name('doctoropd.create');
@@ -91,7 +85,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('/doctoropd/edit/{id}', [DoctorOPDController::class, 'edit'])->name('doctoropd.edit');
     Route::patch('/doctoropd/{id}', [DoctorOPDController::class, 'update'])->name('doctoropd.update');
     Route::delete('/doctoropd/{id}', [DoctorOPDController::class, 'destroy'])->name('doctoropd.destroy');
-
 
     //Invoice   
     Route::get('/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
@@ -101,7 +94,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::patch('/invoice/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
     Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy'])->name('invoice.destroy');
 
-
     //Appointment
     Route::get('/appointment/show', [AppointmentController::class, 'show'])->name('appointment.show');
     Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointment.store');
@@ -109,8 +101,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('/appointments/{appointment}/edit', [AppointmentController::class, 'edit'])->name('appointment.edit');
     Route::patch('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointment.update');
     Route::delete('/appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointment.destroy');
-
-
 
     //Ptient
     Route::get('/patient/show', [PatientController::class, 'show'])->name('patient.show');
@@ -120,7 +110,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::put('patients/patients/{id}', [PatientController::class, 'update'])->name('patient.update');
     Route::delete('patients/{id}', [PatientController::class, 'destroy'])->name('patient.destroy');
 
-
     //Service-Bill
     Route::get('/service-bill', [ServiceBillController::class, 'show'])->name('servicebill.show');
     Route::get('/service-bill/create', [ServiceBillController::class, 'create'])->name('servicebill.create');
@@ -128,7 +117,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('/service-bill/{id}/edit', [ServiceBillController::class, 'edit'])->name('servicebill.edit');
     Route::put('/service-bill/{id}', [ServiceBillController::class, 'update'])->name('servicebill.update');
     Route::delete('/service-bill/{id}', [ServiceBillController::class, 'destroy'])->name('servicebill.destroy');
-
 
     //OPD-Bill
     Route::get('/OPD-bill', [OPD_BillController::class, 'show'])->name('OPDbill.show');
@@ -138,7 +126,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::put('/OPD-bill/{id}', [OPD_BillController::class, 'update'])->name('OPDbill.update');
     Route::delete('/OPD-bill/{id}', [OPD_BillController::class, 'destroy'])->name('OPDbill.destroy');
 
-
     //Package-Bill
     Route::get('/package-bill', [PackageBillController::class, 'show'])->name('packagebill.show');
     Route::get('/package-bill/create', [PackageBillController::class, 'create'])->name('packagebill.create');
@@ -147,7 +134,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::put('/package-bill/{id}', [PackageBillController::class, 'update'])->name('packagebill.update');
     Route::delete('/package-bill/{id}', [PackageBillController::class, 'destroy'])->name('packagebill.destroy');
 
-
     //Service Sale-Report
     Route::get('/service-sale-report', [ServiceSaleReportController::class, 'show'])->name('servicesalereport.show');
     Route::get('/service-sale-report/create', [ServiceSaleReportController::class, 'create'])->name('servicesalereport.create');
@@ -155,7 +141,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('/service-sale-report/{id}/edit', [ServiceSaleReportController::class, 'edit'])->name('servicesalereport.edit');
     Route::put('/service-sale-report/{id}', [ServiceSaleReportController::class, 'update'])->name('servicesalereport.update');
     Route::delete('/service-sale-report/{id}', [ServiceSaleReportController::class, 'destroy'])->name('servicesalereport.destroy');
-
 
     //OPD Sale-Report
     Route::get('/OPD-sale-report', [OPDSaleReportController::class, 'show'])->name('OPDsalereport.show');
@@ -173,15 +158,30 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::put('/package-sale-report/{id}', [PackageSaleReportController::class, 'update'])->name('packagesalereport.update');
     Route::delete('/package-sale-report/{id}', [PackageSaleReportController::class, 'destroy'])->name('packagesalereport.destroy');
 
-
     //Manage Test
-    Route::get('/manage-test', [ManageTestController::class, 'show'])->name('managaetest.show');
+    Route::get('/manage-test', [ManageTestController::class, 'show'])->name('managetest.show');
+    Route::get('/manage-test/create', [ManageTestController::class, 'create'])->name('managetest.create');
+    Route::post('/manage-test', [ManageTestController::class, 'store'])->name('managetest.store');
+    Route::get('/manage-test/{id}/edit', [ManageTestController::class, 'edit'])->name('managetest.edit');
+    Route::put('/manage-test/{id}', [ManageTestController::class, 'update'])->name('managetest.update');
+    Route::delete('/manage-test/{id}', [ManageTestController::class, 'destroy'])->name('managetest.destroy');
 
     //Test Reference
     Route::get('/test-reference', [TestReferencesController::class, 'show'])->name('testreference.show');
+    Route::get('/test-reference/create', [TestReferencesController::class, 'create'])->name('testreference.create');
+    Route::post('/test-reference', [TestReferencesController::class, 'store'])->name('testreference.store');
+    Route::get('/test-reference/{id}/edit', [TestReferencesController::class, 'edit'])->name('testreference.edit');
+    Route::put('/test-reference/{id}', [TestReferencesController::class, 'update'])->name('testreference.update');
+    Route::delete('/test-reference/{id}', [TestReferencesController::class, 'destroy'])->name('testreference.destroy');
 
     //Examination Report
     Route::get('/examination-report', [ExaminationReportController::class, 'show'])->name('examinationreport.show');
+    Route::get('/examination-report/create', [ExaminationReportController::class, 'create'])->name('examinationreport.create');
+    Route::post('/examination-report', [ExaminationReportController::class, 'store'])->name('examinationreport.store');
+    Route::get('/examination-report/{id}/edit', [ExaminationReportController::class, 'edit'])->name('examinationreport.edit');
+    Route::put('/examination-report/{id}', [ExaminationReportController::class, 'update'])->name('examinationreport.update');
+    Route::delete('/examination-report/{id}', [ExaminationReportController::class, 'destroy'])->name('examinationreport.destroy');
+
 
     //Stain Report
     Route::get('/stain-report', [StainReportController::class, 'show'])->name('stainreport.show');

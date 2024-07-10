@@ -9,14 +9,15 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'service_name',
-        'price',
-        'department_id',
-    ];
+    protected $fillable = ['department_id', 'service_name', 'price'];
 
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function serviceBills()
+    {
+        return $this->hasMany(ServiceBill::class);
     }
 }

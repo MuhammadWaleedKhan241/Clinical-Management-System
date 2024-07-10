@@ -23,7 +23,7 @@
                 @endif
 
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-warning btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
                         data-bs-target="#add-service">
                         Add New Service
                     </button>
@@ -57,12 +57,12 @@
                                                 @foreach($departments as $department)
                                                 <option value="{{ $department->id }}">{{ $department->department_name }}
                                                 </option>
-                                                @endforeach
+                                                @endforeach 
                                             </select>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-info waves-effect">Save</button>
+                                        <button type="submit" class="btn btn-warning waves-effect">Save</button>
                                         <button type="button" class="btn btn-default waves-effect"
                                             data-bs-dismiss="modal">Cancel</button>
                                     </div>
@@ -97,10 +97,10 @@
                                     <span class="text-danger">No Department</span>
                                     @endif
                                 </td>
-                                <td>${{ $service->service_amount }}</td>
+                                <td>${{ $service->price }}</td>
                                 <td>
                                     <a href="{{ route('admin.service.edit', $service->id) }}"
-                                        class="btn btn-sm btn-primary">Edit</a>
+                                        class="btn btn-sm btn-warning">Edit</a>
                                     <form action="{{ route('admin.service.destroy', $service->id) }}" method="POST"
                                         style="display:inline-block;">
                                         @csrf

@@ -4,7 +4,7 @@
     <div class="col-12">
         <div class="card">
             <div class="border-bottom title-part-padding">
-                <h4 class="card-title mb-0">Contact Patient list</h4>
+                <h4 class="card-title mb-0">Service Bill List</h4>
             </div>
             <div class="card-body">
 
@@ -13,107 +13,92 @@
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
-                        data-bs-target="#add-contact">
-                        Add New
+                        data-bs-target="#add-service-bill">
+                        Add Service Bill
                     </button>
                 </div>
-                <!-- Add Contact Popup Model -->
-                <div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                    aria-hidden="true">
+                <!-- Add Service Bill Popup Modal -->
+                <div id="add-service-bill" class="modal fade in" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-lg">
                         <div class="modal-content">
                             <div class="modal-header d-flex align-items-center">
                                 <h4 class="modal-title" id="myModalLabel">
-                                    Add Patient
+                                    Add Service Bill
                                 </h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form class="form-horizontal form-material">
+                                <form class="form-horizontal form-material"
+                                    action="{{ route('admin.servicebill.store') }}" method="POST">
+                                    @csrf
                                     <div class="form-group">
                                         <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Full Name" />
+                                            <input type="text" class="form-control" name="customer_name"
+                                                placeholder="Patient Name" required />
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <input type="email" class="form-control" placeholder="Email" />
+                                            <input type="number" step="0.01" class="form-control" name="amount"
+                                                placeholder="Amount" required />
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <input type="number" class="form-control" placeholder="Phone" />
+                                            <input type="date" class="form-control" name="bill_date"
+                                                placeholder="Bill Date" required />
                                         </div>
-
                                         <div class="col-md-12 mb-3">
-                                            <select class="form-control">
-                                                <option value="" disabled selected>Gender</option>
-                                                <option value="option1">Option 1</option>
-                                                <option value="option2">Option 2</option>
-                                                <option value="option3">Option 3</option>
-                                                <!-- Add more options as needed -->
+                                            <label for="service_id" class="form-label">Select Service</label>
+                                            <select class="form-control" id="service_id" name="service_id">
+                                                <option value="" disabled selected>Select a service</option>
+                                                @foreach($services as $service)
+                                                <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
 
+                                        <div id="serviceDetails" style="display: none;">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="payment_type" class="form-label">Payment Type</label>
+                                                <select class="form-control" id="payment_type" name="payment_type">
+                                                    <option value="" disabled selected>Select payment type</option>
+                                                    <option value="cash">Cash</option>
+                                                    <option value="credit_card">Credit Card</option>
+                                                    <option value="debit_card">Debit Card</option>
+                                                    <!-- Add more options as needed -->
+                                                </select>
+                                            </div>
 
-                                        <div class="col-md-12 mb-3">
-                                            <select class="form-control">
-                                                <option value="" disabled selected>Martial Status
-                                                </option>
-                                                <option value="option1">Option 1</option>
-                                                <option value="option2">Option 2</option>
-                                                <option value="option3">Option 3</option>
-                                                <!-- Add more options as needed -->
-                                            </select>
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <select class="form-control">
-                                                <option value="" disabled selected>Blood Group
-                                                </option>
-                                                <option value="option1">Option 1</option>
-                                                <option value="option2">Option 2</option>
-                                                <option value="option3">Option 3</option>
-                                                <!-- Add more options as needed -->
-                                            </select>
-                                        </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label for="invoice_no" class="form-label">Invoice Number</label>
+                                                <input type="text" class="form-control" id="invoice_no"
+                                                    name="invoice_no" placeholder="Enter invoice number">
+                                            </div>
 
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Date of Birth" />
-                                        </div>
-                                        <div class="col-md-12 mb-3drop  ">
-                                            <input type="text" class="form-control" placeholder="Age" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Relative Name" />
+                                            <div class="col-md-12 mb-3">
+                                                <label for="service_amount" class="form-label">Service Amount</label>
+                                                <input type="text" class="form-control" id="service_amount"
+                                                    name="service_amount" placeholder="Enter service amount">
+                                            </div>
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Relative Phone" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Country" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="State" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="District" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Location" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Occupation" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Description" />
+                                            <select class="form-control" name="patient_id" required>
+                                                <option value="" disabled selected>Select Patient</option>
+                                                @foreach($patients as $patient)
+                                                <option value="{{ $patient->id }}">{{ $patient->patient_name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-info waves-effect">
+                                            Save
+                                        </button>
+                                        <button type="button" class="btn btn-danger waves-effect"
+                                            data-bs-dismiss="modal">
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-info waves-effect" data-bs-dismiss="modal">
-                                    Save
-                                </button>
-                                <button type="button" class="btn btn-danger waves-effect" data-bs-dismiss="modal">
-                                    Cancel
-                                </button>
                             </div>
                         </div>
                         <!-- /.modal-content -->
@@ -126,38 +111,36 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
                                 <th>Patient Name</th>
-                                <th>Doctor</th>
-                                <th>Description</th>
-                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Bill Date</th>
+                                <th>Service</th>
+                                <th>Patient</th>
                                 <th>Action</th>
-
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($servicebills as $bill)
                             <tr>
-                                <td>1</td>
-                                <td>Saad</td>
-                                <td>Ali</td>
-                                <td>Dr.Ahmed</td>
-                                <td>bfgbjfcj</td>
-                                <td>Thursday</td>
+                                <td>{{ $bill->id }}</td>
+                                <td>{{ $bill->patient_name }}</td>
+                                <td>{{ $bill->amount }}</td>
+                                <td>{{ $bill->bill_date }}</td>
+                                <td>{{ $bill->service->service_name }}</td>
+                                <td>{{ $bill->patient->patient_name }}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-primary">Details</button>
+                                    <a href="{{ route('admin.servicebill.edit', $bill->id) }}"
+                                        class="btn btn-sm btn-primary">Edit</a>
+                                    <form action="{{ route('admin.servicebill.destroy', $bill->id) }}" method="POST"
+                                        style="display:inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Are you sure you want to delete this service bill?')">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Saad</td>
-                                <td>Ali</td>
-                                <td>Dr.Akbar</td>
-                                <td>bfgbjfcj</td>
-                                <td>Friday</td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Details</button>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -166,4 +149,17 @@
     </div>
 </div>
 
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#service_id').change(function() {
+            if ($(this).val() !== '') {
+                $('#serviceDetails').show();
+            } else {
+                $('#serviceDetails').hide();
+            }
+        });
+    });
+</script>
 @endsection

@@ -186,7 +186,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level visible">
                         <li class="sidebar-item">
-                            <a href="{{route('admin.managaetest.show')}}" class="sidebar-link">
+                            <a href="{{route('admin.managetest.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>

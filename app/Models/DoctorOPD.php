@@ -9,18 +9,13 @@ class DoctorOPD extends Model
 {
     use HasFactory;
 
-    protected $table = 'opd_doctor';
+      protected $table = 'opd_doctor';  //Specify the table name if it doesn't follow the convention
 
     protected $fillable = [
         'full_name',
         'phone',
-        'type',
+        'department',
         'doctor_charges',
-        'opd_fee'
+        'opd_fee',
     ];
-
-    // public function departments()
-    // {
-    //     return $this->belongsToMany(Department::class, 'doctor_department', 'doctor_id', 'department_id');
-    // }
 }

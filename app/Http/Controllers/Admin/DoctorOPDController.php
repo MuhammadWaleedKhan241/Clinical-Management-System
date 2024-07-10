@@ -29,16 +29,46 @@ class DoctorOPDController extends Controller
     {
         $request->validate([
             'full_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'type' => 'required|string|max:255',
+            'phone' => 'required|numeric',
+            'department' => 'required|string',
             'doctor_charges' => 'required|numeric',
             'opd_fee' => 'required|numeric',
         ]);
 
-        DoctorOPD::create($request->all());
+        DoctorOPD::create([
+            'full_name' => $request->full_name,
+            'phone' => $request->phone,
+            'department' => $request->department,
+            'doctor_charges' => $request->doctor_charges,
+            'opd_fee' => $request->opd_fee,
+        ]);
 
-        return redirect()->route('admin.doctoropd.show')->with('success', 'Doctor OPD added successfully.');
+        return redirect()->route('admin.doctoropd.index')->with('success', 'Doctor OPD added successfully');
     }
+
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'phone' => 'required|numeric',
+            'department' => 'required|string',
+            'doctor_charges' => 'required|numeric',
+            'opd_fee' => 'required|numeric',
+        ]);
+
+        $doctorOPD = DoctorOPD::findOrFail($id);
+        $doctorOPD->update([
+            'full_name' => $request->full_name,
+            'phone' => $request->phone,
+            'department' => $request->department,
+            'doctor_charges' => $request->doctor_charges,
+            'opd_fee' => $request->opd_fee,
+        ]);
+
+        return redirect()->route('admin.doctoropd.index')->with('success', 'Doctor OPD updated successfully');
+    }
+
 
     public function edit($id)
     {
@@ -47,21 +77,7 @@ class DoctorOPDController extends Controller
         return view('admin.doctor-OPD.edit', compact('doctor', 'departments'));
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'full_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'type' => 'required|string|max:255',
-            'doctor_charges' => 'required|numeric',
-            'opd_fee' => 'required|numeric',
-        ]);
 
-        $doctor = DoctorOPD::findOrFail($id);
-        $doctor->update($request->all());
-
-        return redirect()->route('admin.doctoropd.show')->with('success', 'Doctor OPD updated successfully.');
-    }
 
     public function destroy($id)
     {

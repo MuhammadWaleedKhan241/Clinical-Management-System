@@ -47,7 +47,7 @@
                                                 required />
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <select name="type" class="form-control" required>
+                                            <select name="department" class="form-control" required>
                                                 <option value="" disabled selected>Select Department</option>
                                                 @foreach($departments as $department)
                                                 <option value="{{ $department->name }}">{{ $department->name }}</option>
@@ -62,8 +62,8 @@
                                             <input type="text" name="opd_fee" class="form-control" placeholder="OPD Fee"
                                                 required />
                                         </div>
-                                        </div>
-                                        <div class="modal-footer">
+                                    </div>
+                                    <div class="modal-footer">
                                         <button type="submit" class="btn btn-info waves-effect">Save</button>
                                         <button type="button" class="btn btn-danger waves-effect"
                                             data-bs-dismiss="modal">Cancel</button>
@@ -93,11 +93,11 @@
                                 <td>{{ $doctor->id }}</td>
                                 <td>{{ $doctor->full_name }}</td>
                                 <td>{{ $doctor->phone }}</td>
-                                <td>{{ $doctor->type }}</td>
+                                <td>{{ $doctor->department }}</td>
                                 <td>{{ $doctor->opd_fee }}</td>
                                 <td>
-                                    <a href="{{ route('admin.doctoropd.show', $doctor->id) }}"
-                                        class="btn btn-sm btn-info">View</a>
+                                    {{-- <a href="{{ route('admin.doctoropd.show', $doctor->id) }}"
+                                        class="btn btn-sm btn-info">View</a> --}}
                                     <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#edit-contact-{{ $doctor->id }}">Edit</button>
                                     <form action="{{ route('admin.doctoropd.destroy', $doctor->id) }}" method="POST"
@@ -128,19 +128,15 @@
                                                                     value="{{ $doctor->full_name }}" required />
                                                             </div>
                                                             <div class="col-md-12 mb-3">
-                                                                <input type="email" name="email" class="form-control"
-                                                                    value="{{ $doctor->email }}" required />
-                                                            </div>
-                                                            <div class="col-md-12 mb-3">
                                                                 <input type="number" name="phone" class="form-control"
                                                                     value="{{ $doctor->phone }}" required />
                                                             </div>
                                                             <div class="col-md-12 mb-3">
-                                                                <select name="type" class="form-control" required>
+                                                                <select name="department" class="form-control" required>
                                                                     @foreach($departments as $department)
                                                                     <option value="{{ $department->name }}" {{ $doctor->
-                                                                        type == $department->name ? 'selected' : ''
-                                                                        }}>{{ $department->name }}</option>
+                                                                        department == $department->name ? 'selected' :
+                                                                        '' }}>{{ $department->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -176,4 +172,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection 

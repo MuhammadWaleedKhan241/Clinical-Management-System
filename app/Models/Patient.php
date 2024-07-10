@@ -26,4 +26,8 @@ class Patient extends Model
         'occupation',
         'description',
     ];
+    public function serviceBills()
+    {
+        return $this->hasMany(ServiceBill::class);
+    }
 }
