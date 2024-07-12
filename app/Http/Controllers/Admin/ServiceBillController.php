@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,7 +17,6 @@ class ServiceBillController extends Controller
         $patients = Patient::all(); // Fetch all patients
         return view('admin.service-bill', compact('servicebills', 'services', 'patients'));
     }
-
 
     public function create()
     {
@@ -39,6 +38,7 @@ class ServiceBillController extends Controller
             'service_amount' => 'required|numeric',
         ]);
 
+        // Create a new ServiceBill instance with validated data
         ServiceBill::create([
             'customer_name' => $request->customer_name,
             'amount' => $request->amount,
@@ -50,8 +50,10 @@ class ServiceBillController extends Controller
             'service_amount' => $request->service_amount,
         ]);
 
+        // Redirect back to the service bill list with a success message
         return redirect()->route('admin.servicebill.show')->with('success', 'Service bill created successfully.');
     }
+
 
     public function edit($id)
     {

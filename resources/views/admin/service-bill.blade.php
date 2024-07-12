@@ -1,4 +1,5 @@
 @extends('admin.admin.master')
+
 @section('content')
 <div class="row">
     <div class="col-12">
@@ -18,8 +19,8 @@
                     </button>
                 </div>
                 <!-- Add Service Bill Popup Modal -->
-                <div id="add-service-bill" class="modal fade in" tabindex="-1" role="dialog"
-                    aria-labelledby="myModalLabel" aria-hidden="true">
+                <div id="add-service-bill" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-lg">
                         <div class="modal-content">
                             <div class="modal-header d-flex align-items-center">
@@ -30,7 +31,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form class="form-horizontal form-material"
+                                <form class="form-horizontal form-material" id="serviceBillForm"
                                     action="{{ route('admin.servicebill.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
@@ -48,7 +49,7 @@
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label for="service_id" class="form-label">Select Service</label>
-                                            <select class="form-control" id="service_id" name="service_id">
+                                            <select class="form-control" id="service_id" name="service_id" required>
                                                 <option value="" disabled selected>Select a service</option>
                                                 @foreach($services as $service)
                                                 <option value="{{ $service->id }}">{{ $service->name }}</option>
@@ -59,7 +60,8 @@
                                         <div id="serviceDetails" style="display: none;">
                                             <div class="col-md-12 mb-3">
                                                 <label for="payment_type" class="form-label">Payment Type</label>
-                                                <select class="form-control" id="payment_type" name="payment_type">
+                                                <select class="form-control" id="payment_type" name="payment_type"
+                                                    required>
                                                     <option value="" disabled selected>Select payment type</option>
                                                     <option value="cash">Cash</option>
                                                     <option value="credit_card">Credit Card</option>
@@ -71,16 +73,18 @@
                                             <div class="col-md-12 mb-3">
                                                 <label for="invoice_no" class="form-label">Invoice Number</label>
                                                 <input type="text" class="form-control" id="invoice_no"
-                                                    name="invoice_no" placeholder="Enter invoice number">
+                                                    name="invoice_no" placeholder="Enter invoice number" required>
                                             </div>
 
                                             <div class="col-md-12 mb-3">
-                                                <label for="service_amount" class="form-label">Service Amount</label>
+                                                <label for="service_amount" class="form-label">Service
+                                                    Amount</label>
                                                 <input type="text" class="form-control" id="service_amount"
-                                                    name="service_amount" placeholder="Enter service amount">
+                                                    name="service_amount" placeholder="Enter service amount" required>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-3">
+                                            <label for="patient_id" class="form-label">Select Patient</label>
                                             <select class="form-control" name="patient_id" required>
                                                 <option value="" disabled selected>Select Patient</option>
                                                 @foreach($patients as $patient)
@@ -126,7 +130,7 @@
                                 <td>{{ $bill->patient_name }}</td>
                                 <td>{{ $bill->amount }}</td>
                                 <td>{{ $bill->bill_date }}</td>
-                                <td>{{ $bill->service->service_name }}</td>
+                                <td>{{ $bill->service->name }}</td>
                                 <td>{{ $bill->patient->patient_name }}</td>
                                 <td>
                                     <a href="{{ route('admin.servicebill.edit', $bill->id) }}"
@@ -150,6 +154,7 @@
 </div>
 
 @endsection
+
 @section('scripts')
 <script>
     $(document).ready(function() {
@@ -159,6 +164,25 @@
             } else {
                 $('#serviceDetails').hide();
             }
+        });
+
+        // Submit form using AJAX
+        $('#serviceBillForm').submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    // Reload page or update table after successful submission
+                    location.reload();
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                    // Handle errors, show validation messages, etc.
+                }
+            });
         });
     });
 </script>

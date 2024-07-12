@@ -43,7 +43,7 @@ class DoctorOPDController extends Controller
             'opd_fee' => $request->opd_fee,
         ]);
 
-        return redirect()->route('admin.doctoropd.index')->with('success', 'Doctor OPD added successfully');
+        return redirect()->route('admin.doctoropd.show')->with('success', 'Doctor OPD added successfully');
     }
 
 
@@ -66,7 +66,7 @@ class DoctorOPDController extends Controller
             'opd_fee' => $request->opd_fee,
         ]);
 
-        return redirect()->route('admin.doctoropd.index')->with('success', 'Doctor OPD updated successfully');
+        return redirect()->route('admin.doctoropd.')->with('success', 'Doctor OPD updated successfully');
     }
 
 
@@ -84,6 +84,6 @@ class DoctorOPDController extends Controller
         $doctor = DoctorOPD::findOrFail($id);
         $doctor->delete();
 
-        return redirect()->route('admin.doctoropd.index')->with('success', 'Doctor OPD deleted successfully.');
+        return redirect()->route('admin.doctoropd.')->with('success', 'Doctor OPD deleted successfully.');
     }
 }

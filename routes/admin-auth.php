@@ -16,9 +16,9 @@ use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\admin\ManageTestController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\admin\ServiceBillController;
-use App\Http\Controllers\admin\OPD_BillController;
-use App\Http\Controllers\admin\OPDSaleReportController;
+use App\Http\Controllers\admin\OpdBillController;
 use App\Http\Controllers\admin\PackageBillController;
+use App\Http\Controllers\admin\OPDSaleReportController;
 use App\Http\Controllers\admin\PackageSaleReportController;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\ServiceSaleReportController;
@@ -40,7 +40,7 @@ Route::middleware('guest:admin')->prefix('admin')->name('admin.')->group(functio
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'show'])->middleware(['verified'])->name('dashboard');
-    
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -119,12 +119,12 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::delete('/service-bill/{id}', [ServiceBillController::class, 'destroy'])->name('servicebill.destroy');
 
     //OPD-Bill
-    Route::get('/OPD-bill', [OPD_BillController::class, 'show'])->name('OPDbill.show');
-    Route::get('/OPD-bill/create', [OPD_BillController::class, 'create'])->name('OPDbill.create');
-    Route::post('/OPD-bill', [OPD_BillController::class, 'store'])->name('OPDbill.store');
-    Route::get('/OPD-bill/{id}/edit', [OPD_BillController::class, 'edit'])->name('OPDbill.edit');
-    Route::put('/OPD-bill/{id}', [OPD_BillController::class, 'update'])->name('OPDbill.update');
-    Route::delete('/OPD-bill/{id}', [OPD_BillController::class, 'destroy'])->name('OPDbill.destroy');
+    Route::get('/OPD-bill', [OpdBillController  ::class, 'show'])->name('OPDbill.show');
+    Route::get('/OPD-bill/create', [OpdBillController::class, 'create'])->name('OPDbill.create');
+    Route::post('/OPD-bill', [OpdBillController::class, 'store'])->name('OPDbill.store');
+    Route::get('/OPD-bill/{id}/edit', [OpdBillController::class, 'edit'])->name('OPDbill.edit');
+    Route::put('/OPD-bill/{id}', [OpdBillController::class, 'update'])->name('OPDbill.update');
+    Route::delete('/OPD-bill/{id}', [OpdBillController::class, 'destroy'])->name('OPDbill.destroy');
 
     //Package-Bill
     Route::get('/package-bill', [PackageBillController::class, 'show'])->name('packagebill.show');

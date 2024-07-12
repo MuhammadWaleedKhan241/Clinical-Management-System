@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceBill extends Model
+class OPD_Bill extends Model
 {
     use HasFactory;
-
+    protected $table = 'opd_bills';
     protected $fillable = [
         'customer_name',
         'amount',

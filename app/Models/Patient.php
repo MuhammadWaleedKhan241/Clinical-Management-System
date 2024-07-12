@@ -30,4 +30,8 @@ class Patient extends Model
     {
         return $this->hasMany(ServiceBill::class);
     }
+    public function opdBills()
+    {
+        return $this->hasMany(OPD_Bill::class);
+    }
 }

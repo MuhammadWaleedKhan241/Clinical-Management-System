@@ -4,6 +4,7 @@ use App\Http\Controllers\Doctor\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Doctor\Auth\RegisteredUserController;
 use App\Http\Controllers\Doctor\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Doctor\DoctorController;
 
 Route::middleware('guest:doctor')->prefix('doctor')->name('doctor.')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -19,9 +20,8 @@ Route::middleware('guest:doctor')->prefix('doctor')->name('doctor.')->group(func
 
 Route::middleware('auth:doctor')->prefix('doctor')->name('doctor.')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('doctor.dashboard');
-    })->middleware(['verified'])->name('doctor.dashboard');
+
+    Route::get('/dashboard', [DoctorController::class, 'show'])->name('doctor.dashboard');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
