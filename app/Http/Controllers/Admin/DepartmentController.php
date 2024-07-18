@@ -14,7 +14,7 @@ class DepartmentController extends Controller
 
         $departments = Department::when($search, function ($query, $search) {
             return $query->where('department_name', 'like', '%' . $search . '%');
-        })->orderBy('department_name', 'asc')->paginate(10);
+        })->paginate(10);
 
         return view('admin.departments', compact('departments', 'search'));
     }

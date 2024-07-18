@@ -21,17 +21,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @endif
-
+                <div>
+                    <h4 class="fw-semibold fs-5 text-dark">Department List</h4>
+                </div>
+                <br>
                 <div class="d-flex justify-content-between mb-3">
-                    <button type="button" class="btn btn-warning btn-rounded" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-sm btn-warning btn-rounded" data-bs-toggle="modal"
                         data-bs-target="#add-contact">
                         Add New Department
                     </button>
-                    <form action="{{ route('admin.department.show') }}" method="GET" class="d-flex">
-                        <input type="text" name="search" class="form-control" placeholder="Search by name"
-                            value="{{ request('search') }}">
-                        <button type="submit" class="btn btn-primary ms-2">Search</button>
-                    </form>
+
+                    <div class="w-25">
+                        <input type="text" id="search" class="form-control float-end" placeholder="Search...">
+                    </div>
                 </div>
 
                 <!-- Add Department Popup Modal -->
@@ -55,8 +57,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-warning waves-effect">Save</button>
-                                        <button type="button" class="btn btn-danger waves-effect"
+                                        <button type="submit" class="btn btn-sm btn-warning">Save</button>
+                                        <button type="button" class="btn btn-sm btn-danger"
                                             data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
@@ -84,12 +86,12 @@
                                 <td>{{ $department->department_name }}</td>
                                 <td>
                                     <a href="{{ route('admin.department.edit', $department->id) }}"
-                                        class="btn btn-warning btn-sm">Edit</a>
+                                        class="btn btn-sm btn-warning">Edit</a>
                                     <form action="{{ route('admin.department.destroy', $department->id) }}"
                                         method="POST" style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"
+                                        <button type="submit" class="btn btn-sm btn-danger"
                                             onclick="return confirm('Are you sure you want to delete this department?')">Delete</button>
                                     </form>
                                 </td>
@@ -105,4 +107,20 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('search').addEventListener('keyup', function() {
+        var value = this.value.toLowerCase().trim();
+        var rows = document.querySelectorAll('#demo-foo-addrow tbody tr');
+
+        rows.forEach(function(row) {
+            var departmentName = row.querySelector('td:nth-child(2)').textContent.toLowerCase().trim();
+
+            if (departmentName.includes(value)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
 @endsection

@@ -1,4 +1,5 @@
 @extends('admin.admin.master')
+
 @section('content')
 <div class="row">
     <div class="col-12">
@@ -21,12 +22,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @endif
-
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-warning btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
-                        data-bs-target="#add-service">
-                        Add New Service
-                    </button>
+                <div>
+                    <h4 class="fw-semibold fs-5 text-dark">Services List</h4>
+                </div>
+                <br>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <button type="button" class="btn btn-sm btn-warning btn-rounded m-t-10 mb-2"
+                            data-bs-toggle="modal" data-bs-target="#add-service">
+                            Add New Service
+                        </button>
+                    </div>
+                    <div class="w-25">
+                        <input type="text" id="search" class="form-control float-end" placeholder="Search...">
+                    </div>
                 </div>
                 <!-- Add Service Popup Modal -->
                 <div id="add-service" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -57,13 +66,13 @@
                                                 @foreach($departments as $department)
                                                 <option value="{{ $department->id }}">{{ $department->department_name }}
                                                 </option>
-                                                @endforeach 
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-warning waves-effect">Save</button>
-                                        <button type="button" class="btn btn-default waves-effect"
+                                        <button type="submit" class="btn btn-sm btn-warning">Save</button>
+                                        <button type="button" class="btn btn-sm btn-danger"
                                             data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
@@ -72,9 +81,10 @@
                     </div>
                 </div>
 
+                <!-- Search Filter -->
                 <div class="table-responsive">
                     <table id="demo-foo-addrow"
-                        class=" table table-striped table-hover table-bordered m-t-30 table-hover contact-list"
+                        class="table table-striped table-hover table-bordered m-t-30 table-hover contact-list"
                         data-paging="true" data-paging-size="7">
                         <thead>
                             <tr>
@@ -117,4 +127,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('search').addEventListener('keyup', function() {
+        var value = this.value.toLowerCase();
+        var rows = document.querySelectorAll('#demo-foo-addrow tbody tr');
+
+        rows.forEach(function(row) {
+            var isVisible = row.textContent.toLowerCase().indexOf(value) !== -1;
+            row.style.display = isVisible ? '' : 'none';
+        });
+    });
+</script>
 @endsection

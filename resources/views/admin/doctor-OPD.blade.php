@@ -15,12 +15,12 @@
                 @endif
 
                 <div>
-                    <h4 class="fw-semibold fs-4 text-dark">Doctor OPD List</h4>
+                    <h4 class="fw-semibold fs-5 text-dark">OPD Doctor List</h4>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-sm btn-warning btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
                         data-bs-target="#add-contact">
-                        Add New Doctor OPD
+                        Add Doctor OPD
                     </button>
                 </div>
                 <!-- Add Contact Popup Model -->
@@ -28,11 +28,11 @@
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-lg">
                         <div class="modal-content">
-                            <div class="modal-header d-flex align-items-center">
+                            {{-- <div class="modal-header d-flex align-items-center">
                                 <h4 class="modal-title" id="myModalLabel">Add Doctor OPD</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
-                            </div>
+                            </div> --}}
                             <div class="modal-body">
                                 <form class="form-horizontal form-material"
                                     action="{{ route('admin.doctoropd.store') }}" method="POST">
@@ -64,8 +64,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-info waves-effect">Save</button>
-                                        <button type="button" class="btn btn-danger waves-effect"
+                                        <button type="submit" class="btn btn-sm btn-warning">Save</button>
+                                        <button type="button" class="btn btn-sm btn-danger"
                                             data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
@@ -96,9 +96,7 @@
                                 <td>{{ $doctor->department }}</td>
                                 <td>{{ $doctor->opd_fee }}</td>
                                 <td>
-                                    {{-- <a href="{{ route('admin.doctoropd.show', $doctor->id) }}"
-                                        class="btn btn-sm btn-info">View</a> --}}
-                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                         data-bs-target="#edit-contact-{{ $doctor->id }}">Edit</button>
                                     <form action="{{ route('admin.doctoropd.destroy', $doctor->id) }}" method="POST"
                                         style="display:inline-block;">
@@ -172,4 +170,4 @@
         </div>
     </div>
 </div>
-@endsection 
+@endsection

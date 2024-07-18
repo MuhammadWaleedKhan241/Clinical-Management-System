@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\Patient;
+use App\Models\Department;
+use App\Models\Doctor;
+use PDF;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -11,30 +15,42 @@ class InvoiceController extends Controller
     public function show()
     {
         $invoices = Invoice::all();
-        return view('admin.invoice-report', compact('invoices'));
+        $patients = Patient::select('id', 'name', 'email', 'phone')->get(); // Fetch patients with specific fields
+        return view('admin.invoice-report', compact('invoices', 'patients'));
     }
+
 
     public function create()
     {
-        return view('invoices.create');
+        $patients = Patient::select('id', 'name', 'email', 'phone')->get();
+        return view('admin.invoice-report', compact('patients'));
     }
-
     public function store(Request $request)
     {
         $request->validate([
-            // Validation rules
+            'patient_id' => 'required|exists:patients,id',
+            'patient_email' => 'required|email',
+            'patient_phone' => 'required|string',
+            'amount' => 'required|numeric',
+            'invoice_date' => 'required|date',
+            'due_date' => 'required|date',
+            'status' => 'required|string|in:pending,paid,canceled',
         ]);
 
-        Invoice::create($request->all());
+        $patient = Patient::find($request->patient_id);
+
+        $invoice = new Invoice();
+        $invoice->patient_name = $patient->name;
+        $invoice->patient_email = $request->patient_email;
+        $invoice->patient_phone = $request->patient_phone;
+        $invoice->amount = $request->amount;
+        $invoice->invoice_date = $request->invoice_date;
+        $invoice->due_date = $request->due_date;
+        $invoice->status = $request->status;
+        $invoice->save();
 
         return redirect()->route('admin.invoice.show')->with('success', 'Invoice created successfully.');
     }
-
-    // public function show($id)
-    // {
-    //     $invoice = Invoice::findOrFail($id);
-    //     return view('invoices.show', compact('invoice'));
-    // }
 
     public function edit($id)
     {
@@ -55,11 +71,18 @@ class InvoiceController extends Controller
         ]);
 
         $invoice = Invoice::findOrFail($id);
-        $invoice->update($request->all());
+        $invoice->update([
+            'customer_name' => $request->input('customer_name'),
+            'customer_email' => $request->input('customer_email'),
+            'customer_phone' => $request->input('customer_phone'),
+            'amount' => $request->input('amount'),
+            'invoice_date' => $request->input('invoice_date'),
+            'due_date' => $request->input('due_date'),
+            'status' => $request->input('status'),
+        ]);
 
         return redirect()->route('admin.invoice.show')->with('success', 'Invoice updated successfully.');
     }
-
 
     public function destroy($id)
     {
@@ -68,4 +91,17 @@ class InvoiceController extends Controller
 
         return redirect()->route('admin.invoice.show')->with('success', 'Invoice deleted successfully.');
     }
+    // public function generatePDF()
+    // {
+    //     $invoices = Invoice::all();
+
+    //     // Generate PDF using barryvdh/laravel-dompdf
+    //     $pdf = PDF::loadView('admin.invoice-pdf', compact('invoices'));
+
+    //     // Optionally, you can download the PDF instead of displaying it
+    //     // return $pdf->download('invoices.pdf');
+
+    //     // Display the PDF in the browser
+    //     return $pdf->stream('invoices.pdf');
+    // }
 }

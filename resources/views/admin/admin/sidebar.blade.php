@@ -2,9 +2,9 @@
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            {{-- <a href="admin-dashboard.html" class="text-nowrap logo-img">
+            <a href="admin-dashboard.html" class="text-nowrap logo-img">
                 <img src="assets/images/logos/light-logo.png" class="light-logo" width="180" alt="" />
-            </a>--}}
+            </a>
             <div class="close-btn d-lg-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-8 text-muted"></i>
             </div>
@@ -62,7 +62,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Emplyee</span>
+                                <span class="hide-menu">Emplyees</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -70,7 +70,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Doctor OPD</span>
+                                <span class="hide-menu">OPD Doctors</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -78,7 +78,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Invoice Report</span>
+                                <span class="hide-menu">Invoice Reports</span>
                             </a>
                         </li>
                     </ul>
@@ -122,7 +122,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Service Bill</span>
+                                <span class="hide-menu">Service Bills</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -130,7 +130,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">OPD Bill</span>
+                                <span class="hide-menu">OPD Bills</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -138,7 +138,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Package Bill</span>
+                                <span class="hide-menu">Package Bills</span>
                             </a>
                         </li>
                     </ul>
@@ -156,7 +156,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Service Sale Report</span>
+                                <span class="hide-menu">Service Sale Reports</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -164,7 +164,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">OPD Sale Report</span>
+                                <span class="hide-menu">OPD Sale Reports</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -172,7 +172,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Package Sale Report</span>
+                                <span class="hide-menu">Package Sale Reports</span>
                             </a>
                         </li>
                     </ul>
@@ -198,7 +198,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Test Reference</span>
+                                <span class="hide-menu">Test References</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -206,7 +206,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Examination Report</span>
+                                <span class="hide-menu">Examination Reports</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -214,7 +214,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Stain Report</span>
+                                <span class="hide-menu">Stain Reports</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -222,7 +222,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Report</span>
+                                <span class="hide-menu">Reports</span>
                             </a>
                         </li>
                     </ul>
@@ -240,7 +240,7 @@
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">User</span>
+                                <span class="hide-menu">Users</span>
                             </a>
                         </li>
                         <li class="sidebar-item">

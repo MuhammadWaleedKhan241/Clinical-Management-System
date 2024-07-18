@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\admin\PackageController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\DoctorOPDController;
 use App\Http\Controllers\admin\ExaminationReportController;
@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\admin\ManageTestController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\admin\ServiceBillController;
-use App\Http\Controllers\admin\OpdBillController;
+use App\Http\Controllers\Admin\OpdBillController;
 use App\Http\Controllers\admin\PackageBillController;
 use App\Http\Controllers\admin\OPDSaleReportController;
 use App\Http\Controllers\admin\PackageSaleReportController;
@@ -47,7 +47,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     //Departments
-    Route::get('/departments', [DepartmentController::class, 'show'])->name('department.show');
+    Route::get('/departments/show', [DepartmentController::class, 'show'])->name('department.show');
     Route::get('/departments/create', [DepartmentController::class, 'create'])->name('department.create');
     Route::post('/departments', [DepartmentController::class, 'store'])->name('department.store');
     Route::get('/departments/{department}/edit', [DepartmentController::class, 'edit'])->name('department.edit');
@@ -55,23 +55,23 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::delete('/departments/{department}', [DepartmentController::class, 'destroy'])->name('department.destroy');
 
     //Services
-    Route::get('/services', [ServiceController::class, 'show'])->name('service.show');
-    Route::get('/services/create', [ServiceController::class, 'create'])->name('service.create');
-    Route::post('/services', [ServiceController::class, 'store'])->name('service.store');
-    Route::get('/services/{service}/edit', [ServiceController::class, 'edit'])->name('service.edit');
-    Route::patch('/services/{service}', [ServiceController::class, 'update'])->name('service.update');
-    Route::delete('/services/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
+    Route::get('services/show', [ServiceController::class, 'show'])->name('service.show');
+    Route::get('services/create', [ServiceController::class, 'create'])->name('service.create');
+    Route::post('services', [ServiceController::class, 'store'])->name('service.store');
+    Route::get('services/{service}/edit', [ServiceController::class, 'edit'])->name('service.edit');
+    Route::match(['put', 'patch'], 'services/{service}', [ServiceController::class, 'update'])->name('service.update');
+    Route::delete('services/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
 
     //Packages
-    Route::get('/packages', [PackageController::class, 'show'])->name('package.show');
-    Route::get('/packages/create', [PackageController::class, 'create'])->name('package.create');
-    Route::post('/packages', [PackageController::class, 'store'])->name('package.store');
-    Route::get('/packages/{id}/edit', [PackageController::class, 'edit'])->name('package.edit');
-    Route::patch('/packages/{package}', [PackageController::class, 'update'])->name('package.update');
-    Route::delete('/packages/{id}', [PackageController::class, 'destroy'])->name('package.destroy');
+    Route::get('/packages/show', [PackageController::class, 'index'])->name('admin.packages.index');
+    Route::get('/packages/create', [PackageController::class, 'create'])->name('admin.packages.create');
+    Route::post('/packages', [PackageController::class, 'store'])->name('admin.packages.store');
+    Route::get('/packages/{id}/edit', [PackageController::class, 'edit'])->name('admin.packages.edit');
+    Route::patch('/packages/{id}', [PackageController::class, 'update'])->name('admin.packages.update');
+    Route::delete('/packages/{id}', [PackageController::class, 'destroy'])->name('admin.packages.destroy');
 
     //Employee
-    Route::get('/employee/show', [EmployeeController::class, 'show'])->name('employee.show');
+    Route::get('/employees/show', [EmployeeController::class, 'show'])->name('employee.show');
     Route::get('/employee/create', [EmployeeController::class, 'create'])->name('employee.create');
     Route::post('/employee', [EmployeeController::class, 'store'])->name('employee.store');
     Route::get('/employee/{id}/edit', [EmployeeController::class, 'edit'])->name('employee.edit');
@@ -79,12 +79,12 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::delete('/employee/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
 
     //DoctorOPD
-    Route::get('/doctoropd/show', [DoctorOPDController::class, 'show'])->name('doctoropd.show');
-    Route::get('/doctoropd/create', [DoctorOPDController::class, 'create'])->name('doctoropd.create');
-    Route::post('/doctoropd', [DoctorOPDController::class, 'store'])->name('doctoropd.store');
-    Route::get('/doctoropd/edit/{id}', [DoctorOPDController::class, 'edit'])->name('doctoropd.edit');
-    Route::patch('/doctoropd/{id}', [DoctorOPDController::class, 'update'])->name('doctoropd.update');
-    Route::delete('/doctoropd/{id}', [DoctorOPDController::class, 'destroy'])->name('doctoropd.destroy');
+    Route::get('/opd-doctors/show', [DoctorOPDController::class, 'show'])->name('doctoropd.show');
+    Route::get('/opd-doctor/create', [DoctorOPDController::class, 'create'])->name('doctoropd.create');
+    Route::post('/opd-doctor', [DoctorOPDController::class, 'store'])->name('doctoropd.store');
+    Route::get('/opd-doctor/edit/{id}', [DoctorOPDController::class, 'edit'])->name('doctoropd.edit');
+    Route::patch('/opd-doctor/{id}', [DoctorOPDController::class, 'update'])->name('doctoropd.update');
+    Route::delete('/opd-doctor/{id}', [DoctorOPDController::class, 'destroy'])->name('doctoropd.destroy');
 
     //Invoice   
     Route::get('/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
@@ -93,6 +93,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('/invoice/{id}/edit', [InvoiceController::class, 'edit'])->name('invoice.edit');
     Route::patch('/invoice/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
     Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy'])->name('invoice.destroy');
+    // Route::get('/invoice/pdf', [InvoiceController::class, 'generatePDF'])->name('admin.invoice.pdf');
 
     //Appointment
     Route::get('/appointment/show', [AppointmentController::class, 'show'])->name('appointment.show');
@@ -119,12 +120,13 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::delete('/service-bill/{id}', [ServiceBillController::class, 'destroy'])->name('servicebill.destroy');
 
     //OPD-Bill
-    Route::get('/OPD-bill', [OpdBillController  ::class, 'show'])->name('OPDbill.show');
+    Route::get('/OPD-bill', [OpdBillController::class, 'show'])->name('OPDbill.show');
     Route::get('/OPD-bill/create', [OpdBillController::class, 'create'])->name('OPDbill.create');
     Route::post('/OPD-bill', [OpdBillController::class, 'store'])->name('OPDbill.store');
     Route::get('/OPD-bill/{id}/edit', [OpdBillController::class, 'edit'])->name('OPDbill.edit');
     Route::put('/OPD-bill/{id}', [OpdBillController::class, 'update'])->name('OPDbill.update');
     Route::delete('/OPD-bill/{id}', [OpdBillController::class, 'destroy'])->name('OPDbill.destroy');
+
 
     //Package-Bill
     Route::get('/package-bill', [PackageBillController::class, 'show'])->name('packagebill.show');

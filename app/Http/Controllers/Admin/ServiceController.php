@@ -12,8 +12,9 @@ class ServiceController extends Controller
 {
     public function show()
     {
-        $services = Service::with('department')->get();
-        $departments = Department::all();
+        $services = Service::with('department')->paginate(10); // Paginate by 10 items per page
+        $departments = Department::all(); // Assuming you have a Department model
+
         return view('admin.service', compact('services', 'departments'));
     }
 
@@ -51,6 +52,11 @@ class ServiceController extends Controller
             return redirect()->route('admin.service.show')->with('error', 'Failed to add service.');
         }
     }
+    public function edit(Service $service)
+    {
+        $departments = Department::all();
+        return view('admin.edit_service', compact('service', 'departments'));
+    }
 
     public function update(Request $request, Service $service)
     {
@@ -71,6 +77,7 @@ class ServiceController extends Controller
             return redirect()->route('admin.service.show')->with('error', 'Failed to update service.');
         }
     }
+
 
     public function destroy(Service $service)
     {

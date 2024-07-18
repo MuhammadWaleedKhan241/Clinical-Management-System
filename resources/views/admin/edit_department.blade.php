@@ -3,10 +3,14 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="border-bottom title-part-padding">
-                <h4 class="card-title mb-0">Edit Department</h4>
-            </div>
+            <br>
+            <br>
+            <br>
+
             <div class="card-body">
+                <div class="border-bottom title-part-padding">
+                    <h4 class="card-title mb-0">Edit Department</h4>
+                </div>
                 <!-- Success and Error Messages -->
                 @if(session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -37,7 +41,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-warning waves-effect">Save</button>
+                        <button type="submit" class="btn btn-warning waves-effect">Update</button>
                         <a href="{{ route('admin.department.show') }}" class="btn btn-danger waves-effect">Cancel</a>
                     </div>
                 </form>

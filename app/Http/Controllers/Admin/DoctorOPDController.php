@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/Admin/DoctorOPDController.php
 
 namespace App\Http\Controllers\Admin;
 
@@ -10,19 +9,11 @@ use App\Models\Department;
 
 class DoctorOPDController extends Controller
 {
-
-
     public function show()
     {
         $doctors = DoctorOPD::all();
         $departments = Department::all();
         return view('admin.doctor-OPD', compact('doctors', 'departments'));
-    }
-
-    public function create()
-    {
-        $departments = Department::all();
-        return view('admin.doctor-OPD.create', compact('departments'));
     }
 
     public function store(Request $request)
@@ -35,17 +26,10 @@ class DoctorOPDController extends Controller
             'opd_fee' => 'required|numeric',
         ]);
 
-        DoctorOPD::create([
-            'full_name' => $request->full_name,
-            'phone' => $request->phone,
-            'department' => $request->department,
-            'doctor_charges' => $request->doctor_charges,
-            'opd_fee' => $request->opd_fee,
-        ]);
+        DoctorOPD::create($request->all());
 
         return redirect()->route('admin.doctoropd.show')->with('success', 'Doctor OPD added successfully');
     }
-
 
     public function update(Request $request, $id)
     {
@@ -58,32 +42,16 @@ class DoctorOPDController extends Controller
         ]);
 
         $doctorOPD = DoctorOPD::findOrFail($id);
-        $doctorOPD->update([
-            'full_name' => $request->full_name,
-            'phone' => $request->phone,
-            'department' => $request->department,
-            'doctor_charges' => $request->doctor_charges,
-            'opd_fee' => $request->opd_fee,
-        ]);
+        $doctorOPD->update($request->all());
 
-        return redirect()->route('admin.doctoropd.')->with('success', 'Doctor OPD updated successfully');
+        return redirect()->route('admin.doctoropd.show')->with('success', 'Doctor OPD updated successfully');
     }
-
-
-    public function edit($id)
-    {
-        $doctor = DoctorOPD::findOrFail($id);
-        $departments = Department::all();
-        return view('admin.doctor-OPD.edit', compact('doctor', 'departments'));
-    }
-
-
 
     public function destroy($id)
     {
         $doctor = DoctorOPD::findOrFail($id);
         $doctor->delete();
 
-        return redirect()->route('admin.doctoropd.')->with('success', 'Doctor OPD deleted successfully.');
+        return redirect()->route('admin.doctoropd.show')->with('success', 'Doctor OPD deleted successfully.');
     }
 }

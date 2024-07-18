@@ -31,4 +31,8 @@ class Package extends Model
     {
         return $this->belongsToMany(Package::class);
     }
+    public function bills()
+    {
+        return $this->hasMany(PatientBill::class);
+    }
 }

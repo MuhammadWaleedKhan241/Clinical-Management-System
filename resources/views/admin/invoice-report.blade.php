@@ -8,7 +8,6 @@
         </h2>
     </div>
 </header>
-
 @endsection
 
 @section('content')
@@ -23,9 +22,10 @@
     </div>
     @endif
 
-    <div class="d-flex justify-content-end ">
+    <div class="d-flex justify-content-end">
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createInvoiceModal">Add New
             Invoice</button>
+        <button class="btn btn-primary ml-2" id="generatePdfBtn">Generate PDF</button> <!-- Added PDF Button -->
     </div>
     <div>
         <h4 class="fw-semibold fs-5 text-dark">Invoice List</h4>
@@ -57,8 +57,6 @@
                 <td>{{ $invoice->due_date }}</td>
                 <td>{{ ucfirst($invoice->status) }}</td>
                 <td>
-                    {{-- <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                        data-bs-target="#viewInvoiceModal-{{ $invoice->id }}">View</button> --}}
                     <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                         data-bs-target="#editInvoiceModal-{{ $invoice->id }}">Edit</button>
                     <form action="{{ route('admin.invoice.destroy', $invoice->id) }}" method="POST"
@@ -145,19 +143,27 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.invoice.store') }}" method="POST">
+                <form id="createInvoiceForm" action="{{ route('admin.invoice.store') }}" method="POST">
                     @csrf
                     <div class="form-group mb-3">
-                        <label for="patient_name">Patient Name</label>
-                        <input type="text" name="patient_name" class="form-control" required>
+                        <label for="patient_id">Patient Name</label>
+                        <select id="patient_id" name="patient_id" class="form-control" required>
+                            <option value="">Select Patient</option>
+                            @foreach($patients as $patient)
+                            <option value="{{ $patient->id }}" data-email="{{ $patient->email }}"
+                                data-phone="{{ $patient->phone }}">{{ $patient->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group mb-3">
                         <label for="patient_email">Patient Email</label>
-                        <input type="email" name="patient_email" class="form-control" required>
+                        <input type="email" id="patient_email" name="patient_email" class="form-control" readonly
+                            required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="patient_phone">Patient Phone</label>
-                        <input type="text" name="patient_phone" class="form-control" required>
+                        <input type="text" id="patient_phone" name="patient_phone" class="form-control" readonly
+                            required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="amount">Amount</label>
@@ -187,97 +193,21 @@
 </div>
 <!-- End Create Modal -->
 
+<!-- jQuery Script to Populate Email and Phone -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#patient_id').change(function() {
+            var selectedPatient = $(this).find(':selected');
+            $('#patient_email').val(selectedPatient.data('email'));
+            $('#patient_phone').val(selectedPatient.data('phone'));
+        });
+
+        // PDF Generation Script
+        // $('#generatePdfBtn').click(function() {
+        //     window.location.href = "{{ route('admin.invoice.pdf') }}";
+        // });
+    });
+</script>
+
 @endsection
-
-
-
-{{-- @extends('admin.admin.master')
-@section('content')
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="border-bottom title-part-padding">
-                <h4 class="card-title mb-0">Doctor OPD List</h4>
-            </div>
-            <div class="card-body">
-                @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @endif
-
-                <div>
-                    <h4 class="fw-semibold fs-4 text-dark">Doctor OPD List</h4>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
-                        data-bs-target="#add-contact">
-                        Add New Doctor OPD
-                    </button>
-                </div>
-                <!-- Add Contact Popup Model -->
-                <div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header d-flex align-items-center">
-                                <h4 class="modal-title" id="myModalLabel">Add Doctor OPD</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal form-material"
-                                    action="{{ route('admin.doctoropd.store') }}" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" name="full_name" class="form-control"
-                                                placeholder="Doctor Name" required />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="number" name="phone" class="form-control" placeholder="Phone"
-                                                required />
-                                        </div>
-
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" name="doctor_charges" class="form-control"
-                                                placeholder="Doctor Charges" required />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" name="opd_fee" class="form-control" placeholder="OPD Fee"
-                                                required />
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-info waves-effect">Save</button>
-                                        <button type="button" class="btn btn-danger waves-effect"
-                                            data-bs-dismiss="modal">Cancel</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table id="demo-foo-addrow"
-                        class="table table-striped table-hover table-bordered m-t-3 table-hover contact-list"
-                        data-paging="true" data-paging-size="7">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Department</th>
-                                <th>OPD Fee</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection --}}

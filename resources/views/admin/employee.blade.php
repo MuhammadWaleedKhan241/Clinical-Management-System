@@ -9,15 +9,31 @@
             </div>
             <div class="card-body">
 
+                @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
+
                 <div>
                     <h4 class="fw-semibold fs-4 text-dark">Employee List</h4>
                 </div>
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
+                <br>
+
+                <div class="d-flex justify-content-between mb-2">
+                    <button type="button" class="btn btn-sm btn-warning btn-rounded m-t-10" data-bs-toggle="modal"
                         data-bs-target="#add-contact">
                         Add New Employee
                     </button>
+                    <input type="text" id="search" class="form-control w-25" placeholder="Search...">
                 </div>
+
                 <!-- Add Contact Popup Modal -->
                 <div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
@@ -89,8 +105,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-info waves-effect">Save</button>
-                                        <button type="button" class="btn btn-danger waves-effect"
+                                        <button type="submit" class="btn btn-sm btn-warning">Save</button>
+                                        <button type="button" class="btn btn-sm btn-danger"
                                             data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>
@@ -100,8 +116,9 @@
                     </div>
                     <!-- /.modal-dialog -->
                 </div>
+
                 <div class="table-responsive">
-                    <table id="demo-foo-addrow"
+                    <table id="employee-table"
                         class="table table-striped table-hover table-bordered m-t-3 table-hover contact-list"
                         data-paging="true" data-paging-size="7">
                         <thead>
@@ -123,7 +140,7 @@
                                 <td>{{ $employee->working_days }}</td>
                                 <td>{{ $employee->type }}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                         data-bs-target="#edit-contact-{{ $employee->id }}">Edit</button>
                                     <form action="{{ route('admin.employee.destroy', $employee->id) }}" method="POST"
                                         style="display:inline-block;">
@@ -240,4 +257,16 @@
         <!-- Column -->
     </div>
 </div>
+
+<script>
+    document.getElementById('search').addEventListener('keyup', function() {
+        var value = this.value.toLowerCase();
+        var rows = document.querySelectorAll('#employee-table tbody tr');
+
+        rows.forEach(function(row) {
+            var isVisible = row.textContent.toLowerCase().indexOf(value) !== -1;
+            row.style.display = isVisible ? '' : 'none';
+        });
+    });
+</script>
 @endsection

@@ -34,6 +34,7 @@
                                 <form class="form-horizontal form-material" action="{{ route('admin.package.store') }}"
                                     method="POST">
                                     @csrf
+                                    @method('PATCH')
                                     <div class="form-group">
                                         <div class="col-md-12 mb-3">
                                             <input type="text" class="form-control" name="package_name"

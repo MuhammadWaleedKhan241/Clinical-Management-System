@@ -9,6 +9,8 @@ class DoctorOPD extends Model
 {
   use HasFactory;
 
+  protected $table = 'opd_doctor';
+
   protected $fillable = [
     'full_name',
     'phone',

@@ -33,40 +33,8 @@
                                 <form class="form-horizontal form-material">
                                     <div class="form-group">
                                         <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Full Name" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="email" class="form-control" placeholder="Email" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="number" class="form-control" placeholder="Phone" />
-                                        </div>
-
-                                        <div class="col-md-12 mb-3">
                                             <select class="form-control">
-                                                <option value="" disabled selected>Gender</option>
-                                                <option value="option1">Option 1</option>
-                                                <option value="option2">Option 2</option>
-                                                <option value="option3">Option 3</option>
-                                                <!-- Add more options as needed -->
-                                            </select>
-                                        </div>
-
-
-                                        <div class="col-md-12 mb-3">
-                                            <select class="form-control">
-                                                <option value="" disabled selected>Martial Status
-                                                </option>
-                                                <option value="option1">Option 1</option>
-                                                <option value="option2">Option 2</option>
-                                                <option value="option3">Option 3</option>
-                                                <!-- Add more options as needed -->
-                                            </select>
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <select class="form-control">
-                                                <option value="" disabled selected>Blood Group
-                                                </option>
+                                                <option value="" disabled selected>Select Package</option>
                                                 <option value="option1">Option 1</option>
                                                 <option value="option2">Option 2</option>
                                                 <option value="option3">Option 3</option>
@@ -75,35 +43,15 @@
                                         </div>
 
                                         <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Date of Birth" />
+                                            <select class="form-control">
+                                                <option value="" disabled selected>Select Patient</option>
+                                                <option value="option1">Option 1</option>
+                                                <option value="option2">Option 2</option>
+                                                <option value="option3">Option 3</option>
+                                                <!-- Add more options as needed -->
+                                            </select>
                                         </div>
-                                        <div class="col-md-12 mb-3drop  ">
-                                            <input type="text" class="form-control" placeholder="Age" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Relative Name" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Relative Phone" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Country" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="State" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="District" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Location" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Occupation" />
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="text" class="form-control" placeholder="Description" />
-                                        </div>
+
                                     </div>
                                 </form>
                             </div>
@@ -126,11 +74,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
+                                <th>Package Name</th>
                                 <th>Patient Name</th>
-                                <th>Doctor</th>
-                                <th>Description</th>
-                                <th>Date</th>
+                                {{-- <th>Doctor</th> --}}
+                                {{-- <th>Description</th> --}}
+                                {{-- <th>Date</th> --}}
                                 <th>Action</th>
 
                             </tr>
@@ -140,8 +88,6 @@
                                 <td>1</td>
                                 <td>Saad</td>
                                 <td>Ali</td>
-                                <td>Dr.Ahmed</td>
-                                <td>bfgbjfcj</td>
                                 <td>Thursday</td>
                                 <td>
                                     <button class="btn btn-sm btn-primary">Details</button>
@@ -151,8 +97,6 @@
                                 <td>2</td>
                                 <td>Saad</td>
                                 <td>Ali</td>
-                                <td>Dr.Akbar</td>
-                                <td>bfgbjfcj</td>
                                 <td>Friday</td>
                                 <td>
                                     <button class="btn btn-sm btn-primary">Details</button>

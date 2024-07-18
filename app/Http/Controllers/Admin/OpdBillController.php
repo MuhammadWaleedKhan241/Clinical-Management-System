@@ -10,9 +10,9 @@ use App\Models\Patient;
 
 class OpdBillController extends Controller
 {
-    public function index()
+    public function show()
     {
-        $opdBills = OPD_Bill::all();
+        $opdBills = Opd_Bill::all();
         $services = Service::all();
         $patients = Patient::all();
         return view('admin.opd_bill', compact('opdBills', 'services', 'patients'));
@@ -33,12 +33,12 @@ class OpdBillController extends Controller
 
 
 
-        OPD_Bill::create($request->all());
+        Opd_Bill::create($request->all());
 
         return response()->json(['success' => 'OPD Bill created successfully.']);
     }
 
-    public function update(Request $request, OPD_Bill $opdBill)
+    public function update(Request $request, Opd_Bill $opdBill)
     {
         $request->validate([
             'patient_name' => 'required|string|max:255',
@@ -56,7 +56,7 @@ class OpdBillController extends Controller
         return redirect()->back()->with('success', 'OPD Bill updated successfully.');
     }
 
-    public function destroy(OPD_Bill $opdBill)
+    public function destroy(Opd_Bill $opdBill)
     {
         $opdBill->delete();
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointments;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -11,7 +12,8 @@ class AppointmentController extends Controller
     public function show()
     {
         $appointments = Appointments::all();
-        return view('admin.appointment', compact('appointments'));
+        $patients = Patient::all(); // Added patients variable
+        return view('admin.appointment', compact('appointments', 'patients')); // Passed patients variable to view
     }
 
     public function create()
@@ -28,6 +30,7 @@ class AppointmentController extends Controller
             'appointment_date' => 'required|date',
             'appointment_time' => 'required|date_format:H:i', // Validate time format
         ]);
+        $patient = Patient::findOrFail($request->patient_id);
 
         Appointments::create([
             'patient_name' => $request->patient_name,
