@@ -44,7 +44,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form class="form-horizontal form-material" action="{{ route('admin.package.store') }}"
+                                <form class="form-horizontal form-material" action="{{ route('admin.packages.store') }}"
                                     method="POST">
                                     @csrf
                                     <div class="form-group">

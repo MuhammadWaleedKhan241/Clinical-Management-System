@@ -7,7 +7,7 @@ use App\Models\Invoice;
 use App\Models\Patient;
 use App\Models\Department;
 use App\Models\Doctor;
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -98,10 +98,11 @@ class InvoiceController extends Controller
     //     // Generate PDF using barryvdh/laravel-dompdf
     //     $pdf = PDF::loadView('admin.invoice-pdf', compact('invoices'));
 
-    //     // Optionally, you can download the PDF instead of displaying it
-    //     // return $pdf->download('invoices.pdf');
+    // //Optionally, you can download the PDF instead of displaying it
+    // return $pdf->download('invoice.pdf');
 
-    //     // Display the PDF in the browser
-    //     return $pdf->stream('invoices.pdf');
+    // //Display the PDF in the browser
+    //     return $pdf->stream('invoice.pdf');
     // }
+    
 }

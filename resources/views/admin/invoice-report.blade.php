@@ -203,11 +203,10 @@
             $('#patient_phone').val(selectedPatient.data('phone'));
         });
 
-        // PDF Generation Script
-        // $('#generatePdfBtn').click(function() {
-        //     window.location.href = "{{ route('admin.invoice.pdf') }}";
-        // });
-    });
+    //    $('#generatePdfBtn').click(function() {
+    //     window.location.href = "{{ route('admin.invoice.pdf') }}";
+    //     });
+    }); 
 </script>
 
 @endsection

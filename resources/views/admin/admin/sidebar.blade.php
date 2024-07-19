@@ -49,14 +49,14 @@
                                 <span class="hide-menu">Services</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        {{-- <li class="sidebar-item">
                             <a href="{{route('admin.package.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
                                 <span class="hide-menu">Packages</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="sidebar-item">
                             <a href="{{route('admin.employee.show')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">

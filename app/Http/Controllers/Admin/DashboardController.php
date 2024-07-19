@@ -1,16 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Appointments;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function show()
     {
-        $appointments = Appointments::all();
-        return view('admin.dashboard', compact('appointments'));
+        $pendingAppointmentsCount = DB::table('appointments')->where('status', 'pending')->count();
+        $totalPatientsCount = DB::table('patients')->count();
+        $totalDepartmentsCount = DB::table('departments')->count();
+        $totalTestsCount = DB::table('tests')->count();
+
+        // Fetch all appointments for the table
+        $appointments = DB::table('appointments')->get();
+
+        return view('admin.dashboard', compact('pendingAppointmentsCount', 'totalPatientsCount', 'totalDepartmentsCount', 'totalTestsCount', 'appointments'));
     }
 }

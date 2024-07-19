@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\admin\PackageController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\DoctorOPDController;
 use App\Http\Controllers\admin\ExaminationReportController;
@@ -19,7 +19,7 @@ use App\Http\Controllers\admin\ServiceBillController;
 use App\Http\Controllers\Admin\OpdBillController;
 use App\Http\Controllers\admin\PackageBillController;
 use App\Http\Controllers\admin\OPDSaleReportController;
-use App\Http\Controllers\admin\PackageSaleReportController;
+use App\Http\Controllers\Admin\PackageSaleReportController;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\ServiceSaleReportController;
 use App\Http\Controllers\admin\StainReportController;
@@ -39,12 +39,13 @@ Route::middleware('guest:admin')->prefix('admin')->name('admin.')->group(functio
 
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'show'])->middleware(['verified'])->name('dashboard');
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    //Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'show'])->middleware(['verified'])->name('dashboard');
 
     //Departments
     Route::get('/departments/show', [DepartmentController::class, 'show'])->name('department.show');
@@ -63,12 +64,12 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::delete('services/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
 
     //Packages
-    Route::get('/packages/show', [PackageController::class, 'index'])->name('admin.packages.index');
-    Route::get('/packages/create', [PackageController::class, 'create'])->name('admin.packages.create');
-    Route::post('/packages', [PackageController::class, 'store'])->name('admin.packages.store');
-    Route::get('/packages/{id}/edit', [PackageController::class, 'edit'])->name('admin.packages.edit');
-    Route::patch('/packages/{id}', [PackageController::class, 'update'])->name('admin.packages.update');
-    Route::delete('/packages/{id}', [PackageController::class, 'destroy'])->name('admin.packages.destroy');
+    // Route::get('/packages', [PackageController::class, 'show'])->name('admin.packages.show');
+    // Route::get('/packages/create', [PackageController::class, 'create'])->name('admin.packages.create');
+    // Route::post('/packages', [PackageController::class, 'store'])->name('admin.packages.store');
+    // Route::get('/packages/{id}/edit', [PackageController::class, 'edit'])->name('admin.packages.edit');
+    // Route::patch('/packages/{id}', [PackageController::class, 'update'])->name('admin.packages.update');
+    // Route::delete('/packages/{id}', [PackageController::class, 'destroy'])->name('admin.packages.destroy');
 
     //Employee
     Route::get('/employees/show', [EmployeeController::class, 'show'])->name('employee.show');
@@ -93,7 +94,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('/invoice/{id}/edit', [InvoiceController::class, 'edit'])->name('invoice.edit');
     Route::patch('/invoice/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
     Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy'])->name('invoice.destroy');
-    // Route::get('/invoice/pdf', [InvoiceController::class, 'generatePDF'])->name('admin.invoice.pdf');
+    // Route::get('/invoice/pdf', [InvoiceController::class, 'generatePDF'])->name('invoice.pdf');
 
     //Appointment
     Route::get('/appointment/show', [AppointmentController::class, 'show'])->name('appointment.show');

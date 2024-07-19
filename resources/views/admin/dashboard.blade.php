@@ -5,7 +5,7 @@
         <div class="col-12">
             <div class="d-flex align-items-center gap-4 mb-4">
                 <div>
-                    <a class="fw-semibold fs-5 text-dark">Admin Dashboard</a>
+                    <a class="fw-semibold fs-5 text-dark">Admin</a>
                 </div>
             </div>
         </div>
@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <a class="fw-semibold fs-3 text-primary mb-1">Pending Appointments</a>
-                            <h5 class="fw-semibold text-primary mb-0">120</h5>
+                            <h5 class="fw-semibold text-primary mb-0">{{ $pendingAppointmentsCount }}</h5>
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <a class="fw-semibold fs-3 text-primary mb-1">Total Patients</a>
-                            <h5 class="fw-semibold text-primary mb-0">120</h5>
+                            <h5 class="fw-semibold text-primary mb-0">{{ $totalPatientsCount }}</h5>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <div class="text-center">
                             <a class="fw-semibold fs-3 text-primary mb-1">Total Departments</a>
-                            <h5 class="fw-semibold text-primary mb-0">120</h5>
+                            <h5 class="fw-semibold text-primary mb-0">{{ $totalDepartmentsCount }}</h5>
                         </div>
                     </div>
                 </div>
@@ -40,11 +40,12 @@
                     <div class="card-body">
                         <div class="text-center">
                             <a class="fw-semibold fs-3 text-primary mb-1">Total Test</a>
-                            <h5 class="fw-semibold text-primary mb-0">120</h5>
+                            <h5 class="fw-semibold text-primary mb-0">{{ $totalTestsCount }}</h5>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <div>
             <h3 class="fw-semibold fs-4 text-dark">Appointments</h3>

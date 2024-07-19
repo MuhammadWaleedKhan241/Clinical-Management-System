@@ -13,8 +13,8 @@ class ServiceBillController extends Controller
     public function show()
     {
         $servicebills = ServiceBill::with(['service', 'patient'])->get(); // Fetch all service bills with related service and patient
-        $services = Service::all(); // Fetch all services
-        $patients = Patient::all(); // Fetch all patients
+        $services = Service::all();
+        $patients = Patient::all();
         return view('admin.service-bill', compact('servicebills', 'services', 'patients'));
     }
 

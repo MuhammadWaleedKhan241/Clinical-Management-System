@@ -85,10 +85,10 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    {{-- <div class="modal-footer">
                         <button type="submit" class="btn btn-info waves-effect">Update</button>
                         <a href="{{ route('admin.package.show') }}" class="btn btn-danger waves-effect">Cancel</a>
-                    </div>
+                    </div> --}}
                 </form>
             </div>
         </div>
