@@ -10,14 +10,12 @@ class CreateServiceBillsTable extends Migration
     {
         Schema::create('service_bills', function (Blueprint $table) {
             $table->id();
-            $table->string('patient_name');
-            $table->decimal('amount', 10, 2);
-            $table->date('bill_date');
             $table->foreignId('service_id')->constrained()->onDelete('cascade');
             $table->foreignId('patient_id')->constrained()->onDelete('cascade');
-            $table->string('payment_type')->nullable();
-            $table->string('invoice_no')->nullable();
-            $table->decimal('service_amount', 10, 2)->nullable();
+            $table->string('payment_type');
+            $table->string('invoice_no')->unique();
+            $table->decimal('service_amount', 10, 2);
+            $table->date('bill_date');
             $table->timestamps();
         });
     }

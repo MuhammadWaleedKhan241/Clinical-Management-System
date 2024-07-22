@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('opd_bills', function (Blueprint $table) {
             $table->id();
-            $table->string('patient_name');
-            $table->decimal('amount', 10, 2);
-            $table->date('bill_date');
-            $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
-            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
-            $table->string('payment_type');
+            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('patient_id');
             $table->string('invoice_no');
-            $table->decimal('service_amount', 10, 2);
+            $table->decimal('service_amount', 8, 2);
+            $table->enum('payment_type', ['cash', 'credit_card', 'debit_card']);
+            $table->date('bill_date');
             $table->timestamps();
         });
     }

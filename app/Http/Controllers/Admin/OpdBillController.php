@@ -3,63 +3,57 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Opd_Bill;
-use App\Models\Service;
+use App\Models\OPD_Bill;
+use App\Models\Doctor;
 use App\Models\Patient;
+use Illuminate\Http\Request;
 
-class OpdBillController extends Controller
+class OPDBillController extends Controller
 {
     public function show()
     {
-        $opdBills = Opd_Bill::all();
-        $services = Service::all();
+        $opdBills = OPD_Bill::with('doctor', 'patient')->get();
+        $doctors = Doctor::all();
         $patients = Patient::all();
-        return view('admin.opd_bill', compact('opdBills', 'services', 'patients'));
+        return view('admin.opd-bill-list', compact('opdBills', 'doctors', 'patients'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'patient_name' => 'required|string|max:255',
-            'amount' => 'required|numeric',
-            'bill_date' => 'required|date',
-            'service_id' => 'required|exists:services,id',
+        $validatedData = $request->validate([
+            'doctor_id' => 'required|exists:doctors,id',
             'patient_id' => 'required|exists:patients,id',
-            'payment_type' => 'required|string',
             'invoice_no' => 'required|string|max:255',
             'service_amount' => 'required|numeric',
+            'payment_type' => 'required|in:cash,credit_card,debit_card',
+            'bill_date' => 'required|date',
         ]);
 
+        OPD_Bill::create($validatedData);
 
-
-        Opd_Bill::create($request->all());
-
-        return response()->json(['success' => 'OPD Bill created successfully.']);
+        return response()->json(['message' => 'OPD Bill added successfully!']);
     }
 
-    public function update(Request $request, Opd_Bill $opdBill)
+    public function update(Request $request, OPD_Bill $opdBill)
     {
-        $request->validate([
-            'patient_name' => 'required|string|max:255',
-            'amount' => 'required|numeric',
-            'bill_date' => 'required|date',
-            'service_id' => 'required|exists:services,id',
+        $validatedData = $request->validate([
+            'doctor_id' => 'required|exists:doctors,id',
             'patient_id' => 'required|exists:patients,id',
-            'payment_type' => 'required|string',
             'invoice_no' => 'required|string|max:255',
             'service_amount' => 'required|numeric',
+            'payment_type' => 'required|in:cash,credit_card,debit_card',
+            'bill_date' => 'required|date',
         ]);
 
-        $opdBill->update($request->all());
+        $opdBill->update($validatedData);
 
-        return redirect()->back()->with('success', 'OPD Bill updated successfully.');
+        return response()->json(['message' => 'OPD Bill updated successfully!']);
     }
 
-    public function destroy(Opd_Bill $opdBill)
+    public function destroy(OPD_Bill $opdBill)
     {
         $opdBill->delete();
 
-        return redirect()->back()->with('success', 'OPD Bill deleted successfully.');
+        return response()->json(['message' => 'OPD Bill deleted successfully!']);
     }
 }

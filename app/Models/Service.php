@@ -9,7 +9,7 @@ class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['department_id', 'service_name', 'price'];
+    protected $fillable = ['service_id', 'patient_id', 'payment_type', 'invoice_no', 'service_amount', 'bill_date'];
 
     public function department()
     {
@@ -23,5 +23,14 @@ class Service extends Model
     public function opdBills()
     {
         return $this->hasMany(OPD_Bill::class);
+    }
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
     }
 }

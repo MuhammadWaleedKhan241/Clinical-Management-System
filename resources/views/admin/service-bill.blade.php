@@ -17,21 +17,20 @@
                         Add Service Bill
                     </button>
                 </div>
+
                 <!-- Add Service Bill Popup Modal -->
                 <div id="add-service-bill" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-lg">
                         <div class="modal-content">
                             <div class="modal-header d-flex align-items-center">
-                                <h4 class="modal-title" id="myModalLabel">
-                                    Add Service Bill
-                                </h4>
+                                <h4 class="modal-title" id="myModalLabel">Add Service Bill</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form class="form-horizontal form-material" id="serviceBillForm"
-                                    action="{{ route('admin.servicebill.store') }}" method="POST">
+                                <form id="serviceBillForm" action="{{ route('admin.servicebill.store') }}"
+                                    method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <div class="col-md-12 mb-3">
@@ -39,12 +38,32 @@
                                             <select class="form-control" id="service_id" name="service_id" required>
                                                 <option value="" disabled selected>Select a service</option>
                                                 @foreach($services as $service)
-                                                <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                                <option value="{{ $service->id }}">{{ $service->service_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label for="patient_id" class="form-label">Select Patient</label>
+                                            <select class="form-control" name="patient_id" required>
+                                                <option value="" disabled selected>Select Patient</option>
+                                                @foreach($patients as $patient)
+                                                <option value="{{ $patient->id }}">{{ $patient->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
 
-                                        <div id="serviceDetails" style="display: none;">
+                                        <!-- Hidden section -->
+                                        <div id="serviceDetails" style="display:none;">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="invoice_no" class="form-label">Invoice Number</label>
+                                                <input type="text" class="form-control" id="invoice_no"
+                                                    name="invoice_no" placeholder="Enter invoice number" required>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label for="service_amount" class="form-label">Service Amount</label>
+                                                <input type="text" class="form-control" id="service_amount"
+                                                    name="service_amount" placeholder="Enter service amount" required>
+                                            </div>
                                             <div class="col-md-12 mb-3">
                                                 <label for="payment_type" class="form-label">Payment Type</label>
                                                 <select class="form-control" id="payment_type" name="payment_type"
@@ -55,28 +74,8 @@
                                                     <option value="debit_card">Debit Card</option>
                                                 </select>
                                             </div>
-
-                                            <div class="col-md-12 mb-3">
-                                                <label for="invoice_no" class="form-label">Invoice Number</label>
-                                                <input type="text" class="form-control" id="invoice_no"
-                                                    name="invoice_no" placeholder="Enter invoice number" required>
-                                            </div>
-
-                                            <div class="col-md-12 mb-3">
-                                                <label for="service_amount" class="form-label">Service Amount</label>
-                                                <input type="text" class="form-control" id="service_amount"
-                                                    name="service_amount" placeholder="Enter service amount" required>
-                                            </div>
                                         </div>
-                                        <div class="col-md-12 mb-3">
-                                            <label for="patient_id" class="form-label">Select Patient</label>
-                                            <select class="form-control" name="patient_id" required>
-                                                <option value="" disabled selected>Select Patient</option>
-                                                @foreach($patients as $patient)
-                                                <option value="{{ $patient->id }}">{{ $patient->patient_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+
                                         <div class="col-md-12 mb-3">
                                             <input type="date" class="form-control" name="bill_date"
                                                 placeholder="Bill Date" required />
@@ -90,33 +89,30 @@
                                 </form>
                             </div>
                         </div>
-                        <!-- /.modal-content -->
                     </div>
-                    <!-- /.modal-dialog -->
                 </div>
+
                 <div class="table-responsive">
                     <table id="demo-foo-addrow" class="table table-bordered m-t-3 table-hover contact-list"
                         data-paging="true" data-paging-size="7">
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Service Name</th>
                                 <th>Patient Name</th>
                                 <th>Amount</th>
                                 <th>Bill Date</th>
-                                <th>Service</th>
-                                <th>Patient</th>
-                                <th>Action</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($servicebills as $bill)
                             <tr>
                                 <td>{{ $bill->id }}</td>
-                                <td>{{ $bill->patient_name }}</td>
-                                <td>{{ $bill->amount }}</td>
-                                <td>{{ $bill->bill_date }}</td>
-                                <td>{{ $bill->service->name }}</td>
-                                <td>{{ $bill->patient->patient_name }}</td>
+                                <td>{{ $bill->service->service_name }}</td>
+                                <td>{{ $bill->patient->name }}</td>
+                                <td>{{ number_format($bill->service_amount, 2) }}</td>
+                                <td>{{ $bill->bill_date->format('Y-m-d') }}</td>
                                 <td>
                                     <a href="{{ route('admin.servicebill.edit', $bill->id) }}"
                                         class="btn btn-sm btn-primary">Edit</a>
@@ -128,8 +124,7 @@
                                             onclick="return confirm('Are you sure you want to delete this service bill?')">Delete</button>
                                     </form>
                                 </td>
-                            </tr>
-                            @endforeach
+                                @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -137,7 +132,6 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 @section('scripts')
@@ -151,7 +145,6 @@
             }
         });
 
-        // Submit form using AJAX
         $('#serviceBillForm').submit(function(event) {
             event.preventDefault();
             var formData = $(this).serialize();
@@ -160,15 +153,35 @@
                 type: 'POST',
                 data: formData,
                 success: function(response) {
-                    // Reload page or update table after successful submission
+                    alert('Service bill saved successfully!');
                     location.reload();
                 },
                 error: function(error) {
                     console.error('Error:', error);
-                    // Handle errors, show validation messages, etc.
+                    alert('An error occurred. Please try again.');
                 }
             });
         });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const serviceSelect = document.getElementById('service_id');
+        const serviceDetails = document.getElementById('serviceDetails');
+
+        // Show serviceDetails when a service is selected
+        serviceSelect.addEventListener('change', function() {
+            if (serviceSelect.value) {
+                serviceDetails.style.display = 'block'; // Show the hidden fields
+            } else {
+                serviceDetails.style.display = 'none'; // Hide the hidden fields
+            }
+        });
+
+        // Optional: Hide serviceDetails on page load if no service is selected
+        if (!serviceSelect.value) {
+            serviceDetails.style.display = 'none';
+        }
     });
 </script>
 @endsection

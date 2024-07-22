@@ -41,7 +41,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    
+
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     //Dashboard
@@ -96,14 +96,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy'])->name('invoice.destroy');
     // Route::get('/invoice/pdf', [InvoiceController::class, 'generatePDF'])->name('invoice.pdf');
 
-    //Appointment
-    Route::get('/appointment/show', [AppointmentController::class, 'show'])->name('appointment.show');
-    Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointment.store');
-    Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointment.create');
-    Route::get('/appointments/{appointment}/edit', [AppointmentController::class, 'edit'])->name('appointment.edit');
-    Route::patch('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointment.update');
-    Route::delete('/appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointment.destroy');
-
     //Ptient
     Route::get('/patient/show', [PatientController::class, 'show'])->name('patient.show');
     Route::get('/patients/create', [PatientController::class, 'create'])->name('patient.create');
@@ -111,6 +103,14 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('/patients/{patient}', [PatientController::class, 'edit'])->name('patient.edit');
     Route::put('patients/patients/{id}', [PatientController::class, 'update'])->name('patient.update');
     Route::delete('patients/{id}', [PatientController::class, 'destroy'])->name('patient.destroy');
+
+    //Appointment
+    Route::get('/appointment/show', [AppointmentController::class, 'show'])->name('appointment.show');
+    Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointment.store');
+    Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointment.create');
+    Route::get('/appointments/{appointment}/edit', [AppointmentController::class, 'edit'])->name('appointment.edit');
+    Route::patch('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointment.update');
+    Route::delete('/appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointment.destroy');
 
     //Service-Bill
     Route::get('/service-bill', [ServiceBillController::class, 'show'])->name('servicebill.show');
@@ -121,13 +121,12 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::delete('/service-bill/{id}', [ServiceBillController::class, 'destroy'])->name('servicebill.destroy');
 
     //OPD-Bill
-    Route::get('/OPD-bill', [OpdBillController::class, 'show'])->name('OPDbill.show');
+    Route::get('/OPD-bill/show', [OpdBillController::class, 'show'])->name('OPDbill.show');
     Route::get('/OPD-bill/create', [OpdBillController::class, 'create'])->name('OPDbill.create');
     Route::post('/OPD-bill', [OpdBillController::class, 'store'])->name('OPDbill.store');
     Route::get('/OPD-bill/{id}/edit', [OpdBillController::class, 'edit'])->name('OPDbill.edit');
     Route::put('/OPD-bill/{id}', [OpdBillController::class, 'update'])->name('OPDbill.update');
     Route::delete('/OPD-bill/{id}', [OpdBillController::class, 'destroy'])->name('OPDbill.destroy');
-
 
     //Package-Bill
     Route::get('/package-bill', [PackageBillController::class, 'show'])->name('packagebill.show');
@@ -185,12 +184,15 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::put('/examination-report/{id}', [ExaminationReportController::class, 'update'])->name('examinationreport.update');
     Route::delete('/examination-report/{id}', [ExaminationReportController::class, 'destroy'])->name('examinationreport.destroy');
 
-
     //Stain Report
     Route::get('/stain-report', [StainReportController::class, 'show'])->name('stainreport.show');
 
     //Report
     Route::get('/report', [ReportController::class, 'show'])->name('report.show');
+
+
+
+
 
     //User
     Route::get('/user', [UserController::class, 'show'])->name('user.show');

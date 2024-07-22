@@ -9,16 +9,19 @@ class ServiceBill extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
-        'customer_name',
-        'amount',
-        'bill_date',
         'service_id',
         'patient_id',
-        'payment_type',
         'invoice_no',
         'service_amount',
+        'payment_type',
+
     ];
+    protected $casts = [
+        'bill_date' => 'date',
+    ];
+
 
     public function service()
     {
