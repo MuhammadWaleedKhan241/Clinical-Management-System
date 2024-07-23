@@ -4,13 +4,26 @@
     <div class="col-12">
         <div class="card">
             <div class="border-bottom title-part-padding">
-                <h4 class="card-title mb-0">Contact Patient list</h4>
+                <h4 class="card-title mb-0">Contact Patient List</h4>
             </div>
             <div class="card-body">
-
-                <div>
-                    <h4 class="fw-semibold fs-4 text-dark">Package Bill List</h4>
+                <!-- Alert Message -->
+                @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+                @endif
+
+                <div class="d-flex justify-content-between mb-3">
+                    <div>
+                        <h4 class="fw-semibold fs-4 text-dark">Package Bill List</h4>
+                    </div>
+                    <div>
+                        <input type="text" id="searchBar" class="form-control" placeholder="Search...">
+                    </div>
+                </div>
+
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn btn-info btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
                         data-bs-target="#add-contact">
@@ -55,12 +68,12 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-info waves-effect" data-bs-dismiss="modal">
-                                    Save
-                                </button>
+                            <div class="modal-footer d-flex justify-content-between">
                                 <button type="button" class="btn btn-danger waves-effect" data-bs-dismiss="modal">
                                     Cancel
+                                </button>
+                                <button type="button" class="btn btn-info waves-effect" data-bs-dismiss="modal">
+                                    Save
                                 </button>
                             </div>
                         </div>
@@ -80,7 +93,6 @@
                                 {{-- <th>Description</th> --}}
                                 {{-- <th>Date</th> --}}
                                 <th>Action</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -109,4 +121,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('searchBar').addEventListener('input', function () {
+        var filter = this.value.toLowerCase();
+        var rows = document.querySelectorAll('.contact-list tbody tr');
+        rows.forEach(function(row) {
+            var text = row.textContent.toLowerCase();
+            row.style.display = text.includes(filter) ? '' : 'none';
+        });
+    });
+</script>
 @endsection

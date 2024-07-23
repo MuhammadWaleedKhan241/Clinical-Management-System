@@ -12,26 +12,26 @@ class OPDBillController extends Controller
 {
     public function show()
     {
-        $opdBills = OPD_Bill::with('doctor', 'patient')->get();
+        $opdBills = OPD_Bill::with('doctor', 'patient')->get(); // Fetch related data if needed
         $doctors = Doctor::all();
         $patients = Patient::all();
-        return view('admin.opd-bill-list', compact('opdBills', 'doctors', 'patients'));
+
+        return view('admin.opd_bill', compact('opdBills', 'doctors', 'patients'));
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'doctor_id' => 'required|exists:doctors,id',
             'patient_id' => 'required|exists:patients,id',
-            'invoice_no' => 'required|string|max:255',
+            'payment_type' => 'required',
+            'invoice_no' => 'required|unique:opd_bills',
             'service_amount' => 'required|numeric',
-            'payment_type' => 'required|in:cash,credit_card,debit_card',
-            'bill_date' => 'required|date',
         ]);
 
-        OPD_Bill::create($validatedData);
+        OPD_Bill::create($request->all());
 
-        return response()->json(['message' => 'OPD Bill added successfully!']);
+        return response()->json(['success' => 'OPD Bill added successfully']);
     }
 
     public function update(Request $request, OPD_Bill $opdBill)

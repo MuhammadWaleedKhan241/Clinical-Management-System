@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OPD_Bill extends Model
 {
     use HasFactory;
+    protected $table = 'opd_bills';
 
     protected $fillable = [
         'doctor_id',
