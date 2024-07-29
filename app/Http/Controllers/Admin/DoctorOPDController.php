@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DoctorOPD;
+use App\Models\Doctor;
 use App\Models\Department;
 
 class DoctorOPDController extends Controller
@@ -13,6 +14,7 @@ class DoctorOPDController extends Controller
     {
         $doctors = DoctorOPD::all();
         $departments = Department::all();
+        $doctors = Doctor::all();
         return view('admin.doctor-OPD', compact('doctors', 'departments'));
     }
 
@@ -20,11 +22,18 @@ class DoctorOPDController extends Controller
     {
         $request->validate([
             'full_name' => 'required|string|max:255',
-            'phone' => 'required|numeric',
+            'phone' => [
+                'required',
+                'numeric',
+                'regex:/^03[0-9]{9}$/',
+            ],
             'department' => 'required|string',
             'doctor_charges' => 'required|numeric',
             'opd_fee' => 'required|numeric',
         ]);
+
+        // Debug the incoming request
+        dd($request->all());
 
         DoctorOPD::create($request->all());
 
@@ -35,7 +44,11 @@ class DoctorOPDController extends Controller
     {
         $request->validate([
             'full_name' => 'required|string|max:255',
-            'phone' => 'required|numeric',
+            'phone' => [
+                'required',
+                'numeric',
+                'regex:/^03[0-9]{9}$/', // Validates Pakistani mobile number format
+            ],
             'department' => 'required|string',
             'doctor_charges' => 'required|numeric',
             'opd_fee' => 'required|numeric',

@@ -48,11 +48,13 @@ class ServiceBillController extends Controller
             $serviceBill->bill_date = $request->bill_date;
             $serviceBill->save();
 
-            return response()->json(['success' => true, 'message' => 'Service bill saved successfully!']);
+            return redirect()->route('admin.servicebill.show')->with('success', 'Service bill saved successfully!');
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+
 
     public function edit($id)
     {
@@ -65,14 +67,12 @@ class ServiceBillController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'amount' => 'required|numeric',
-            'bill_date' => 'required|date',
             'service_id' => 'required|exists:services,id',
-            'patient_id' => 'required|exists:patients,id',
             'payment_type' => 'required|string',
             'invoice_no' => 'required|string|max:255',
             'service_amount' => 'required|numeric',
+            'patient_id' => 'required|exists:patients,id',
+            'bill_date' => 'required|date',
         ]);
 
         $servicebill = ServiceBill::findOrFail($id);

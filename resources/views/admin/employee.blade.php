@@ -8,7 +8,6 @@
                 <h4 class="card-title mb-0">Contact Employee List</h4>
             </div>
             <div class="card-body">
-
                 @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
@@ -18,6 +17,16 @@
                 @if(session('error'))
                 <div class="alert alert-danger">
                     {{ session('error') }}
+                </div>
+                @endif
+
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
                 @endif
 
@@ -60,8 +69,9 @@
                                                 required />
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <input type="number" name="phone" class="form-control" placeholder="Phone"
-                                                required />
+                                            <input type="tel" name="phone" class="form-control"
+                                                placeholder="Phone, +92 300 1234567"
+                                                pattern="^(?:\+92|0)?3[0-9]{2}[0-9]{7}$" required />
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <select name="type" class="form-control" required>
@@ -74,9 +84,10 @@
                                         <div class="col-md-12 mb-3">
                                             <select name="department" class="form-control" required>
                                                 <option value="" disabled selected>Select Department</option>
-                                                <option value="Cardiology">Cardiology</option>
-                                                <option value="Neurology">Neurology</option>
-                                                <option value="Oncology">Oncology</option>
+                                                @foreach($departments as $department)
+                                                <option value="{{ $department->department_name }}">{{
+                                                    $department->department_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-12 mb-3">
@@ -100,8 +111,17 @@
                                                 placeholder="Speciality" required />
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <input type="text" name="working_days" class="form-control"
-                                                placeholder="Working Days" required />
+                                            <label for="working_days">Working Days</label>
+                                            <select name="working_days[]" id="working_days" class="form-control"
+                                                multiple required>
+                                                <option value="Monday">Monday</option>
+                                                <option value="Tuesday">Tuesday</option>
+                                                <option value="Wednesday">Wednesday</option>
+                                                <option value="Thursday">Thursday</option>
+                                                <option value="Friday">Friday</option>
+                                                <option value="Saturday">Saturday</option>
+                                                <option value="Sunday">Sunday</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -132,120 +152,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($employees as $employee)
+                            @foreach ($employees as $employee)
                             <tr>
                                 <td>{{ $employee->id }}</td>
                                 <td>{{ $employee->full_name }}</td>
                                 <td>{{ $employee->phone }}</td>
                                 <td>{{ $employee->working_days }}</td>
                                 <td>{{ $employee->type }}</td>
-                                <td>
-                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#edit-contact-{{ $employee->id }}">Edit</button>
-                                    <form action="{{ route('admin.employee.destroy', $employee->id) }}" method="POST"
-                                        style="display:inline-block;">
+                                <td class="d-flex justify-content-between">
+                                    <a href="{{ route('admin.employee.edit', $employee->id) }}"
+                                        class="btn btn-sm btn-warning text-white">
+                                        <i class="fa fa-edit"></i> Edit
+                                    </a>
+                                    <form action="{{ route('admin.employee.destroy', $employee->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-danger text-white"
+                                            onclick="return confirm('Are you sure you want to delete this employee?')">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </button>
                                     </form>
-                                    <!-- Add edit modal -->
-                                    <div id="edit-contact-{{ $employee->id }}" class="modal fade in" tabindex="-1"
-                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header d-flex align-items-center">
-                                                    <h4 class="modal-title" id="myModalLabel">
-                                                        Edit Employee
-                                                    </h4>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form class="form-horizontal form-material" method="POST"
-                                                        action="{{ route('admin.employee.update', $employee->id) }}">
-                                                        @csrf
-                                                        @method('PATCH')
-                                                        <div class="form-group">
-                                                            <div class="col-md-12 mb-3">
-                                                                <input type="text" class="form-control" name="full_name"
-                                                                    value="{{ $employee->full_name }}" required />
-                                                            </div>
-                                                            <div class="col-md-12 mb-3">
-                                                                <input type="email" class="form-control" name="email"
-                                                                    value="{{ $employee->email }}" required />
-                                                            </div>
-                                                            <div class="col-md-12 mb-3">
-                                                                <input type="number" class="form-control" name="phone"
-                                                                    value="{{ $employee->phone }}" required />
-                                                            </div>
-                                                            <div class="col-md-12 mb-3">
-                                                                <select class="form-control" name="type" required>
-                                                                    <option value="Doctor" {{ $employee->type ==
-                                                                        'Doctor' ? 'selected' : '' }}>Doctor</option>
-                                                                    <option value="Nurse" {{ $employee->type == 'Nurse'
-                                                                        ? 'selected' : '' }}>Nurse</option>
-                                                                    <option value="Staff" {{ $employee->type == 'Staff'
-                                                                        ? 'selected' : '' }}>Staff</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-12 mb-3">
-                                                                <select class="form-control" name="department" required>
-                                                                    <option value="Cardiology" {{ $employee->department
-                                                                        == 'Cardiology' ? 'selected' : '' }}>Cardiology
-                                                                    </option>
-                                                                    <option value="Neurology" {{ $employee->department
-                                                                        == 'Neurology' ? 'selected' : '' }}>Neurology
-                                                                    </option>
-                                                                    <option value="Oncology" {{ $employee->department ==
-                                                                        'Oncology' ? 'selected' : '' }}>Oncology
-                                                                    </option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-12 mb-3">
-                                                                <input type="text" class="form-control" name="address"
-                                                                    value="{{ $employee->address }}" required />
-                                                            </div>
-                                                            <div class="col-md-12 mb-3">
-                                                                <input type="text" class="form-control" name="education"
-                                                                    value="{{ $employee->education }}" required />
-                                                            </div>
-                                                            <div class="col-md-12 mb-3">
-                                                                <input type="text" class="form-control"
-                                                                    name="description"
-                                                                    value="{{ $employee->description }}" required />
-                                                            </div>
-                                                            <div class="col-md-12 mb-3">
-                                                                <input type="text" class="form-control"
-                                                                    name="certificate"
-                                                                    value="{{ $employee->certificate }}" required />
-                                                            </div>
-                                                            <div class="col-md-12 mb-3">
-                                                                <input type="text" class="form-control"
-                                                                    name="speciality"
-                                                                    value="{{ $employee->speciality }}" required />
-                                                            </div>
-                                                            <div class="col-md-12 mb-3">
-                                                                <input type="text" class="form-control"
-                                                                    name="working_days"
-                                                                    value="{{ $employee->working_days }}" required />
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-info waves-effect">
-                                                                Update
-                                                            </button>
-                                                            <button type="button" class="btn btn-danger waves-effect"
-                                                                data-bs-dismiss="modal">
-                                                                Cancel
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <!-- /.modal-content -->
-                                        </div>
-                                        <!-- /.modal-dialog -->
-                                    </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -254,19 +180,36 @@
                 </div>
             </div>
         </div>
-        <!-- Column -->
     </div>
 </div>
+@endsection
 
+@section('scripts')
 <script>
-    document.getElementById('search').addEventListener('keyup', function() {
-        var value = this.value.toLowerCase();
-        var rows = document.querySelectorAll('#employee-table tbody tr');
-
-        rows.forEach(function(row) {
-            var isVisible = row.textContent.toLowerCase().indexOf(value) !== -1;
-            row.style.display = isVisible ? '' : 'none';
+    $(document).ready(function () {
+        $('#search').on('keyup', function () {
+            var value = $(this).val().toLowerCase();
+            $('#employee-table tbody tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
         });
     });
 </script>
+
+{{-- phone --}}
+
+<script>
+    $(document).ready(function () {
+        $('#add-contact form').on('submit', function () {
+            var phone = $('input[name="phone"]').val();
+            var phonePattern = /^(?:\+92|0)?(?:3[0-9]{2}|2[0-9]{1})[0-9]{7}$/;
+
+            if (!phonePattern.test(phone)) {
+                alert('Please enter a valid Pakistani phone number.');
+                return false; // Prevent form submission
+            }
+        });
+    });
+</script>
+
 @endsection

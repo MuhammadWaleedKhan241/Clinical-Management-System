@@ -44,7 +44,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form class="form-horizontal form-material" action="{{ route('admin.packages.store') }}"
+                                <form class="form-horizontal form-material" action="{{ route('packages.store') }}"
                                     method="POST">
                                     @csrf
                                     <div class="form-group">
@@ -88,7 +88,7 @@
                                 <th>ID</th>
                                 <th>Package Name</th>
                                 <th>Description</th>
-                                <th>Select Test</th>
+                                <th>Tests</th>
                                 <th>Price</th>
                                 <th>Action</th>
                             </tr>
@@ -99,12 +99,13 @@
                                 <td>{{ $package->id }}</td>
                                 <td>{{ $package->package_name }}</td>
                                 <td>{{ $package->description }}</td>
-                                <td>{{ $package->select_test }}</td>
+                                <td>{{ implode(', ', $package->select_test ?? []) }}</td>
+                                <!-- Adjusted to handle array -->
                                 <td>{{ $package->price }}</td>
                                 <td>
                                     <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                         data-bs-target="#edit-package-{{ $package->id }}">Edit</button>
-                                    <form action="{{ route('admin.package.destroy', $package->id) }}" method="POST"
+                                    <form action="{{ route('packages.destroy', $package->id) }}" method="POST"
                                         style="display:inline;">
                                         @csrf
                                         @method('DELETE')
@@ -113,59 +114,6 @@
                                     </form>
                                 </td>
                             </tr>
-
-                            <!-- Edit Package Modal -->
-                            <div id="edit-package-{{ $package->id }}" class="modal fade in" tabindex="-1" role="dialog"
-                                aria-labelledby="editPackageLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header d-flex align-items-center">
-                                            <h4 class="modal-title" id="editPackageLabel">
-                                                Edit Package
-                                            </h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form class="form-horizontal form-material"
-                                                action="{{ route('admin.package.update', $package->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="form-group">
-                                                    <div class="col-md-12 mb-3">
-                                                        <input type="text" name="package_name" class="form-control"
-                                                            value="{{ $package->package_name }}" required>
-                                                    </div>
-                                                    <div class="col-md-12 mb-3">
-                                                        <textarea name="description" class="form-control"
-                                                            required>{{ $package->description }}</textarea>
-                                                    </div>
-                                                    <div class="col-md-12 mb-3">
-                                                        <input type="text" name="select_test" class="form-control"
-                                                            value="{{ $package->select_test }}">
-                                                    </div>
-                                                    <div class="col-md-12 mb-3">
-                                                        <input type="number" name="price" class="form-control"
-                                                            value="{{ $package->price }}" required>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-info waves-effect">
-                                                        Save
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger waves-effect"
-                                                        data-bs-dismiss="modal">
-                                                        Cancel
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
                             @endforeach
                         </tbody>
                     </table>

@@ -9,20 +9,17 @@ class ServiceBill extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'service_id',
         'patient_id',
         'invoice_no',
         'service_amount',
         'payment_type',
-
+        'bill_date',
     ];
     protected $casts = [
         'bill_date' => 'date',
     ];
-
-
     public function service()
     {
         return $this->belongsTo(Service::class);

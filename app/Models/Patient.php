@@ -38,4 +38,8 @@ class Patient extends Model
     {
         return $this->hasMany(PatientBill::class);
     }
+    public function packageBills()
+    {
+        return $this->hasMany(Package_Bill::class);
+    }
 }

@@ -45,4 +45,8 @@ class Doctor extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function packageBills()
+    {
+        return $this->hasMany(Package_Bill::class);
+    }
 }

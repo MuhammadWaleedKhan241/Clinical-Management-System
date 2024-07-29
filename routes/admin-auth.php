@@ -64,12 +64,12 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::delete('services/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
 
     //Packages
-    // Route::get('/packages', [PackageController::class, 'show'])->name('admin.packages.show');
-    // Route::get('/packages/create', [PackageController::class, 'create'])->name('admin.packages.create');
-    // Route::post('/packages', [PackageController::class, 'store'])->name('admin.packages.store');
-    // Route::get('/packages/{id}/edit', [PackageController::class, 'edit'])->name('admin.packages.edit');
-    // Route::patch('/packages/{id}', [PackageController::class, 'update'])->name('admin.packages.update');
-    // Route::delete('/packages/{id}', [PackageController::class, 'destroy'])->name('admin.packages.destroy');
+    Route::get('/packages/show', [PackageController::class, 'show'])->name('packages.show');
+    Route::get('/packages/create', [PackageController::class, 'create'])->name('packages.create');
+    Route::post('/packages', [PackageController::class, 'store'])->name('packages.store');
+    Route::get('/packages/{id}/edit', [PackageController::class, 'edit'])->name('packages.edit');
+    Route::patch('/packages/{id}', [PackageController::class, 'update'])->name('packages.update');
+    Route::delete('/packages/{id}', [PackageController::class, 'destroy'])->name('packages.destroy');
 
     //Employee
     Route::get('/employees/show', [EmployeeController::class, 'show'])->name('employee.show');
@@ -115,10 +115,10 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     //Service-Bill
     Route::get('/service-bill', [ServiceBillController::class, 'show'])->name('servicebill.show');
     Route::get('/service-bill/create', [ServiceBillController::class, 'create'])->name('servicebill.create');
-    Route::post('/service-bill', [ServiceBillController::class, 'store'])->name('servicebill.store');
+    Route::post('/admin/service-bill/store', [OPDBillController::class, 'store'])->name('OPDbill.store');
     Route::get('/service-bill/{id}/edit', [ServiceBillController::class, 'edit'])->name('servicebill.edit');
-    Route::put('/service-bill/{id}', [ServiceBillController::class, 'update'])->name('servicebill.update');
-    Route::delete('/service-bill/{id}', [ServiceBillController::class, 'destroy'])->name('servicebill.destroy');
+    Route::put('/admin/service-bill/update/{id}', [OPDBillController::class, 'update'])->name('OPDbill.update');
+    Route::delete('/admin/service-bill/destroy/{id}', [OPDBillController::class, 'destroy'])->name('OPDbill.destroy');
 
     //OPD-Bill
     Route::get('/OPD-bill/show', [OpdBillController::class, 'show'])->name('OPDbill.show');

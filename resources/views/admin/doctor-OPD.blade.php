@@ -1,4 +1,5 @@
 @extends('admin.admin.master')
+
 @section('content')
 <div class="row">
     <div class="col-12">
@@ -23,42 +24,44 @@
                         Add Doctor OPD
                     </button>
                 </div>
-                <!-- Add Contact Popup Model -->
-                <div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                    aria-hidden="true">
+
+                <!-- Add Contact Popup Modal -->
+                <div id="add-contact" class="modal fade" tabindex="-1" role="dialog"
+                    aria-labelledby="addDoctorModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-lg">
                         <div class="modal-content">
-                            {{-- <div class="modal-header d-flex align-items-center">
-                                <h4 class="modal-title" id="myModalLabel">Add Doctor OPD</h4>
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="addDoctorModalLabel">Add Doctor OPD</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
-                            </div> --}}
+                            </div>
                             <div class="modal-body">
                                 <form class="form-horizontal form-material"
                                     action="{{ route('admin.doctoropd.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <div class="col-md-12 mb-3">
+                                        <div class="mb-3">
                                             <input type="text" name="full_name" class="form-control"
                                                 placeholder="Doctor Name" required />
                                         </div>
-                                        <div class="col-md-12 mb-3">
-                                            <input type="number" name="phone" class="form-control" placeholder="Phone"
-                                                required />
+                                        <div class="mb-3">
+                                            <input type="tel" name="phone" class="form-control" placeholder="Phone"
+                                                pattern="^(?:\+92|0)?3[0-9]{2}[0-9]{7}$" required />
                                         </div>
-                                        <div class="col-md-12 mb-3">
+                                        <div class="mb-3">
                                             <select name="department" class="form-control" required>
                                                 <option value="" disabled selected>Select Department</option>
                                                 @foreach($departments as $department)
-                                                <option value="{{ $department->name }}">{{ $department->name }}</option>
+                                                <option value="{{ $department->department_name }}">{{
+                                                    $department->department_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-12 mb-3">
+                                        <div class="mb-3">
                                             <input type="text" name="doctor_charges" class="form-control"
                                                 placeholder="Doctor Charges" required />
                                         </div>
-                                        <div class="col-md-12 mb-3">
+                                        <div class="mb-3">
                                             <input type="text" name="opd_fee" class="form-control" placeholder="OPD Fee"
                                                 required />
                                         </div>
@@ -73,10 +76,10 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="table-responsive">
                     <table id="demo-foo-addrow"
-                        class="table table-striped table-hover table-bordered m-t-3 table-hover contact-list"
-                        data-paging="true" data-paging-size="7">
+                        class="table table-striped table-hover table-bordered m-t-3 table-hover contact-list">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -102,15 +105,18 @@
                                         style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Are you sure you want to delete this doctor?')">Delete</button>
                                     </form>
+
                                     <!-- Edit Modal -->
-                                    <div id="edit-contact-{{ $doctor->id }}" class="modal fade in" tabindex="-1"
-                                        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div id="edit-contact-{{ $doctor->id }}" class="modal fade" tabindex="-1"
+                                        role="dialog" aria-labelledby="editDoctorModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-scrollable modal-lg">
                                             <div class="modal-content">
-                                                <div class="modal-header d-flex align-items-center">
-                                                    <h4 class="modal-title" id="myModalLabel">Edit Doctor OPD</h4>
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="editDoctorModalLabel">Edit Doctor OPD
+                                                    </h4>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
@@ -121,15 +127,16 @@
                                                         @csrf
                                                         @method('PATCH')
                                                         <div class="form-group">
-                                                            <div class="col-md-12 mb-3">
+                                                            <div class="mb-3">
                                                                 <input type="text" name="full_name" class="form-control"
                                                                     value="{{ $doctor->full_name }}" required />
                                                             </div>
-                                                            <div class="col-md-12 mb-3">
-                                                                <input type="number" name="phone" class="form-control"
-                                                                    value="{{ $doctor->phone }}" required />
+                                                            <div class="mb-3">
+                                                                <input type="tel" name="phone" class="form-control"
+                                                                    value="{{ $doctor->phone }}"
+                                                                    pattern="^(?:\+92|0)?3[0-9]{2}[0-9]{7}$" required />
                                                             </div>
-                                                            <div class="col-md-12 mb-3">
+                                                            <div class="mb-3">
                                                                 <select name="department" class="form-control" required>
                                                                     @foreach($departments as $department)
                                                                     <option value="{{ $department->name }}" {{ $doctor->
@@ -138,20 +145,19 @@
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-                                                            <div class="col-md-12 mb-3">
+                                                            <div class="mb-3">
                                                                 <input type="text" name="doctor_charges"
                                                                     class="form-control"
                                                                     value="{{ $doctor->doctor_charges }}" required />
                                                             </div>
-                                                            <div class="col-md-12 mb-3">
+                                                            <div class="mb-3">
                                                                 <input type="text" name="opd_fee" class="form-control"
                                                                     value="{{ $doctor->opd_fee }}" required />
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="submit"
-                                                                class="btn btn-info waves-effect">Update</button>
-                                                            <button type="button" class="btn btn-danger waves-effect"
+                                                            <button type="submit" class="btn btn-info">Update</button>
+                                                            <button type="button" class="btn btn-danger"
                                                                 data-bs-dismiss="modal">Cancel</button>
                                                         </div>
                                                     </form>
@@ -170,4 +176,17 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#search').on('keyup', function() {
+            var value = $(this).val().toLowerCase();
+            $('#demo-foo-addrow tbody tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 @endsection

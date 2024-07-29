@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('package_name');
             $table->text('description');
-            $table->string('select_test')->nullable()->change();
+            $table->json('select_test')->nullable(); // Ensure this field is JSON and nullable
             $table->decimal('price', 8, 2);
             $table->timestamps();
             $table->softDeletes();
         });
+
     }
 
     /**

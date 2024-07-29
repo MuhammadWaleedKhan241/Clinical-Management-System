@@ -10,13 +10,16 @@ class CreateServiceBillsTable extends Migration
     {
         Schema::create('service_bills', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id')->constrained()->onDelete('cascade');
-            $table->foreignId('patient_id')->constrained()->onDelete('cascade');
-            $table->string('payment_type');
+            $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('patient_id');
             $table->string('invoice_no')->unique();
             $table->decimal('service_amount', 10, 2);
+            $table->enum('payment_type', ['cash', 'credit_card', 'debit_card']);
             $table->date('bill_date');
             $table->timestamps();
+
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
         });
     }
 

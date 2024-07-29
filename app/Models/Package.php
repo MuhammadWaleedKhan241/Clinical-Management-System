@@ -35,4 +35,8 @@ class Package extends Model
     {
         return $this->hasMany(PatientBill::class);
     }
+    public function packageBills()
+    {
+        return $this->hasMany(PackageBill::class);
+    }
 }

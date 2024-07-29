@@ -30,7 +30,7 @@
                                 @foreach($departments as $department)
                                 <option value="{{ $department->id }}" {{ $service->department_id == $department->id ?
                                     'selected' : '' }}>
-                                    {{ $department->name }}
+                                    {{ $department->department_name }}
                                 </option>
                                 @endforeach
                             </select>

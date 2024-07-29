@@ -108,14 +108,15 @@
                                     @endif
                                 </td>
                                 <td>${{ $service->price }}</td>
-                                <td>
+                                <td class="justify-content-between">
                                     <a href="{{ route('admin.service.edit', $service->id) }}"
-                                        class="btn btn-sm btn-warning">Edit</a>
+                                        class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Edit</a>
                                     <form action="{{ route('admin.service.destroy', $service->id) }}" method="POST"
                                         style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i>
+                                            Delete</button>
                                     </form>
                                 </td>
                             </tr>

@@ -5,90 +5,84 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Package;
 use App\Models\Test;
-use App\Models\Patient;
-use App\Models\PatientBill;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller
 {
+    public function show()
+    {
+        $packages = Package::paginate(10);
+        return view('admin.packages', compact('packages'));
+    }
 
-    // public function show()
-    // {
-    //     $packages = Package::paginate(10);
-    //     return view('admin.packages', compact('packages'));
-    // }
+    public function create()
+    {
+        $tests = Test::all();
+        return view('admin.packages.create', compact('tests'));
+    }
 
-    // public function create()
-    // {
-    //     $tests = Test::all();
-    //     return view('admin.packages.create', compact('tests'));
-    // }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'package_name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'select_test' => 'nullable|array',
+        ]);
 
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'package_name' => 'required|string|max:255',
-    //         'description' => 'required|string',
-    //         'price' => 'required|numeric',
-    //     ]);
+        try {
+            $package = new Package();
+            $package->package_name = $request->package_name;
+            $package->description = $request->description;
+            $package->price = $request->price;
+            $package->select_test = $request->select_test;
+            $package->save();
 
-    //     try {
-    //         $package = new Package();
-    //         $package->package_name = $request->package_name;
-    //         $package->description = $request->description;
-    //         $package->price = $request->price;
-    //         $package->save();
+            return redirect()->route('packages.show')->with('success', 'Package added successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('packages.show')->with('error', 'Failed to add package!');
+        }
+    }
 
-    //         // If you have tests to associate with the package, you can do it here
+    public function edit($id)
+    {
+        $package = Package::findOrFail($id);
+        $tests = Test::all();
+        return view('admin.packages.edit', compact('package', 'tests'));
+    }
 
-    //         return redirect()->route('admin.package.show')->with('success', 'Package added successfully!');
-    //     } catch (\Exception $e) {
-    //         return redirect()->route('admin.package.show')->with(
-    //             'error',
-    //             'Failed to add package!'
-    //         );
-    //     }
-    // }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'package_name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'select_test' => 'nullable|array',
+        ]);
 
-    // public function edit($id)
-    // {
-    //     $package = Package::findOrFail($id);
-    //     $tests = Test::all();
-    //     return view('admin.packages.edit', compact('package', 'tests'));
-    // }
+        try {
+            $package = Package::findOrFail($id);
+            $package->package_name = $request->package_name;
+            $package->description = $request->description;
+            $package->price = $request->price;
+            $package->select_test = $request->select_test;
+            $package->save();
 
-    // public function update(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'package_name' => 'required|string|max:255',
-    //         'description' => 'required|string',
-    //         'price' => 'required|numeric',
-    //     ]);
+            return redirect()->route('packages.show')->with('success', 'Package updated successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('packages.show')->with('error', 'Failed to update package!');
+        }
+    }
 
-    //     try {
-    //         $package = Package::findOrFail($id);
-    //         $package->package_name = $request->package_name;
-    //         $package->description = $request->description;
-    //         $package->price = $request->price;
-    //         $package->save();
+    public function destroy($id)
+    {
+        try {
+            $package = Package::findOrFail($id);
+            $package->delete();
 
-    //         // If you have tests to update or associate with the package, handle it here
-
-    //         return redirect()->route('admin.packages.show')->with('success', 'Package updated successfully!');
-    //     } catch (\Exception $e) {
-    //         return redirect()->route('admin.packages.show')->with('error', 'Failed to update package!');
-    //     }
-    // }
-
-    // public function destroy($id)
-    // {
-    //     try {
-    //         $package = Package::findOrFail($id);
-    //         $package->delete();
-
-    //         return redirect()->route('admin.package.show')->with('success', 'Package deleted successfully!');
-    //     } catch (\Exception $e) {
-    //         return redirect()->route('admin.package.show')->with('error', 'Failed to delete package!');
-    //     }
-    // }
+            return redirect()->route('packages.show')->with('success', 'Package deleted successfully!');
+        } catch (\Exception $e) {
+            return redirect()->route('packages.show')->with('error', 'Failed to delete package!');
+        }
+    }
 }
