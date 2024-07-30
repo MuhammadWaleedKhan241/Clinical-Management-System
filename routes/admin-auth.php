@@ -1,30 +1,31 @@
 <?php
 
-use App\Http\Controllers\admin\AppointmentController;
+
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\ProfileController;
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\admin\AppointmentController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\DoctorOPDController;
-use App\Http\Controllers\admin\ExaminationReportController;
+use App\Http\Controllers\Admin\ExaminationReportController;
 use App\Http\Controllers\Admin\InvoiceController;
-use App\Http\Controllers\admin\ManageTestController;
+use App\Http\Controllers\Admin\ManageTestController;
 use App\Http\Controllers\Admin\PatientController;
-use App\Http\Controllers\admin\ServiceBillController;
+use App\Http\Controllers\Admin\ServiceBillController;
 use App\Http\Controllers\Admin\OpdBillController;
-use App\Http\Controllers\admin\PackageBillController;
-use App\Http\Controllers\admin\OPDSaleReportController;
+use App\Http\Controllers\Admin\PackageBillController;
+use App\Http\Controllers\Admin\OPDSaleReportController;
 use App\Http\Controllers\Admin\PackageSaleReportController;
-use App\Http\Controllers\admin\ReportController;
-use App\Http\Controllers\admin\ServiceSaleReportController;
-use App\Http\Controllers\admin\StainReportController;
-use App\Http\Controllers\admin\TestReferencesController;
-use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\ServiceSaleReportController;
+use App\Http\Controllers\Admin\StainReportController;
+use App\Http\Controllers\Admin\TestReferencesController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -64,12 +65,12 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::delete('services/{service}', [ServiceController::class, 'destroy'])->name('service.destroy');
 
     //Packages
-    Route::get('/packages/show', [PackageController::class, 'show'])->name('packages.show');
-    Route::get('/packages/create', [PackageController::class, 'create'])->name('packages.create');
-    Route::post('/packages', [PackageController::class, 'store'])->name('packages.store');
-    Route::get('/packages/{id}/edit', [PackageController::class, 'edit'])->name('packages.edit');
-    Route::patch('/packages/{id}', [PackageController::class, 'update'])->name('packages.update');
-    Route::delete('/packages/{id}', [PackageController::class, 'destroy'])->name('packages.destroy');
+    // Route::get('/packages/show', [PackageController::class, 'show'])->name('package.show');
+    // Route::get('/packages/create', [PackageController::class, 'create'])->name('packages.create');
+    // Route::post('/packages', [PackageController::class, 'store'])->name('packages.store');
+    // Route::get('/packages/{id}/edit', [PackageController::class, 'edit'])->name('packages.edit');
+    // Route::patch('/packages/{id}', [PackageController::class, 'update'])->name('packages.update');
+    // Route::delete('/packages/{id}', [PackageController::class, 'destroy'])->name('packages.destroy');
 
     //Employee
     Route::get('/employees/show', [EmployeeController::class, 'show'])->name('employee.show');
@@ -87,10 +88,10 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::patch('/opd-doctor/{id}', [DoctorOPDController::class, 'update'])->name('doctoropd.update');
     Route::delete('/opd-doctor/{id}', [DoctorOPDController::class, 'destroy'])->name('doctoropd.destroy');
 
-    //Invoice   
+    //Invoice  
+    Route::get('/invoice', [InvoiceController::class, 'show'])->name('invoice.show');
     Route::get('/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
     Route::post('/invoice', [InvoiceController::class, 'store'])->name('invoice.store');
-    Route::get('/invoice', [InvoiceController::class, 'show'])->name('invoice.show');
     Route::get('/invoice/{id}/edit', [InvoiceController::class, 'edit'])->name('invoice.edit');
     Route::patch('/invoice/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
     Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy'])->name('invoice.destroy');
@@ -189,10 +190,6 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
     //Report
     Route::get('/report', [ReportController::class, 'show'])->name('report.show');
-
-
-
-
 
     //User
     Route::get('/user', [UserController::class, 'show'])->name('user.show');

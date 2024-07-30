@@ -41,15 +41,19 @@
                                     @csrf
                                     <div class="form-group">
                                         <div class="mb-3">
-                                            <input type="text" name="full_name" class="form-control"
-                                                placeholder="Doctor Name" required />
+                                            <select class="form-control" id="doctor_id" name="doctor_id" required>
+                                                <option value="" disabled selected>Select a doctor</option>
+                                                @foreach($doctors as $doctor)
+                                                <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="mb-3">
                                             <input type="tel" name="phone" class="form-control" placeholder="Phone"
                                                 pattern="^(?:\+92|0)?3[0-9]{2}[0-9]{7}$" required />
                                         </div>
                                         <div class="mb-3">
-                                            <select name="department" class="form-control" required>
+                                            <select name="department" class=    "form-control" required>
                                                 <option value="" disabled selected>Select Department</option>
                                                 @foreach($departments as $department)
                                                 <option value="{{ $department->department_name }}">{{
@@ -71,7 +75,7 @@
                                         <button type="button" class="btn btn-sm btn-danger"
                                             data-bs-dismiss="modal">Cancel</button>
                                     </div>
-                                </form>
+                                    </form>
                             </div>
                         </div>
                     </div>
@@ -94,7 +98,7 @@
                             @foreach($doctors as $doctor)
                             <tr>
                                 <td>{{ $doctor->id }}</td>
-                                <td>{{ $doctor->full_name }}</td>
+                                <td>{{ $doctor->name }}</td>
                                 <td>{{ $doctor->phone }}</td>
                                 <td>{{ $doctor->department }}</td>
                                 <td>{{ $doctor->opd_fee }}</td>
@@ -128,8 +132,8 @@
                                                         @method('PATCH')
                                                         <div class="form-group">
                                                             <div class="mb-3">
-                                                                <input type="text" name="full_name" class="form-control"
-                                                                    value="{{ $doctor->full_name }}" required />
+                                                                <input type="text" name="name" class="form-control"
+                                                                    value="{{ $doctor->name }}" required />
                                                             </div>
                                                             <div class="mb-3">
                                                                 <input type="tel" name="phone" class="form-control"
@@ -139,9 +143,12 @@
                                                             <div class="mb-3">
                                                                 <select name="department" class="form-control" required>
                                                                     @foreach($departments as $department)
-                                                                    <option value="{{ $department->name }}" {{ $doctor->
-                                                                        department == $department->name ? 'selected' :
-                                                                        '' }}>{{ $department->name }}</option>
+                                                                    <option value="{{ $department->department_name }}"
+                                                                        {{ $doctor->department ==
+                                                                        $department->department_name ? 'selected' : ''
+                                                                        }}>
+                                                                        {{ $department->department_name }}
+                                                                    </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>

@@ -13,7 +13,7 @@
                     {{ session('success') }}
                 </div>
                 @endif
-                @if (session('error'))
+                @if (session('error'))  
                 <div class="alert alert-danger">
                     {{ session('error') }}
                 </div>
@@ -117,15 +117,14 @@
                             @foreach($opdBills as $bill)
                             <tr>
                                 <td>{{ $bill->id }}</td>
-                                <td>{{ $bill->doctor->name }}</td>
-                                <td>{{ $bill->patient->name }}</td>
+                                <td>{{ $bill->doctor->name }}</td> <!-- Ensure 'doctor' relationship is defined -->
+                                <td>{{ $bill->patient->name }}</td> <!-- Ensure 'patient' relationship is defined -->
                                 <td>{{ $bill->service_amount }}</td>
                                 <td>{{ $bill->bill_date }}</td>
                                 <td>
                                     <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#edit-opd-bill-{{ $bill->id }}">Edit</button>
-                                    <form action="{{ route('admin.OPDbill.destroy', $bill->id) }}" method="POST"
-                                        style="display:inline-block;">
+                                    <form action="{{ route('admin.OPDbill.destroy', $bill->id) }}" method="POST" style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"

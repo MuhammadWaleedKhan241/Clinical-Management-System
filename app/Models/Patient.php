@@ -40,6 +40,10 @@ class Patient extends Model
     }
     public function packageBills()
     {
-        return $this->hasMany(Package_Bill::class);
+        return $this->hasMany(PackageBill::class);
+    }
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
     }
 }

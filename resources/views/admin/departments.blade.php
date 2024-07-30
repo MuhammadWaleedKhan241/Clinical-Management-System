@@ -86,15 +86,15 @@
                                 <td>{{ $department->department_name }}</td>
                                 <td class=" justify-content-between">
                                     <a href="{{ route('admin.department.edit', $department->id) }}"
-                                        class="btn btn-sm btn-warning">Edit
-                                        <i class="fa fa-edit"></i></a>
+                                        class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Edit
+                                    </a>
                                     <form action="{{ route('admin.department.destroy', $department->id) }}"
                                         method="POST" style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"
                                             onclick="return confirm('Are you sure you want to delete this department?')">
-                                            <i class="fa fa-edit"></i>Delete</button>
+                                            <i class="fa fa-trash"></i> Delete</button>
 
                                     </form>
                                 </td>

@@ -10,7 +10,7 @@ class CreateOpdDoctorTable extends Migration
     {
         Schema::create('opd_doctor', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
+            $table->string('name');
             $table->string('phone');
             $table->string('department');
             $table->decimal('doctor_charges', 8, 2);

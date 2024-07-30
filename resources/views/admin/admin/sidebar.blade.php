@@ -2,7 +2,7 @@
     <!-- Sidebar scroll-->
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-            <a href="admin-dashboard.html" class="text-nowrap logo-img">
+            <a href="{{ route('admin.dashboard') }}" class="text-nowrap logo-img">
                 <img src="assets/images/logos/light-logo.png" class="light-logo" width="180" alt="" />
             </a>
             <div class="close-btn d-lg-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -12,13 +12,12 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar>
             <ul id="sidebarnav">
-
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Home</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('admin.dashboard')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('admin.dashboard') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-clipboard"></i>
                         </span>
@@ -34,7 +33,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level visible">
                         <li class="sidebar-item">
-                            <a href="{{route('admin.department.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.department.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -42,31 +41,31 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin.service.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.service.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
                                 <span class="hide-menu">Services</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a href="{{route('admin.package.show')}}" class="sidebar-link">
+                        {{-- <li class="sidebar-item">
+                            <a href="{{ route('admin.package.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
                                 <span class="hide-menu">Packages</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="sidebar-item">
-                            <a href="{{route('admin.employee.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.employee.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">Emplyees</span>
+                                <span class="hide-menu">Employees</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin.doctoropd.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.doctoropd.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -74,7 +73,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin.invoice.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.invoice.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -84,7 +83,7 @@
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow" aria-expanded="false">
+                    <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
                         <span>
                             <i class="ti ti-message-dots"></i>
                         </span>
@@ -92,7 +91,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level visible">
                         <li class="sidebar-item">
-                            <a href="{{route('admin.patient.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.patient.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -100,7 +99,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin.appointment.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.appointment.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -118,7 +117,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level visible">
                         <li class="sidebar-item">
-                            <a href="{{route('admin.servicebill.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.servicebill.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -126,15 +125,15 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin.OPDbill.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.OPDbill.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
-                                <span class="hide-menu">OPD Invoice </span>
+                                <span class="hide-menu">OPD Invoice</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin.packagebill.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.packagebill.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -144,7 +143,7 @@
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow" aria-expanded="false">
+                    <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
                         <span>
                             <i class="ti ti-file-pencil"></i>
                         </span>
@@ -152,7 +151,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level visible">
                         <li class="sidebar-item">
-                            <a href="{{route('admin.servicesalereport.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.servicesalereport.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -160,7 +159,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin.OPDsalereport.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.OPDsalereport.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -168,7 +167,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin.packagesalereport.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.packagesalereport.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -178,7 +177,7 @@
                     </ul>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow" aria-expanded="false">
+                    <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
                         <span>
                             <i class="ti ti-file-pencil"></i>
                         </span>
@@ -186,7 +185,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level visible">
                         <li class="sidebar-item">
-                            <a href="{{route('admin.managetest.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.managetest.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -194,7 +193,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin.testreference.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.testreference.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
@@ -202,65 +201,18 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{route('admin.examinationreport.show')}}" class="sidebar-link">
+                            <a href="{{ route('admin.examinationreport.show') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-circle"></i>
                                 </div>
                                 <span class="hide-menu">Examination Reports</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a href="{{route('admin.stainreport.show')}}" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-circle"></i>
-                                </div>
-                                <span class="hide-menu">Stain Reports</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{route('admin.report.show')}}" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-circle"></i>
-                                </div>
-                                <span class="hide-menu">Reports</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-file-description"></i>
-                        </span>
-                        <span class="hide-menu">Setting</span>
-                    </a>
-                    <ul aria-expanded="false" class="collapse first-level visible">
-                        <li class="sidebar-item">
-                            <a href="{{route('admin.user.show')}}" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-circle"></i>
-                                </div>
-                                <span class="hide-menu">Users</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="settings.html" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-circle"></i>
-                                </div>
-                                <span class="hide-menu">Settings</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="backup.html" class="sidebar-link">
-                                <div class="round-16 d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-circle"></i>
-                                </div>
-                                <span class="hide-menu">Backup</span>
-                            </a>
-                        </li>
                     </ul>
                 </li>
             </ul>
         </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
 </aside>
