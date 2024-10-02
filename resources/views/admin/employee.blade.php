@@ -40,7 +40,8 @@
                         data-bs-target="#add-contact">
                         Add New Employee
                     </button>
-                    <input type="text" id="search" class="form-control w-25" placeholder="Search...">
+                    <input type="text" id="search" class="form-control w-25" placeholder="Search..."
+                        value="{{ request('search') }}">
                 </div>
 
                 <!-- Add Contact Popup Modal -->
@@ -112,8 +113,7 @@
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label for="working_days">Working Days</label>
-                                            <select name="working_days[]" id="working_days" class="form-control"
-                                                multiple required>
+                                            <select name=" []" id="working_days" class="form-control" multiple required>
                                                 <option value="Monday">Monday</option>
                                                 <option value="Tuesday">Tuesday</option>
                                                 <option value="Wednesday">Wednesday</option>
@@ -178,6 +178,10 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="d-flex justify-content-center">
+                    {{ $employees->appends(request()->query())->links() }}
+                </div>
             </div>
         </div>
     </div>
@@ -209,6 +213,19 @@
                 return false; // Prevent form submission
             }
         });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+    $('#search').on('keyup', function (event) {
+    if (event.key === "Enter") { // Only search when the Enter key is pressed
+    var searchQuery = $(this).val();
+    var url = new URL(window.location.href);
+    url.searchParams.set('search', searchQuery);
+    window.location.href = url.toString();
+    }
+    });
     });
 </script>
 

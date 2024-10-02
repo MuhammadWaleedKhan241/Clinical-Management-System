@@ -15,11 +15,9 @@
                 </div>
                 @endif
 
-                <div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="fw-semibold fs-5 text-dark">OPD Doctor List</h4>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-sm btn-warning btn-rounded m-t-10 mb-2" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-sm btn-warning btn-rounded" data-bs-toggle="modal"
                         data-bs-target="#add-contact">
                         Add Doctor OPD
                     </button>
@@ -36,54 +34,51 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form class="form-horizontal form-material"
-                                    action="{{ route('admin.doctoropd.store') }}" method="POST">
+                                <form action="{{ route('admin.doctoropd.store') }}" method="POST">
                                     @csrf
-                                    <div class="form-group">
-                                        <div class="mb-3">
-                                            <select class="form-control" id="doctor_id" name="doctor_id" required>
-                                                <option value="" disabled selected>Select a doctor</option>
-                                                @foreach($doctors as $doctor)
-                                                <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="tel" name="phone" class="form-control" placeholder="Phone"
-                                                pattern="^(?:\+92|0)?3[0-9]{2}[0-9]{7}$" required />
-                                        </div>
-                                        <div class="mb-3">
-                                            <select name="department" class=    "form-control" required>
-                                                <option value="" disabled selected>Select Department</option>
-                                                @foreach($departments as $department)
-                                                <option value="{{ $department->department_name }}">{{
-                                                    $department->department_name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="text" name="doctor_charges" class="form-control"
-                                                placeholder="Doctor Charges" required />
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="text" name="opd_fee" class="form-control" placeholder="OPD Fee"
-                                                required />
-                                        </div>
+                                    <div class="form-group mb-3">
+                                        <select class="form-control" id="doctor_id" name="doctor_id" required>
+                                            <option value="" disabled selected>Select a doctor</option>
+                                            @foreach($doctors as $doctor)
+                                            <option value="{{ $doctor->name }}">{{ $doctor->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="tel" name="phone" value="phone" class="form-control"
+                                            placeholder="Phone" pattern="^(?:\+92|0)?3[0-9]{2}[0-9]{7}$" required />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <select name="department" class="form-control" required>
+                                            <option value="department_name" disabled selected>Select Department</option>
+                                            @foreach($departments as $department)
+                                            <option value="{{ $department->department_name }}">{{
+                                                $department->department_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="text" name="doctor_charges" value="doctor_charges"
+                                            class="form-control" placeholder="Doctor Charges" required />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <input type="text" value="opd_fee" name="opd_fee" class="form-control"
+                                            placeholder="OPD Fee" required />
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-sm btn-warning">Save</button>
-                                        <button type="button" class="btn btn-sm btn-danger"
+                                        <button type="submit" class="btn btn-warning">Save</button>
+                                        <button type="button" class="btn btn-danger"
                                             data-bs-dismiss="modal">Cancel</button>
                                     </div>
-                                    </form>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- End Add Contact Modal -->
 
                 <div class="table-responsive">
-                    <table id="demo-foo-addrow"
-                        class="table table-striped table-hover table-bordered m-t-3 table-hover contact-list">
+                    <table id="doctor-table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -95,7 +90,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($doctors as $doctor)
+                            @foreach($doctorOPDs as $doctor)
                             <tr>
                                 <td>{{ $doctor->id }}</td>
                                 <td>{{ $doctor->name }}</td>
@@ -125,42 +120,38 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form class="form-horizontal form-material"
-                                                        action="{{ route('admin.doctoropd.update', $doctor->id) }}"
+                                                    <form action="{{ route('admin.doctoropd.update', $doctor->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('PATCH')
-                                                        <div class="form-group">
-                                                            <div class="mb-3">
-                                                                <input type="text" name="name" class="form-control"
-                                                                    value="{{ $doctor->name }}" required />
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <input type="tel" name="phone" class="form-control"
-                                                                    value="{{ $doctor->phone }}"
-                                                                    pattern="^(?:\+92|0)?3[0-9]{2}[0-9]{7}$" required />
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <select name="department" class="form-control" required>
-                                                                    @foreach($departments as $department)
-                                                                    <option value="{{ $department->department_name }}"
-                                                                        {{ $doctor->department ==
-                                                                        $department->department_name ? 'selected' : ''
-                                                                        }}>
-                                                                        {{ $department->department_name }}
-                                                                    </option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <input type="text" name="doctor_charges"
-                                                                    class="form-control"
-                                                                    value="{{ $doctor->doctor_charges }}" required />
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <input type="text" name="opd_fee" class="form-control"
-                                                                    value="{{ $doctor->opd_fee }}" required />
-                                                            </div>
+                                                        <div class="form-group mb-3">
+                                                            <input type="text" name="name" class="form-control"
+                                                                value="{{ $doctor->name }}" required />
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <input type="tel" name="phone" class="form-control"
+                                                                value="{{ $doctor->phone }}"
+                                                                pattern="^(?:\+92|0)?3[0-9]{2}[0-9]{7}$" required />
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <select name="department" class="form-control" required>
+                                                                @foreach($departments as $department)
+                                                                <option value="{{ $department->department_name }}" {{
+                                                                    $doctor->department == $department->department_name
+                                                                    ? 'selected' : '' }}>
+                                                                    {{ $department->department_name }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <input type="text" name="doctor_charges"
+                                                                class="form-control"
+                                                                value="{{ $doctor->doctor_charges }}" required />
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <input type="text" name="opd_fee" class="form-control"
+                                                                value="{{ $doctor->opd_fee }}" required />
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="submit" class="btn btn-info">Update</button>
@@ -188,12 +179,7 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-        $('#search').on('keyup', function() {
-            var value = $(this).val().toLowerCase();
-            $('#demo-foo-addrow tbody tr').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
+        $('#doctor-table').DataTable(); // Use DataTables for better table management
     });
 </script>
 @endsection

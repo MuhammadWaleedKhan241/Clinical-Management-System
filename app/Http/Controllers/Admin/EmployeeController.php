@@ -10,12 +10,23 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $employees = Employee::all();
+        $query = Employee::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('full_name', 'LIKE', "%{$search}%")
+                ->orWhere('phone', 'LIKE', "%{$search}%")
+                ->orWhere('type', 'LIKE', "%{$search}%")
+                ->orWhere('working_days', 'LIKE', "%{$search}%");
+        }
+        $employees = $query->paginate(10)->appends($request->all());
         $departments = Department::all();
         return view('admin.employee', compact('employees', 'departments'));
     }
+
+
 
     public function create()
     {
@@ -51,7 +62,8 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::findOrFail($id);
-        $departments = Department::all();
+        $departments = Department::all(); // Fetch departments if needed
+
         return view('admin.edit_employee', compact('employee', 'departments'));
     }
 

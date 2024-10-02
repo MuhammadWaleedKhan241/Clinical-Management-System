@@ -10,10 +10,20 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $services = Service::with('department')->paginate(10); // Paginate by 10 items per page
-        $departments = Department::all(); // Assuming you have a Department model
+        $query = Service::with('department');
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('service_name', 'like', "%{$search}%")
+                ->orWhereHas('department', function ($q) use ($search) {
+                    $q->where('department_name', 'like', "%{$search}%");
+                });
+        }
+
+        $services = $query->paginate(10);
+        $departments = Department::all();
 
         return view('admin.service', compact('services', 'departments'));
     }
@@ -53,23 +63,20 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         $request->validate([
-            'service_name' => 'required|string|max:255',
+            'service_name' => 'required|string|max:255|unique:services,service_name,' . $service->id,
             'price' => 'required|numeric',
             'department_id' => 'required|exists:departments,id',
         ]);
 
-        try {
-            $service->update([
-                'service_name' => $request->service_name,
-                'price' => $request->price,
-                'department_id' => $request->department_id,
-            ]);
-            return redirect()->route('admin.service.show')->with('success', 'Service updated successfully.');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.service.show')->with('error', 'Failed to update service.');
-        }
-    }
 
+        $service->update([
+            'service_name' => $request->service_name,
+            'price' => $request->price,
+            'department_id' => $request->department_id,
+        ]);
+
+        return redirect()->route('admin.service.show')->with('success', 'Service updated successfully.');
+    }
 
     public function destroy(Service $service)
     {

@@ -22,6 +22,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @endif
+
                 <div>
                     <h4 class="fw-semibold fs-5 text-dark">Services List</h4>
                 </div>
@@ -34,9 +35,13 @@
                         </button>
                     </div>
                     <div class="w-25">
-                        <input type="text" id="search" class="form-control float-end" placeholder="Search...">
+                        <form action="{{ route('admin.service.show') }}" method="GET">
+                            <input type="text" name="search" id="search" class="form-control float-end"
+                                placeholder="Search..." value="{{ request()->input('search') }}">
+                        </form>
                     </div>
                 </div>
+
                 <!-- Add Service Popup Modal -->
                 <div id="add-service" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
@@ -124,6 +129,11 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Pagination Links -->
+                <div class="d-flex justify-content-center">
+                    {{ $services->appends(request()->input())->links() }}
+                </div>
             </div>
         </div>
     </div>
@@ -131,13 +141,7 @@
 
 <script>
     document.getElementById('search').addEventListener('keyup', function() {
-        var value = this.value.toLowerCase();
-        var rows = document.querySelectorAll('#demo-foo-addrow tbody tr');
-
-        rows.forEach(function(row) {
-            var isVisible = row.textContent.toLowerCase().indexOf(value) !== -1;
-            row.style.display = isVisible ? '' : 'none';
-        });
+        this.form.submit(); // Submit the form to trigger the search
     });
 </script>
 @endsection

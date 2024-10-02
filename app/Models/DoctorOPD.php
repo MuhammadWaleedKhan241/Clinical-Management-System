@@ -12,11 +12,7 @@ class DoctorOPD extends Model
   protected $table = 'opd_doctor';
 
   protected $fillable = [
-    'name',
-    'phone',
-    'department',
-    'doctor_charges',
-    'opd_fee',
+    'name', 'phone', 'department', 'doctor_charges', 'opd_fee'
   ];
   public function Opd_Bill()
   {

@@ -45,8 +45,9 @@
                                 value="{{ old('email', $employee->email) }}" placeholder="Email" required />
                         </div>
                         <div class="col-md-12 mb-3">
-                            <input type="number" name="phone" class="form-control"
-                                value="{{ old('phone', $employee->phone) }}" placeholder="Phone" required />
+                            <input type="tel" name="phone" class="form-control" placeholder="Phone, +92 300 1234567"
+                                pattern="^(?:\+92|0)?3[0-9]{2}[0-9]{7}$" value="{{ old('phone', $employee->phone) }}"
+                                required />
                         </div>
                         <div class="col-md-12 mb-3">
                             <select name="type" class="form-control" required>

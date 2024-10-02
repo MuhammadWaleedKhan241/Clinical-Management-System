@@ -12,7 +12,6 @@
                     method="POST">
                     @csrf
                     @method('PATCH')
-                    <!-- Use PATCH method -->
                     <div class="form-group">
                         <div class="col-md-12 mb-3">
                             <label for="service_name">Service Name</label>
